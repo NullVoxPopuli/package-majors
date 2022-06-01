@@ -64,7 +64,6 @@ specifiers:
   ember-template-imports: ^3.0.0
   ember-template-lint: ^4.8.0
   ember-truth-helpers: ^3.0.0
-  ember-welcome-page: ^6.2.0
   eslint: ^7.32.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-ember: ^10.6.1
@@ -143,7 +142,6 @@ devDependencies:
   ember-template-imports: 3.0.0_ember-cli-htmlbars@6.0.1
   ember-template-lint: 4.10.0
   ember-truth-helpers: 3.0.0
-  ember-welcome-page: 6.2.0
   eslint: 7.32.0
   eslint-config-prettier: 8.5.0_eslint@7.32.0
   eslint-plugin-ember: 10.6.1_eslint@7.32.0
@@ -1635,14 +1633,6 @@ packages:
       semver: 7.3.7
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@embroider/addon-shim/1.7.1:
-    resolution: {integrity: sha512-0xTQLZEAuGeMiZq4tF3KFlP4R/r1js7qq2QEQ89bhEDI8yKCDBScvPrpSpaT6aZj8bWByjDvXHFuSpInFl5gww==}
-    engines: {node: 12.* || 14.* || >= 16}
-    dependencies:
-      '@embroider/shared-internals': 1.7.1
-      semver: 7.3.7
     dev: true
 
   /@embroider/macros/1.7.1:
@@ -6130,13 +6120,6 @@ packages:
       ember-cli-babel: 7.26.11
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /ember-welcome-page/6.2.0:
-    resolution: {integrity: sha512-bDPgNgW0eRhLCHLaFK87p1mcP8hGwr0pXvPoskDeUGQzsOI3Pc3U/8WLpUSi2mNrmv0eNtfWqE+A1Wbx6F2l0Q==}
-    engines: {node: 12.* || 14.* || >= 16}
-    dependencies:
-      '@embroider/addon-shim': 1.7.1
     dev: true
 
   /emoji-regex/8.0.0:

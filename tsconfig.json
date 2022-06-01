@@ -41,7 +41,7 @@
     // Setting `noEmitOnError` here allows ember-cli-typescript to catch errors
     // and inject them into Ember CLI's build error reporting, which provides
     // nice feedback for when
-    "noEmitOnError": true,
+    "noEmitOnError": false,
 
     // We use Babel for emitting runtime code, because it's very important that
     // we always and only use the same transpiler for non-stable features, in

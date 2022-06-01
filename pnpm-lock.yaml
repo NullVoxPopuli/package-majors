@@ -57,6 +57,7 @@ specifiers:
   ember-source: ~4.4.0
   ember-template-imports: ^3.0.0
   ember-template-lint: ^4.8.0
+  ember-truth-helpers: ^3.0.0
   ember-welcome-page: ^6.2.0
   eslint: ^7.32.0
   eslint-config-prettier: ^8.5.0
@@ -129,6 +130,7 @@ devDependencies:
   ember-source: 4.4.1_w2i5cy6pptznn7rmavsgpnxasa
   ember-template-imports: 3.0.0_ember-cli-htmlbars@6.0.1
   ember-template-lint: 4.10.0
+  ember-truth-helpers: 3.0.0
   ember-welcome-page: 6.2.0
   eslint: 7.32.0
   eslint-config-prettier: 8.5.0_eslint@7.32.0
@@ -5953,6 +5955,15 @@ packages:
       slash: 3.0.0
       tmp: 0.2.1
       workerpool: 6.2.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /ember-truth-helpers/3.0.0:
+    resolution: {integrity: sha512-hPKG9QqruAELh0li5xaiLZtr88ioWYxWCXisAWHWE0qCP4a2hgtuMzKUPpiTCkltvKjuqpzTZCU4VhQ+IlRmew==}
+    engines: {node: 10.* || >= 12.*}
+    dependencies:
+      ember-cli-babel: 7.26.11
     transitivePeerDependencies:
       - supports-color
     dev: true

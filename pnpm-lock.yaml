@@ -53,6 +53,7 @@ specifiers:
   ember-page-title: ^7.0.0
   ember-qunit: ^5.1.5
   ember-resolver: ^8.0.3
+  ember-resources: github:NullVoxpopuli/glint
   ember-source: ~4.4.0
   ember-template-imports: ^3.0.0
   ember-template-lint: ^4.8.0
@@ -124,6 +125,7 @@ devDependencies:
   ember-page-title: 7.0.0
   ember-qunit: 5.1.5_m2vpijm5kklvqmlfibufmotnbi
   ember-resolver: 8.0.3_@babel+core@7.18.2
+  ember-resources: github.com/NullVoxpopuli/glint/8a4395f495fb936a9a0dd75cb907345d76a47acc
   ember-source: 4.4.1_w2i5cy6pptznn7rmavsgpnxasa
   ember-template-imports: 3.0.0_ember-cli-htmlbars@6.0.1
   ember-template-lint: 4.10.0
@@ -12070,4 +12072,10 @@ packages:
   /yocto-queue/1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
+    dev: true
+
+  github.com/NullVoxpopuli/glint/8a4395f495fb936a9a0dd75cb907345d76a47acc:
+    resolution: {tarball: https://codeload.github.com/NullVoxpopuli/glint/tar.gz/8a4395f495fb936a9a0dd75cb907345d76a47acc}
+    name: glint
+    version: 0.7.4
     dev: true

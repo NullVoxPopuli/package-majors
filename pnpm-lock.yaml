@@ -60,7 +60,6 @@ specifiers:
   ember-data: ~4.4.0
   ember-export-application-global: ^2.0.1
   ember-fetch: ^8.1.1
-  ember-functions-as-helper-polyfill: ^2.1.1
   ember-load-initializers: ^2.1.2
   ember-modifier: ^3.2.7
   ember-page-title: ^7.0.0
@@ -148,7 +147,6 @@ devDependencies:
   ember-data: 4.4.0_dzrarqmejens5o5lr5bdn3kdtu
   ember-export-application-global: 2.0.1
   ember-fetch: 8.1.1
-  ember-functions-as-helper-polyfill: 2.1.1_ember-source@4.5.0
   ember-load-initializers: 2.1.2_@babel+core@7.18.2
   ember-page-title: 7.0.0
   ember-qunit: 5.1.5_m2vpijm5kklvqmlfibufmotnbi
@@ -8918,20 +8916,6 @@ packages:
       whatwg-fetch: 3.6.2
     transitivePeerDependencies:
       - encoding
-      - supports-color
-    dev: true
-
-  /ember-functions-as-helper-polyfill/2.1.1_ember-source@4.5.0:
-    resolution: {integrity: sha512-vZ2w9G/foohwtPm99Jos1m6bhlXyyyiJ4vhLbxyjWB4wh7bcpRzXPgCewDRrwefZQ2BwtHg3c9zvVMlI0g+o2Q==}
-    engines: {node: '>= 14.0.0'}
-    peerDependencies:
-      ember-source: ^3.25.0 || ^4.0.0
-    dependencies:
-      ember-cli-babel: 7.26.11
-      ember-cli-typescript: 5.1.0
-      ember-cli-version-checker: 5.1.2
-      ember-source: 4.5.0_dzrarqmejens5o5lr5bdn3kdtu
-    transitivePeerDependencies:
       - supports-color
     dev: true
 

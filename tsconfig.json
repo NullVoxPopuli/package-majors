@@ -1,4 +1,16 @@
 {
+  "glint": {
+    "environment": [
+      "ember-loose",
+      "ember-template-imports"
+    ],
+    "transform": {
+      "include": [
+        "app/**",
+        "tests/**"
+      ]
+    }
+  },
   "compilerOptions": {
     "target": "ES2021",
     "module": "ES2020",

@@ -40,15 +40,21 @@ const Welcome: TOC<{}> = <template>
 
   Now: {{Clock}}<br>
 
-  Information here
+  <br>
 
-  What you can do
+  <ul>
+  <li>
+  <a href="https://tutorial.glimdown.com">gjs tutorial</a> -- get familiar with Ember's new file format
+  </li>
+  <li>
+  <a href="https://github.com/NullVoxPopuli/ember-resources/blob/better-composition/docs/docs/resources.md">Docs: Resources</a> -- learn about the new reactivity primitive
+    </li>
+  <li>
+    <a href="https://github.com/jmurphyau/ember-truth-helpers">ember-truth-helpers</a> -- additional built in helpers coming to Ember.js
+  </li>
+  </ul>
 
-  New features
 
-  Resources
-
-  Docs (RFCs atm)
 </template>
 
 export default Welcome;

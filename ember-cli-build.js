@@ -3,8 +3,11 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
-  let app = new EmberApp(defaults, {
+  const app = new EmberApp(defaults, {
     // Add options here
+    'ember-cli-babel': {
+      enableTypeScriptTransform: true,
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -22,15 +25,17 @@ module.exports = function (defaults) {
   const { Webpack } = require('@embroider/webpack');
 
   return require('@embroider/compat').compatBuild(app, Webpack, {
-    staticAddonTestSupportTrees: true,
+    extraPublicTrees: [],
     staticAddonTrees: true,
+    staticAddonTestSupportTrees: true,
     staticHelpers: true,
     staticModifiers: true,
     staticComponents: true,
+    splitControllers: true,
+    splitRouteClasses: true,
     // splitAtRoutes: ['route.name'], // can also be a RegExp
     // packagerOptions: {
     //    webpackConfig: { }
     // }
   });
 };
-

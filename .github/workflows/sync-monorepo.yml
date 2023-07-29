@@ -27,9 +27,9 @@ jobs:
           mv *.js ./polaris-starter/
           mv .e* ./polaris-starter/
           mv .p* ./polaris-starter/
-          mv .s ./polaris-starter/
-          mv .t ./polaris-starter/
-          mv .w ./polaris-starter/
+          mv .s* ./polaris-starter/
+          mv .t* ./polaris-starter/
+          mv .w* ./polaris-starter/
           mv .gitignore ./polaris-starter/
           mv app ./polaris-starter/
           mv config ./polaris-starter/

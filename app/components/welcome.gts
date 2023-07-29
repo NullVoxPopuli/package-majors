@@ -36,14 +36,15 @@ const FancyText: TOC<{
   </template>;
 
 const Welcome: TOC<{}> = <template>
+  <header>
+    <img src='/images/logo.png' width=50 height=50 />
+    <h1>Welcome to <FancyText>Polaris</FancyText></h1>
+  </header>
   <main>
-    <header>
-      <img src='/images/logo.png' width=50 height=50 />
-      <h1>Welcome to <FancyText>Polaris</FancyText></h1>
+    <div class='title'>
+      <h2>Learning Resources</h2>
       <aside>The time is <span>{{Clock}}</span></aside>
-    </header>
-
-    <h2>Learning Resources</h2>
+    </div>
     <ul>
       <li>
         <a href="https://tutorial.glimdown.com">gjs tutorial</a>
@@ -74,7 +75,9 @@ const Welcome: TOC<{}> = <template>
       </li>
     </ul>
 
-    <a href="https://github.com/NullVoxPopuli/polaris-starter/tree/main" class='github'>Fork Starter Project on GitHub</a>
+    <div class='footer'>
+      <a href="https://github.com/NullVoxPopuli/polaris-starter/tree/main" class='github'>Fork Starter Project on GitHub</a>
+    </div>
   </main>
 </template>
 

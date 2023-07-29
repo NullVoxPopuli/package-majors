@@ -9,12 +9,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 main {
   background: rgba(4, 2, 2, 1);
   padding: 2rem 4rem 4rem;
-  margin-bottom: 30rem;
   border-radius: 0.75rem;
 }
 
@@ -26,25 +26,42 @@ a {
 header {
   display: flex;
   align-items: center;
+  margin-top: -20rem;
+  margin-bottom: 1rem;
 }
 
-h1 {
-  flex: 1;
+header h1 {
   margin-left: 1rem;
 }
 
 header img {
+  margin-left: 0rem;
   border-radius: 1rem;
   border: 1px solid rgba(30, 30, 30, 1);
 }
 
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.title h2 {
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
 ul {
   margin-bottom: 5rem;
+  padding: 0;
 }
 
 li {
   display: grid;
-  grid-template-columns: 15rem 40rem 1fr;
+  grid-template-columns: 15rem 30rem 1fr;
   grid-template-areas: "link text .";
   margin-bottom: 1rem;
 }

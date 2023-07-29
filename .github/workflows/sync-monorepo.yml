@@ -37,6 +37,7 @@ jobs:
           mv tests ./polaris-starter/
           mv types ./polaris-starter/
           mv README.md ./polaris-starter/
+          mv tsconfig.json ./polaris-starter/
 
           mv ./.github/monorepo-files/package.json ./
           mv ./.github/monorepo-files/pnpm-workspace.yaml ./

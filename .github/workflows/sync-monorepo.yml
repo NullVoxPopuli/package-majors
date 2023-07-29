@@ -1,0 +1,52 @@
+name: Sync monorepo branch
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update_monorepo_branch:
+    name: Update Unstable Branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: wyvox/action-setup-pnpm@v2.3.0
+      - run: |
+          rm -rf node_modules
+          rm -rf dist
+          rm pnpm-lock.yaml
+
+          mkdir -p polaris-starter
+          mkdir -p packages/
+          touch packages/.gitkeep
+
+          mv package.json ./polaris-starter/
+          mv *.js ./polaris-starter/
+          mv .e* ./polaris-starter/
+          mv .p* ./polaris-starter/
+          mv .s ./polaris-starter/
+          mv .t ./polaris-starter/
+          mv .w ./polaris-starter/
+          mv .gitignore ./polaris-starter/
+          mv app ./polaris-starter/
+          mv config ./polaris-starter/
+          mv public ./polaris-starter/
+          mv tests ./polaris-starter/
+          mv types ./polaris-starter/
+          mv README.md ./polaris-starter/
+
+          mv ./.github/monorepo-files/package.json ./
+          mv ./.github/monorepo-files/pnpm-workspace.yaml ./
+          mv ./.github/monorepo-files/.gitignore ./
+
+          mv ./.github ./polaris-starter/
+
+      - run: pnpm install --fix-lockfile
+      - run: |
+          git checkout -b monorepo
+          git add .
+          git commit -m "Syncing monorepo"
+          git push origin monorepo -f

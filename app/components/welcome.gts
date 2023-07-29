@@ -70,6 +70,19 @@ const Welcome: TOC<{}> = <template>
   <br>
   <br>
 
+  <a href="https://stackblitz.com/github/nullVoxPopuli/polaris-starter/tree/main">
+    Try it on StackBlitz
+  </a>
+  <br>
+  <a href="https://stackblitz.com/github/nullVoxPopuli/polaris-starter/tree/monorepo">
+    Try the monorepo version on StackBlitz
+  </a>
+  <br>
+
+  <br>
+  <br>
+  <br>
+
   <a href="https://github.com/NullVoxPopuli/polaris-starter/tree/main">Edit/Fork this starter project here</a>
 
 

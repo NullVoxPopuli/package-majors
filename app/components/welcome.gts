@@ -37,7 +37,7 @@ const FancyText: TOC<{
 
 const Welcome: TOC<{}> = <template>
   <header>
-    <img src='/images/logo.png' width='50' height='50' alt='logo' />
+    <img src='/images/logo.png' width='50' height='50' alt='an unofficial polaris logo. a gold compass rose sits in a space setting with kaleidoscopic colors showing through the compass.' />
     <h1>Welcome to <FancyText>Polaris</FancyText></h1>
   </header>
   <main>

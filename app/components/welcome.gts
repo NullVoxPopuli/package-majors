@@ -37,7 +37,7 @@ const FancyText: TOC<{
 
 const Welcome: TOC<{}> = <template>
   <header>
-    <img src='/images/logo.png' width=50 height=50 />
+    <img src='/images/logo.png' width='50' height='50' alt='logo' />
     <h1>Welcome to <FancyText>Polaris</FancyText></h1>
   </header>
   <main>

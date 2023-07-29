@@ -1,1 +1,72 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background: rgba(12, 10, 10, 1);
+  color: rgba(235, 235, 235, 1);
+  padding: 1rem;
+}
+
+a {
+  color: rgba(120, 170, 255, 1);
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+header img {
+  border-radius: 1rem;
+  border: 1px solid rgba(30, 30, 30, 1);
+}
+
+ul {
+  margin-bottom: 5rem;
+}
+
+li {
+  display: grid;
+  grid-template-columns: 15rem 40rem 1fr;
+  grid-template-areas: "link text .";
+  margin-bottom: 1rem;
+}
+
+li a {
+  grid-area: link;
+}
+
+li span {
+  grid-area: text;
+}
+
+a.github {
+  align-items: center;
+  color: white;
+  background: rgba(30, 30, 30, 1);
+  padding: 0.75rem 0rem;
+  border-radius: 0.25rem;
+  border: 1px solid #111;
+  padding-right: 1rem;
+}
+
+a.github:before {
+  display: inline-block;
+  content: " ";
+  background: white;
+  width: 20px;
+  height: 20px;
+  mask: url("/images/github-mark.svg") no-repeat center;
+  mask-size: 20px;
+  padding: 0 1rem;
+  vertical-align: middle;
+}
+
+a.github:hover {
+  background: rgba(35, 35, 35, 1);
+}

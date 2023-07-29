@@ -36,6 +36,12 @@ const FancyText: TOC<{
   </template>;
 
 const Welcome: TOC<{}> = <template>
+  <style>
+    ul li {
+      line-height: 1.75rem;
+    }
+  </style>
+
   <h1>Welcome to <FancyText>Polaris</FancyText></h1>
 
   Now: {{Clock}}<br>
@@ -43,15 +49,21 @@ const Welcome: TOC<{}> = <template>
   <br>
 
   <ul>
-  <li>
-  <a href="https://tutorial.glimdown.com">gjs tutorial</a> -- get familiar with Ember's new file format
-  </li>
-  <li>
-  <a href="https://github.com/NullVoxPopuli/ember-resources/blob/better-composition/docs/docs/resources.md">Docs: Resources</a> -- learn about the new reactivity primitive
+    <li>
+      <a href="https://tutorial.glimdown.com">gjs tutorial</a> -- get familiar with Ember's new file format, programming patters, paradigms, and new way of thinking about reactivity.
     </li>
-  <li>
-    <a href="https://github.com/jmurphyau/ember-truth-helpers">ember-truth-helpers</a> -- additional built in helpers coming to Ember.js
-  </li>
+    <li>
+    <a href="https://github.com/NullVoxPopuli/ember-resources/tree/main/docs/docs">Docs: Resources</a> -- learn about the new reactivity primitive
+      </li>
+    <li>
+      <a href="https://github.com/jmurphyau/ember-truth-helpers">ember-truth-helpers</a> -- additional built in helpers coming to Ember.js
+    </li>
+    <li>
+      TypeScript always enabled, always optional
+    </li>
+    <li>
+      Coming soon: <a href="https://vitejs.dev/">Vite</a> by default.
+    </li>
   </ul>
 
 

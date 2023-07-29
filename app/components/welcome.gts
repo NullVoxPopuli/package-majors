@@ -47,22 +47,22 @@ const Welcome: TOC<{}> = <template>
     </div>
     <ul>
       <li>
-        <a href="https://tutorial.glimdown.com">gjs tutorial</a>
-          <span>get familiar with Ember's new file format, programming patters, paradigms, and new way of thinking about reactivity.</span>
+        <a href="https://tutorial.glimdown.com">gjs Tutorial</a>
+          <span>Get familiar with Ember's new file format, programming patterns, paradigms, and new way of thinking about reactivity</span>
       </li>
       <li>
       <a href="https://github.com/NullVoxPopuli/ember-resources/tree/main/docs/docs">Docs: Resources</a>
-        <span>learn about the new reactivity primitive</span>
+        <span>Learn about the new reactivity primitive</span>
         </li>
       <li>
         <a href="https://github.com/jmurphyau/ember-truth-helpers">ember-truth-helpers</a>
-          <span>additional built in helpers coming to Ember.js</span>
+          <span>Additional template helpers (coming soon to Ember.js)</span>
       </li>
       <li>
         <a href="https://typescript.org">TypeScript</a><span>TypeScript always enabled, always optional</span>
       </li>
       <li>
-        <a href="https://vitejs.dev/">Vite</a><span> Coming soon by default.</span>
+        <a href="https://vitejs.dev/">Vite</a><span>* Coming soon by default</span>
       </li>
       <li>
         <a href="https://stackblitz.com/github/nullVoxPopuli/polaris-starter/tree/main"> StackBlitz </a>
@@ -72,6 +72,11 @@ const Welcome: TOC<{}> = <template>
       <li>
         <a href="https://stackblitz.com/github/nullVoxPopuli/polaris-starter/tree/monorepo"> StackBlitz (mono-repo) </a>
         <span> Try the mono-repo version on StackBlitz</span>
+      </li>
+
+      <li>
+        <a href="https://discord.gg/emberjs">Discord</a>
+        <span>Join the community Discord</span>
       </li>
     </ul>
 

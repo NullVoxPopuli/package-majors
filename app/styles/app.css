@@ -5,7 +5,8 @@ body {
   color: rgba(235, 235, 235, 1);
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +27,6 @@ a {
 header {
   display: flex;
   align-items: center;
-  margin-top: -20rem;
   margin-bottom: 1rem;
 }
 
@@ -47,6 +47,10 @@ header img {
 
 .title h2 {
   flex: 1;
+}
+
+.title aside {
+  color: rgba(62, 60, 60, 1);
 }
 
 .footer {

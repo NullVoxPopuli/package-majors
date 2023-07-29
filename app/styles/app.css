@@ -1,8 +1,38 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+
+body {
+  --page-bg: rgba(235, 235, 235, 1);
+  --page-font: rgba(40, 35, 35, 1);
+  --main-bg: white;
+  --link-font: rgba(80, 130, 215, 1);
+  --link-hover: rgba(20, 70, 155, 1);
+  --logo-border: rgba(30, 30, 30, 1);
+  --time-font: rgba(182, 180, 180, 1);
+  --github-bg: rgba(120, 120, 120, 1);
+  --github-border: rgba(90, 90, 90, 1);
+  --github-font: white;
+  --github-hover: rgba(55, 55, 55, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --page-bg: rgba(12, 10, 10, 1);
+    --page-font: rgba(235, 235, 235, 1);
+    --main-bg: rgba(4, 2, 2, 1);
+    --link-font: rgba(120, 170, 255, 1);
+    --logo-border: rgba(30, 30, 30, 1);
+    --time-font: rgba(62, 60, 60, 1);
+    --github-bg: rgba(30, 30, 30, 1);
+    --github-border: #111;
+    --github-font: white;
+    --github-hover: rgba(35, 35, 35, 1);
+  }
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
-  background: rgba(12, 10, 10, 1);
-  color: rgba(235, 235, 235, 1);
+  background: var(--page-bg);
+  color: var(--page-font);
   height: 100vh;
   width: 100vw;
   overflow-x: hidden;
@@ -14,13 +44,12 @@ body {
 }
 
 main {
-  background: rgba(4, 2, 2, 1);
+  background: var(--main-bg);
   padding: 2rem 4rem 4rem;
   border-radius: 0.75rem;
 }
 
 a {
-  color: rgba(120, 170, 255, 1);
   text-decoration: none;
 }
 
@@ -37,7 +66,7 @@ header h1 {
 header img {
   margin-left: 0rem;
   border-radius: 1rem;
-  border: 1px solid rgba(30, 30, 30, 1);
+  border: 1px solid var(--logo-border);
 }
 
 .title {
@@ -50,7 +79,7 @@ header img {
 }
 
 .title aside {
-  color: rgba(62, 60, 60, 1);
+  color: var(--time-font);
 }
 
 .footer {
@@ -71,7 +100,12 @@ li {
 }
 
 li a {
+  color: var(--link-font);
   grid-area: link;
+}
+
+li a:hover {
+  color: var(--link-hover);
 }
 
 li span {
@@ -80,18 +114,18 @@ li span {
 
 a.github {
   align-items: center;
-  color: white;
-  background: rgba(30, 30, 30, 1);
+  color: var(--github-font);
+  background: var(--github-bg);
   padding: 0.75rem 0rem;
   border-radius: 0.25rem;
-  border: 1px solid #111;
+  border: 1px solid var(--github-border);
   padding-right: 1rem;
 }
 
 a.github:before {
   display: inline-block;
   content: " ";
-  background: white;
+  background: var(--github-font);
   width: 20px;
   height: 20px;
   mask: url("/images/github-mark.svg") no-repeat center;
@@ -101,5 +135,5 @@ a.github:before {
 }
 
 a.github:hover {
-  background: rgba(35, 35, 35, 1);
+  background: var(--github-hover);
 }

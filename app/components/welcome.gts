@@ -66,6 +66,13 @@ const Welcome: TOC<{}> = <template>
     </li>
   </ul>
 
+  <br>
+  <br>
+  <br>
+
+  <a href="https://github.com/NullVoxPopuli/polaris-starter/tree/main">Edit/Fork this starter project here</a>
+
+
 
 </template>
 

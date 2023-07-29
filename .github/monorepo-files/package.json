@@ -26,6 +26,9 @@
   },
   "packageManager": "pnpm@8.6.10",
   "pnpm": {
+    "ignoreMissing": [
+      "rsvp"
+    ],
     "allowedDeprecatedVersions": {
       "source-map-url": "^0.3.0",
       "core-js": "^2.0.0"

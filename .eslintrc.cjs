@@ -1,6 +1,5 @@
 "use strict";
 
-const path = require("path");
 /**
  * ESLint is really complicated right now, so all of it is abstracted away.
  * Updates coming soon (and hopefully to the built-in ember experience).
@@ -32,13 +31,18 @@ function addTSProject(override) {
 
       This is likely because we need to configure the TS parser to use glint instead of tsc
     */
-    parserOptions: {
-      ...override.parserOptions,
-      extraFileExtensions: [".gts"],
-      project: path.join(__dirname, "./tsconfig.json"),
-      // TODO: try to set the Glint Program
-      //   https://typescript-eslint.io/packages/parser/
-      // program: import("@glint/core"),
+    // parserOptions: {
+    //   ...override.parserOptions,
+    //   extraFileExtensions: [".gts"],
+    //   project: path.join(__dirname, "./tsconfig.json"),
+    //   // TODO: try to set the Glint Program
+    //   //   https://typescript-eslint.io/packages/parser/
+    //   // program: import("@glint/core"),
+    // },
+    rules: {
+      ...override.rules,
+      // Disabled until the above issue is resalved
+      "@typescript-eslint/prefer-optional-chain": "off",
     },
   };
 }

@@ -9,5 +9,7 @@ module.exports = {
       'error',
       { forbidden: ['meta', 'html', 'script'] },
     ],
+    // Stylistic
+    'no-inline-styles': false,
   },
 };

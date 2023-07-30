@@ -41,7 +41,7 @@ function addTSProject(override) {
     // },
     rules: {
       ...override.rules,
-      // Disabled until the above issue is resalved
+      // Disabled until the above issue is resolved
       "@typescript-eslint/prefer-optional-chain": "off",
     },
   };

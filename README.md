@@ -1,5 +1,17 @@
 # polaris-starter
 
+The goal of this project is to be a quick way to get started with _Polaris_, the next edition of Ember.
+
+Leading up to an _Edition_, the pit of incoherence can be quite deep, as there are lots of moving parts leading up to the solidification of what is in an Edition.
+
+This project is your one-stop-shop for features and patterns expected to be a part of of _Polaris_.
+
+The demo app contained in this repo is deployed here: https://polaris-starter.pages.dev/
+
+Below, you'll find the default README content for new ember projects.
+
+---
+
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 

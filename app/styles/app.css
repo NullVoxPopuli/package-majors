@@ -91,9 +91,8 @@ ul {
 }
 
 li {
-  display: grid;
-  grid-template-columns: 15rem 30rem 1fr;
-  grid-template-areas: "link text .";
+  display: flex;
+  flex-direction: column;
   margin-bottom: 1rem;
 }
 

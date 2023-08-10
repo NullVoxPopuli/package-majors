@@ -1,7 +1,9 @@
 # polaris-starter
 
-[Webpack](https://github.com/NullVoxPopuli/polaris-starter/tree/webpack)
-[Vite](https://github.com/NullVoxPopuli/polaris-starter/tree/main)
+Variants:
+- [Vite](https://github.com/NullVoxPopuli/polaris-starter/tree/main) 
+- [Webpack](https://github.com/NullVoxPopuli/polaris-starter/tree/webpack) 👈 This branch  
+
 
 The goal of this project is to be a quick way to get started with _Polaris_, the next edition of Ember.
 

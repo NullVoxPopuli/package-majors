@@ -2,9 +2,8 @@
 
 Variants:
 
-- [Vite](https://github.com/NullVoxPopuli/polaris-starter/tree/main) 
+- [Vite](https://github.com/NullVoxPopuli/polaris-starter/tree/main)
 - [Webpack](https://github.com/NullVoxPopuli/polaris-starter/tree/webpack) 👈 This branch
-
 
 # polaris-starter
 

@@ -1,16 +1,14 @@
 {
-  "extend": "@tsconfig/ember/tsconfig.json",
+  "extends": "@tsconfig/ember/tsconfig.json",
   "glint": {
-    "environment": ["ember-loose", "ember-template-imports"],
-    "transform": {
-      "include": ["app/**", "tests/**"]
-    }
+    "environment": ["ember-loose", "ember-template-imports"]
   },
   "compilerOptions": {
     // The combination of `baseUrl` with `paths` allows Ember's classic package
     // layout, which is not resolveable with the Node resolution algorithm, to
     // work with TypeScript.
     "baseUrl": ".",
+    "allowJs": true,
     "paths": {
       "polaris-starter/tests/*": ["tests/*"],
       "polaris-starter/*": ["app/*"],

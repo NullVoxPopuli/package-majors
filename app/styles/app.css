@@ -8,7 +8,7 @@ body {
   --link-hover: rgb(20 70 155);
   --logo-border: rgb(30 30 30);
   --time-font: rgb(82 80 80);
-  --github-bg: rgb(120 120 120);
+  --github-bg: rgb(20 20 20);
   --github-border: rgb(90 90 90);
   --github-font: white;
   --github-hover: rgb(55 55 55);
@@ -34,10 +34,10 @@ body {
     --link-font: rgb(120 170 255);
     --logo-border: rgb(30 30 30);
     --time-font: rgb(162 160 160);
-    --github-bg: rgb(30 30 30);
+    --github-bg: rgb(230 230 230);
     --github-border: #111;
-    --github-font: white;
-    --github-hover: rgb(35 35 35);
+    --github-font: black;
+    --github-hover: rgb(255 255 255);
   }
 }
 
@@ -113,22 +113,18 @@ a.github {
   align-items: center;
   color: var(--github-font);
   background: var(--github-bg);
-  padding: 0.75rem 0;
+  padding: 0.75rem 1rem;
   border-radius: 0.25rem;
   border: 1px solid var(--github-border);
   padding-right: 1rem;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem;
 }
 
-a.github::before {
-  display: inline-block;
-  content: " ";
-  background: var(--github-font);
-  width: 20px;
-  height: 20px;
-  mask: url("/images/github-mark.svg") no-repeat center;
-  mask-size: 20px;
-  padding: 0 1rem;
-  vertical-align: middle;
+a.github img {
+  mix-blend-mode: difference;
+  max-height: 1.2rem;
 }
 
 a.github:hover {

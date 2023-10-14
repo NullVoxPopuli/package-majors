@@ -90,12 +90,6 @@
     "overrides": {
       "@glimmer/component": "^1.1.2",
       "@glimmer/tracking": "^1.1.2",
-      "@glimmer/compiler": "^0.84.3",
-      "@glimmer/syntax": "^0.84.3",
-      "@glimmer/validator": "^0.84.3",
-      "@glimmer/reference": "^0.84.3",
-      "@glimmer/manager": "^0.84.3",
-      "@glimmer/interfaces": "^0.84.3",
       "@glint/core": "1.2.1",
       "@glint/environment-ember-loose": "1.2.1",
       "@glint/environment-ember-template-imports": "^1.2.1",

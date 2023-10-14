@@ -29,5 +29,7 @@ jobs:
 
     steps:
       - uses: wyvox/action@v1
+        with:
+          node-version: 18.18.1
       - name: Run Tests
         run: pnpm test:ember

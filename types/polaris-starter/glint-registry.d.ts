@@ -6,9 +6,9 @@ import '@glint/environment-ember-loose/native-integration';
 declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
     /**
-      * If any loose-mode templates need access to components,
-      * helpers, etc, and those loose-mode templates are type-checked,
-      * they'll need to be added here.
-      */
+     * If any loose-mode templates need access to components,
+     * helpers, etc, and those loose-mode templates are type-checked,
+     * they'll need to be added here.
+     */
   }
 }

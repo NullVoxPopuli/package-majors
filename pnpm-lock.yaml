@@ -7,6 +7,8 @@ settings:
 overrides:
   '@glimmer/component': ^1.1.2
   '@glimmer/tracking': ^1.1.2
+  '@glimmer/manager': 0.84.2
+  '@glimmer/validator': 0.84.2
   '@glint/core': 1.2.1
   '@glint/environment-ember-loose': 1.2.1
   '@glint/environment-ember-template-imports': ^1.2.1
@@ -2226,7 +2228,7 @@ packages:
       '@glimmer/global-context': 0.84.3
       '@glimmer/interfaces': 0.84.3
       '@glimmer/util': 0.84.3
-      '@glimmer/validator': 0.84.3
+      '@glimmer/validator': 0.84.2
     dev: true
 
   /@glimmer/runtime@0.84.2:
@@ -2266,7 +2268,7 @@ packages:
     resolution: {integrity: sha512-cyV32zsHh+CnftuRX84ALZpd2rpbDrhLhJnTXn9W//QpqdRZ5rdMsxSY9fOsj0CKEc706tmEU299oNnDc0d7tA==}
     dependencies:
       '@glimmer/env': 0.1.7
-      '@glimmer/validator': 0.44.0
+      '@glimmer/validator': 0.84.2
 
   /@glimmer/util@0.44.0:
     resolution: {integrity: sha512-duAsm30uVK9jSysElCbLyU6QQYO2X9iLDLBIBUcCqck9qN1o3tK2qWiHbGK5d6g8E2AJ4H88UrfElkyaJlGrwg==}
@@ -2285,21 +2287,11 @@ packages:
       '@glimmer/interfaces': 0.84.3
       '@simple-dom/interface': 1.4.0
 
-  /@glimmer/validator@0.44.0:
-    resolution: {integrity: sha512-i01plR0EgFVz69GDrEuFgq1NheIjZcyTy3c7q+w7d096ddPVeVcRzU3LKaqCfovvLJ+6lJx40j45ecycASUUyw==}
-
   /@glimmer/validator@0.84.2:
     resolution: {integrity: sha512-9tpSmwiktsJDqriNEiFfyP+9prMSdk08THA6Ik71xS/sudBKxoDpul678uvyEYST/+Z23F8MxwKccC+QxCMXNA==}
     dependencies:
       '@glimmer/env': 0.1.7
       '@glimmer/global-context': 0.84.2
-
-  /@glimmer/validator@0.84.3:
-    resolution: {integrity: sha512-RTBV4TokUB0vI31UC7ikpV7lOYpWUlyqaKV//pRC4pexYMlmqnVhkFrdiimB/R1XyNdUOQUmnIAcdic39NkbhQ==}
-    dependencies:
-      '@glimmer/env': 0.1.7
-      '@glimmer/global-context': 0.84.3
-    dev: true
 
   /@glimmer/vm-babel-plugins@0.84.3(@babel/core@7.23.2):
     resolution: {integrity: sha512-fucWuuN7Q9QFB0ODd+PCltcTkmH4fLqYyXGArrfLt/TYN8gLv0yo00mPwFOSY7MWti/MUx88xd20/PycvYtg8w==}
@@ -6514,7 +6506,7 @@ packages:
     dependencies:
       '@glimmer/reference': 0.84.3
       '@glimmer/syntax': 0.84.3
-      '@glimmer/validator': 0.84.3
+      '@glimmer/validator': 0.84.2
       async-promise-queue: 1.0.5
       colors: 1.4.0
       commander: 8.3.0

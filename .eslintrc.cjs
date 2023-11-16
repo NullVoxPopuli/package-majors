@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
 /**
  * ESLint is really complicated right now, so all of it is abstracted away.
  * Updates coming soon (and hopefully to the built-in ember experience).
  */
-const { configs } = require("@nullvoxpopuli/eslint-configs");
+const { configs } = require('@nullvoxpopuli/eslint-configs');
 
 const config = configs.ember();
 
-const hasTS = (globArray) => globArray.some((glob) => glob.includes("ts"));
+const hasTS = (globArray) => globArray.some((glob) => glob.includes('ts'));
 
 // Setup newer TS-aware lints
 function addTSProject(override) {
@@ -42,7 +42,7 @@ function addTSProject(override) {
     rules: {
       ...override.rules,
       // Disabled until the above issue is resolved
-      "@typescript-eslint/prefer-optional-chain": "off",
+      '@typescript-eslint/prefer-optional-chain': 'off',
     },
   };
 }

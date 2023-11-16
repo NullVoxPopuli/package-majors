@@ -1,5 +1,5 @@
 /**
- * Modifier from:
+ * Modified from:
  * https://codepen.io/enbee81/pen/GRJVgXj?editors=1100
  */
 export const NameInput = <template>
@@ -48,7 +48,7 @@ export const NameInput = <template>
       width: 100%;
       padding: 0.4rem 1rem;
       border: 0.5rem solid transparent;
-      background-image: linear-gradient(#000, #000), linear-gradient(120deg, #f09 0%, #0ff 50%, #9f0 100%);
+      background-image: linear-gradient(#000, #000), linear-gradient(120deg, #f0f 0%, #0ff 50%, #9f9 100%);
       background-origin: border-box;
       background-clip: padding-box, border-box;
       border-radius: 1.5rem;

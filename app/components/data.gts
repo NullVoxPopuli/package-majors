@@ -69,6 +69,19 @@ const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) =
         tooltip: {
           enabled: true,
         },
+        legend: {
+            labels: {
+                color: "white",
+                font: {
+                  size: 18
+                }
+            }
+        },
+        
+      },
+      scales: {
+        y: { ticks: { color: 'white' } },
+        x: { ticks: { color: 'white' } }
       },
       transitions: {
         show: {

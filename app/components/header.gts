@@ -1,22 +1,25 @@
 import { ExternalLink } from 'ember-primitives';
 
+import { Arrow } from './icons/fa/external-link';
+
 export const Header = <template>
   <header>
     <ExternalLink class="github" href="https://github.com/NullVoxPopuli/package-majors">
       <img alt="" src="/images/github-logo.png" />
       GitHub
+      <Arrow />
     </ExternalLink>
 
     <h1>Packages by Major</h1>
-
   </header>
-  <style>
 
+  <style>
     header {
       display: flex;
       justify-content: space-between;
       position: fixed;
-      background: white;
+      background: rgb(40,40,40);
+      font-size: 0.8rem;
       top: 0;
       left: 0;
       right: 0;
@@ -24,7 +27,7 @@ export const Header = <template>
 
       h1 {
         margin: 0;
-        color: var(--github-font);
+        color: white;
       }
     }
 
@@ -32,10 +35,9 @@ export const Header = <template>
       align-items: center;
       color: var(--github-font);
       background: var(--github-bg);
-      padding: 0.75rem 1rem;
+      padding: 0.25rem 1rem;
       border-radius: 0.25rem;
       border: 1px solid var(--github-border);
-      padding-right: 1rem;
       display: grid;
       grid-auto-flow: column;
       gap: 0.5rem;

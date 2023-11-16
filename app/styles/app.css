@@ -34,7 +34,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   body {
-    --main-bg: rgb(42 40 40);
+    --main-bg: rgb(62 60 60);
     --page-font: white;
     --page-bg: rgb(4 2 2);
     --link-font: rgb(120 170 255);

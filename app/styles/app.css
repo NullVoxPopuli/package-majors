@@ -25,11 +25,18 @@ body {
   flex-direction: column;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition-duration: 0.001s !important;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   body {
-    --page-bg: rgb(42 40 40);
-    --page-font: rgb(235 235 235);
-    --main-bg: rgb(4 2 2);
+    --main-bg: rgb(42 40 40);
+    --page-font: white;
+    --page-bg: rgb(4 2 2);
     --link-font: rgb(120 170 255);
     --logo-border: rgb(30 30 30);
     --time-font: rgb(162 160 160);
@@ -41,47 +48,17 @@ body {
 }
 
 main {
-  background: var(--main-bg);
   padding: 2rem 4rem 4rem;
-  border-radius: 0.75rem;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 a {
   text-decoration: none;
-}
-
-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-header h1 {
-  margin-left: 1rem;
-}
-
-header img {
-  margin-left: 0;
-  border-radius: 1rem;
-  border: 1px solid var(--logo-border);
-}
-
-.title {
-  display: flex;
-  align-items: center;
-}
-
-.title h2 {
-  flex: 1;
-}
-
-.title aside {
-  color: var(--time-font);
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
 }
 
 ul {
@@ -108,24 +85,3 @@ li span {
   grid-area: text;
 }
 
-a.github {
-  align-items: center;
-  color: var(--github-font);
-  background: var(--github-bg);
-  padding: 0.75rem 1rem;
-  border-radius: 0.25rem;
-  border: 1px solid var(--github-border);
-  padding-right: 1rem;
-  display: grid;
-  grid-auto-flow: column;
-  gap: 0.5rem;
-}
-
-a.github img {
-  mix-blend-mode: difference;
-  max-height: 1.2rem;
-}
-
-a.github:hover {
-  background: var(--github-hover);
-}

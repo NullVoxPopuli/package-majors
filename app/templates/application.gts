@@ -2,13 +2,13 @@
 import pageTitle from 'ember-page-title/helpers/page-title';
 import Route from 'ember-route-template';
 
-import Welcome from '../components/welcome';
+import { Layout } from '../components/layout';
 
 export default Route(
   <template>
     {{pageTitle "PolarisStarter"}}
 
-    <Welcome />
+    <Layout />
 
     {{outlet}}
   </template>

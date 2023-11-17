@@ -15,7 +15,7 @@ export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   }
 
   return Object.entries(groups).map(([major, downloadCount]) => {
-    return { major, downloadCount }
+    return { major, downloadCount };
   });
 }
 

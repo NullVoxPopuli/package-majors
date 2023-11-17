@@ -5,11 +5,11 @@ import type RouterService from '@ember/routing/router-service';
 type Transition = ReturnType<RouterService['transitionTo']>;
 
 function urlFor(packageName: string) {
-  return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`
+  return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
 }
 
 async function getStats(packageName: string) {
-   return fetch(urlFor(packageName)).then(response => response.json());
+  return fetch(urlFor(packageName)).then((response) => response.json());
 }
 
 function getQP(transition: Transition): string {
@@ -34,15 +34,20 @@ export default class Query extends Route {
 
   async model(_: unknown, transition: Transition) {
     let rawPackages = getQP(transition);
-    let packages = rawPackages.split(',').map(str => str.trim()).filter(Boolean);
+    let packages = rawPackages
+      .split(',')
+      .map((str) => str.trim())
+      .filter(Boolean);
 
-    let stats = await Promise.all(packages.map(packageName => {
-      return getStats(packageName);
-    }))
+    let stats = await Promise.all(
+      packages.map((packageName) => {
+        return getStats(packageName);
+      })
+    );
 
     return {
       packages,
-      stats
-    }
+      stats,
+    };
   }
 }

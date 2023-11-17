@@ -19,7 +19,8 @@ body {
   overflow: hidden;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -90,4 +91,3 @@ li a:hover {
 li span {
   grid-area: text;
 }
-

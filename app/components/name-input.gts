@@ -10,8 +10,14 @@ export const NameInput: TOC<{
   };
 }> = <template>
   <div class="input-group">
-    <label class="input-group__label" for="myInput">Package Name</label>
-    <input type="text" class="input-group__input" name="packageName" value={{@value}} />
+    <label class="input-group__label" for="packageNamesInput">Package Name</label>
+    <input
+      type="text"
+      id="packageNamesInput"
+      class="input-group__input"
+      name="packageName"
+      value={{@value}}
+    />
   </div>
   <style>
     .input-group { width: 100%; max-width: 20em; display: flex; flex-direction: column; z-index: 2;

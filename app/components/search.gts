@@ -29,7 +29,9 @@ export class Search extends Component<{ Blocks: { default: [data: DownloadsRespo
   @service declare router: RouterService;
 
   get lastSubmitted() {
-    return this.router.currentRoute?.queryParams?.['packages'] || '';
+    let packages = this.router.currentRoute?.queryParams?.['packages'];
+
+    return packages ? `${packages}` : '';
   }
 
   updateSearch = (data: SearchFormData) => {

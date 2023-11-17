@@ -12,8 +12,8 @@
     // Apps don't need to publish declarations
     "declaration": false,
     "paths": {
-      "polaris-starter/tests/*": ["tests/*"],
-      "polaris-starter/*": ["app/*"],
+      "package-majors/tests/*": ["tests/*"],
+      "package-majors/*": ["app/*"],
       "*": ["types/*"]
     }
   },

@@ -1,55 +1,17 @@
 import { BarController, BarElement, CategoryScale, Chart, Colors, Legend,LinearScale, Tooltip } from "chart.js";
 import { modifier } from 'ember-modifier';
-import getMajor from 'semver/functions/major';
+import { groupByMajor, type Grouped } from 'package-majors/utils';
 
-import type { DownloadsByMajor,DownloadsResponse } from './types';
+import { DataTable } from './data-table';
+
 import type { TOC } from '@ember/component/template-only';
+import type { DownloadsResponse } from 'package-majors/types';
 
-type Grouped = ReturnType<typeof groupByMajor>;
 
 Chart.register(
   Colors, BarController, BarElement, CategoryScale, LinearScale, Legend, Tooltip
 );
 
-function groupByMajor(downloads: DownloadsResponse['downloads']) {
-  let groups: Record<number, number> = {};
-
-  for (let [version, downloadCount] of Object.entries(downloads)) {
-    let major = getMajor(version);
-
-    groups[major] ||= 0;
-    groups[major] += downloadCount;
-  } 
-
-  return Object.entries(groups).map(([major, downloadCount]) => {
-    return { major, downloadCount }
-  });
-}
-
-const DataTable: TOC<{ Args: {
-  data: Grouped; 
-}}> = <template>
-  <table>
-    <thead>
-      <tr>
-        <th>Major</th>
-        <th>Downloads</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each @data as |group|}}
-        <tr>
-          <td>
-            {{group.major}}
-          </td>
-          <td>
-            {{group.downloadCount}}
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</template>;
 
 const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) => {
   let chart = new Chart(element, {
@@ -65,6 +27,7 @@ const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) =
       ]
     },
     options: {
+      responsive: true,
       plugins: {
         tooltip: {
           enabled: true,
@@ -73,11 +36,11 @@ const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) =
             labels: {
                 color: "white",
                 font: {
-                  size: 18
+                  size: 16
                 }
             }
         },
-        
+
       },
       scales: {
         y: { ticks: { color: 'white' } },
@@ -95,12 +58,12 @@ const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) =
     }
   });
 
-  return () => chart.destroy(); 
+  return () => chart.destroy();
 });
 
 const DataChart: TOC<{
   Args: {
-    data: Grouped; 
+    data: Grouped;
   }
 }> = <template>
   <canvas {{renderChart @data}}></canvas>

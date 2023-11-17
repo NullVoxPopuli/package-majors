@@ -1,15 +1,15 @@
-[Try it on StackBlitz](https://stackblitz.com/github/nullVoxPopuli/polaris-starter/tree/main?file=README.md)
+[Try it on StackBlitz](https://stackblitz.com/github/nullVoxPopuli/package-majors/tree/main?file=README.md)
 
 Variants:
 
-- [Vite](https://github.com/NullVoxPopuli/polaris-starter/tree/main)
-- [Webpack](https://github.com/NullVoxPopuli/polaris-starter/tree/webpack) 👈 This branch
+- [Vite](https://github.com/NullVoxPopuli/package-majors/tree/main)
+- [Webpack](https://github.com/NullVoxPopuli/package-majors/tree/webpack) 👈 This branch
 
-# polaris-starter
+# package-majors
 
 Variants:
-- [Vite](https://github.com/NullVoxPopuli/polaris-starter/tree/main) 
-- [Webpack](https://github.com/NullVoxPopuli/polaris-starter/tree/webpack) 👈 This branch  
+- [Vite](https://github.com/NullVoxPopuli/package-majors/tree/main) 
+- [Webpack](https://github.com/NullVoxPopuli/package-majors/tree/webpack) 👈 This branch  
 
 
 The goal of this project is to be a quick way to get started with _Polaris_, the next edition of Ember.
@@ -18,7 +18,7 @@ Leading up to an _Edition_, the pit of incoherence can be quite deep, as there a
 
 This project is your one-stop-shop for features and patterns expected to be a part of of _Polaris_.
 
-The demo app contained in this repo is deployed here: https://polaris-starter.pages.dev/
+The demo app contained in this repo is deployed here: https://package-majors.pages.dev/
 
 Below, you'll find the default README content for new ember projects.
 
@@ -39,7 +39,7 @@ You will need the following things properly installed on your computer.
 ## Installation
 
 - `git clone <repository-url>` this repository
-- `cd polaris-starter`
+- `cd package-majors`
 - `pnpm install`
 
 ## Running / Development

@@ -1,8 +1,8 @@
 export interface DownloadsResponse {
   package: string;
   downloads: {
-    [version: string]: number
-  }
+    [version: string]: number;
+  };
 }
 
 export interface ErrorResponse {

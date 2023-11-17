@@ -1,121 +1,139 @@
-import { BarController, BarElement, CategoryScale, Chart, Colors, Legend,LinearScale, Tooltip } from "chart.js";
+import {
+  BarController,
+  BarElement,
+  CategoryScale,
+  Chart,
+  Colors,
+  Legend,
+  LinearScale,
+  Tooltip,
+} from 'chart.js';
 import { modifier } from 'ember-modifier';
-import getMajor from 'semver/functions/major';
+import { groupByMajor, type Grouped } from 'package-majors/utils';
 
-import type { DownloadsByMajor,DownloadsResponse } from './types';
 import type { TOC } from '@ember/component/template-only';
+import type { DownloadsResponse } from 'package-majors/types';
 
-type Grouped = ReturnType<typeof groupByMajor>;
+Chart.register(Colors, BarController, BarElement, CategoryScale, LinearScale, Legend, Tooltip);
 
-Chart.register(
-  Colors, BarController, BarElement, CategoryScale, LinearScale, Legend, Tooltip
-);
+function allMajors(data: FormattedData[]): string[] {
+  let majors = new Set<string>();
 
-function groupByMajor(downloads: DownloadsResponse['downloads']) {
-  let groups: Record<number, number> = {};
+  for (let datum of data) {
+    for (let downloadStat of datum.downloads) {
+      majors.add(downloadStat.major);
+    }
+  }
 
-  for (let [version, downloadCount] of Object.entries(downloads)) {
-    let major = getMajor(version);
-
-    groups[major] ||= 0;
-    groups[major] += downloadCount;
-  } 
-
-  return Object.entries(groups).map(([major, downloadCount]) => {
-    return { major, downloadCount }
-  });
+  return [...majors].sort((a, b) => Number(a) - Number(b));
 }
 
-const DataTable: TOC<{ Args: {
-  data: Grouped; 
-}}> = <template>
-  <table>
-    <thead>
-      <tr>
-        <th>Major</th>
-        <th>Downloads</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each @data as |group|}}
-        <tr>
-          <td>
-            {{group.major}}
-          </td>
-          <td>
-            {{group.downloadCount}}
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</template>;
-
-const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) => {
+const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData[]]) => {
   let chart = new Chart(element, {
     type: 'bar',
     data: {
-      labels: data.map(datum => `v${datum.major}.*`),
-      datasets: [
-        {
-          label: 'Downloads by Major Version',
-          data: data.map(datum => datum.downloadCount),
+      labels: allMajors(data),
+      datasets: data.map((packageData) => {
+        return {
+          label: packageData.name,
+          data: packageData.downloads,
           backgroundColor: '#8844cc',
-        }
-      ]
+        };
+      }),
     },
     options: {
+      responsive: true,
       plugins: {
+        // colors: {
+        //   forceOverride: true,
+        // },
         tooltip: {
           enabled: true,
+          padding: 8,
+          bodyFont: {
+            size: 16,
+          },
+          callbacks: {
+            title: (items) => {
+              return items.map((i) => `v${i.label}`);
+            },
+          },
         },
         legend: {
-            labels: {
-                color: "white",
-                font: {
-                  size: 18
-                }
-            }
+          labels: {
+            color: 'white',
+            font: {
+              size: 16,
+            },
+          },
         },
-        
       },
       scales: {
         y: { ticks: { color: 'white' } },
-        x: { ticks: { color: 'white' } }
+        x: {
+          type: 'category',
+          ticks: {
+            color: 'white',
+            callback: function (value: string | number) {
+              return `v${this.getLabelForValue(value as number)}`;
+            },
+          },
+        },
+      },
+      parsing: {
+        xAxisKey: 'major',
+        yAxisKey: 'downloadCount',
       },
       transitions: {
         show: {
           animations: {
             y: {
-              from: 0
-            }
-          }
-        }
-      }
-    }
+              from: 0,
+            },
+          },
+        },
+      },
+    },
   });
 
-  return () => chart.destroy(); 
+  return () => chart.destroy();
 });
 
 const DataChart: TOC<{
   Args: {
-    data: Grouped; 
-  }
-}> = <template>
-  <canvas {{renderChart @data}}></canvas>
-</template>;
+    data: FormattedData[];
+  };
+}> = <template><canvas {{renderChart @data}}></canvas></template>;
+
+interface FormattedData {
+  name: string;
+  downloads: Grouped;
+}
+
+function format(data: DownloadsResponse[]) {
+  const grouped = data.map((datum) => {
+    return {
+      name: datum.package,
+      downloads: groupByMajor(datum.downloads),
+    };
+  });
+
+  return grouped;
+}
 
 export const Data: TOC<{
   Args: {
-    data: DownloadsResponse;
-  }
+    data: {
+      packages: string[];
+      stats: DownloadsResponse[];
+    };
+  };
 }> = <template>
-  {{#let (groupByMajor @data.downloads) as |grouped|}}
-    <details><summary>Data as a Table</summary>
-      <DataTable @data={{grouped}} />
-    </details>
+  {{#if @data.stats}}
+    {{#let (format @data.stats) as |formattedData|}}
 
-    <DataChart @data={{grouped}} />
-  {{/let}}
+      <DataChart @data={{formattedData}} />
+
+    {{/let}}
+  {{/if}}
 </template>;

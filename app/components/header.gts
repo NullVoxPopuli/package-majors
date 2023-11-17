@@ -17,12 +17,8 @@ export const Header = <template>
     header {
       display: flex;
       justify-content: space-between;
-      position: fixed;
       background: rgb(40,40,40);
       font-size: 0.8rem;
-      top: 0;
-      left: 0;
-      right: 0;
       padding: 0.5rem;
 
       h1 {

@@ -12,25 +12,48 @@ Chart.register(
   Colors, BarController, BarElement, CategoryScale, LinearScale, Legend, Tooltip
 );
 
+function allMajors(data: FormattedData[]): string[] {
+  let majors = new Set<string>();
 
-const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) => {
+  for (let datum of data) {
+    for (let downloadStat of datum.downloads) {
+      majors.add(downloadStat.major);
+    }
+  }
+
+  return [...majors].sort();
+}
+
+const renderChart = modifier(( element: HTMLCanvasElement, [data]: [FormattedData[]] ) => {
   let chart = new Chart(element, {
     type: 'bar',
     data: {
-      labels: data.map(datum => `v${datum.major}.*`),
-      datasets: [
-        {
-          label: 'Downloads by Major Version',
-          data: data.map(datum => datum.downloadCount),
-          backgroundColor: '#8844cc',
-        }
-      ]
+      labels: allMajors(data),
+      datasets: data.map(packageData => {
+          return {
+            label: packageData.name,
+            data: packageData.downloads,
+            backgroundColor: '#8844cc',
+          }
+      })
     },
     options: {
       responsive: true,
       plugins: {
+        // colors: {
+        //   forceOverride: true,
+        // },
         tooltip: {
           enabled: true,
+          padding: 8,
+          bodyFont: {
+            size: 16
+          },
+          callbacks: {
+            title: (items) => {
+              return items.map(i => `v${i.label}`)
+            }
+          }
         },
         legend: {
             labels: {
@@ -44,7 +67,18 @@ const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) =
       },
       scales: {
         y: { ticks: { color: 'white' } },
-        x: { ticks: { color: 'white' } }
+        x: {
+          type: 'category',
+          ticks: {
+            color: 'white',
+            callback: function(value: string | number) {
+              return `v${this.getLabelForValue(value as number)}`;
+            }
+        } }
+      },
+      parsing: {
+        xAxisKey: 'major',
+        yAxisKey: 'downloadCount',
       },
       transitions: {
         show: {
@@ -63,22 +97,41 @@ const renderChart = modifier(( element: HTMLCanvasElement, [data]: [Grouped] ) =
 
 const DataChart: TOC<{
   Args: {
-    data: Grouped;
+    data: FormattedData[]
   }
 }> = <template>
   <canvas {{renderChart @data}}></canvas>
 </template>;
 
+interface FormattedData {
+    name: string;
+    downloads: Grouped;
+}
+
+function format(data: DownloadsResponse[]) {
+  const grouped = data.map(datum => {
+    return {
+      name: datum.package,
+      downloads: groupByMajor(datum.downloads),
+    }
+  });
+
+  return grouped;
+}
+
 export const Data: TOC<{
   Args: {
-    data: DownloadsResponse;
+    data: {
+      packages: string[];
+      stats: DownloadsResponse[];
+    }
   }
 }> = <template>
-  {{#let (groupByMajor @data.downloads) as |grouped|}}
-    <details><summary>Data as a Table</summary>
-      <DataTable @data={{grouped}} />
-    </details>
+  {{#if @data.stats}}
+    {{#let (format @data.stats) as |formattedData|}}
 
-    <DataChart @data={{grouped}} />
-  {{/let}}
+      <DataChart @data={{formattedData}} />
+
+    {{/let}}
+  {{/if}}
 </template>;

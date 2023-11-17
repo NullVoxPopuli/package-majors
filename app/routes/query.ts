@@ -8,7 +8,7 @@ function urlFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`
 }
 
-function getStats(packageName) {
+async function getStats(packageName: string) {
    return fetch(urlFor(packageName)).then(response => response.json());
 }
 
@@ -34,7 +34,7 @@ export default class Query extends Route {
 
   async model(_: unknown, transition: Transition) {
     let rawPackages = getQP(transition);
-    let packages = rawPackages.split(',');
+    let packages = rawPackages.split(',').map(str => str.trim()).filter(Boolean);
 
     let stats = await Promise.all(packages.map(packageName => {
       return getStats(packageName);

@@ -2,14 +2,21 @@
 import pageTitle from 'ember-page-title/helpers/page-title';
 import Route from 'ember-route-template';
 
-import { Layout } from '../components/layout';
+import { Header } from '../components/header';
+import { Search } from '../components/search';
 
 export default Route(
   <template>
-    {{pageTitle "PolarisStarter"}}
+    {{pageTitle "Downloads by Major"}}
 
-    <Layout />
+    <div class="layout">
+      <Header />
 
-    {{outlet}}
+      <main>
+        <Search />
+
+        {{outlet}}
+      </main>
+    </div>
   </template>
 );

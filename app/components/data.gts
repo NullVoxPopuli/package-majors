@@ -11,8 +11,6 @@ import {
 import { modifier } from 'ember-modifier';
 import { groupByMajor, type Grouped } from 'package-majors/utils';
 
-import { DataTable } from './data-table';
-
 import type { TOC } from '@ember/component/template-only';
 import type { DownloadsResponse } from 'package-majors/types';
 
@@ -27,7 +25,7 @@ function allMajors(data: FormattedData[]): string[] {
     }
   }
 
-  return [...majors].sort();
+  return [...majors].sort((a, b) => Number(a) - Number(b));
 }
 
 const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData[]]) => {

@@ -27,6 +27,11 @@ export default Route(
       <main>
         <Search />
 
+        <p>
+          Reveal problems users are having with upgrading to the next major. <br>
+          Search for a package to see if its ecosystem has an upgrading problem.
+        </p>
+
         {{outlet}}
       </main>
     </div>

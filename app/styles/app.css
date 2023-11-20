@@ -123,6 +123,7 @@ main {
   gap: 4rem;
   max-height: calc(100dvh - 52px);
 }
+
 main > div,
 main > p,
 main > form {

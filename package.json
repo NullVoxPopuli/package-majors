@@ -107,7 +107,6 @@
     "edition": "octane"
   },
   "dependencies": {
-    "@embroider/macros": "^1.13.3",
     "@universal-ember/preem": "^0.1.7",
     "chart.js": "^4.4.0",
     "ember-modifier": "^4.1.0",
@@ -115,7 +114,9 @@
     "ember-resources": "^6.4.2",
     "ember-route-template": "^1.0.3",
     "semver": "^7.5.4",
-    "tracked-built-ins": "^3.3.0"
+    "tracked-built-ins": "^3.3.0",
+    "decorator-transforms": "^1.0.0",
+    "@embroider/macros": "^1.13.3"
   },
   "volta": {
     "node": "18.17.0",

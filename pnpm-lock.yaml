@@ -24,6 +24,9 @@ dependencies:
   chart.js:
     specifier: ^4.4.0
     version: 4.4.0
+  decorator-transforms:
+    specifier: ^1.0.0
+    version: 1.0.0(@babel/core@7.23.3)
   ember-modifier:
     specifier: ^4.1.0
     version: 4.1.0(ember-source@5.4.0)
@@ -5317,6 +5320,15 @@ packages:
     resolution: {integrity: sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==}
     engines: {node: '>=0.10'}
     dev: true
+
+  /decorator-transforms@1.0.0(@babel/core@7.23.3):
+    resolution: {integrity: sha512-UzITCViUrfUFZrBerpE0RSWMy3l7h26eS7QOpz9Qd74CTTPZdImhBC/vfh7LXIIdTrOvKTH4pWDqC2KvwqloEA==}
+    dependencies:
+      '@babel/plugin-syntax-decorators': 7.23.3(@babel/core@7.23.3)
+      babel-import-util: 2.0.1
+    transitivePeerDependencies:
+      - '@babel/core'
+    dev: false
 
   /deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}

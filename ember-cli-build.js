@@ -7,6 +7,20 @@ module.exports = function (defaults) {
     // Add options here
     'ember-cli-babel': {
       enableTypeScriptTransform: true,
+      disableDecoratorTransforms: true,
+    },
+    babel: {
+      plugins: [
+        // add the new transform.
+        [
+          require.resolve('decorator-transforms'),
+          {
+            runtime: {
+              import: require.resolve('decorator-transforms/runtime'),
+            },
+          },
+        ],
+      ],
     },
   });
 

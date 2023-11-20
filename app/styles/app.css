@@ -117,11 +117,17 @@ body {
 main {
   padding: 2rem 4rem 4rem;
   max-width: 100vw;
-  display: flex;
+  display: grid;
   justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  grid-auto-columns: 1fr;
   gap: 4rem;
+  max-height: calc(100dvh - 52px);
+}
+main > div,
+main > p,
+main > form {
+  display: grid;
+  justify-content: center;
 }
 
 a {

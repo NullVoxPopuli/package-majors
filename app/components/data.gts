@@ -43,6 +43,7 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
       }),
     },
     options: {
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
         tooltip: {
@@ -108,7 +109,15 @@ const DataChart: TOC<{
   Args: {
     data: FormattedData[];
   };
-}> = <template><canvas {{renderChart @data}}></canvas></template>;
+}> = <template>
+  <div
+    style="
+  display: grid;
+  min-width: 100%;
+  justify-content: center;
+  "
+  ><canvas {{renderChart @data}}></canvas></div>
+</template>;
 
 interface FormattedData {
   name: string;

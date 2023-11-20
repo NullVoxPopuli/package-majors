@@ -29,16 +29,18 @@ function allMajors(data: FormattedData[]): string[] {
   return [...majors].sort((a, b) => Number(a) - Number(b));
 }
 
+const colors = ['#8844cc', '#44cc88', '#cc8844', '#cc4488', '#88cc44', '#4488cc'];
+
 const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData[]]) => {
   let chart = new Chart(element, {
     type: 'bar',
     data: {
       labels: allMajors(data),
-      datasets: data.map((packageData) => {
+      datasets: data.map((packageData, i) => {
         return {
           label: packageData.name,
           data: packageData.downloads,
-          backgroundColor: '#8844cc',
+          backgroundColor: colors[i % colors.length],
         };
       }),
     },

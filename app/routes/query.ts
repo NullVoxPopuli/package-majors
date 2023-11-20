@@ -8,8 +8,18 @@ function urlFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
 }
 
+const CACHE = new Map();
+
 async function getStats(packageName: string) {
-  return fetch(urlFor(packageName)).then((response) => response.json());
+  if (CACHE.has(packageName)) {
+    return CACHE.get(packageName);
+  }
+
+  let result = await fetch(urlFor(packageName)).then((response) => response.json());
+
+  CACHE.set(packageName, result);
+
+  return result;
 }
 
 function getQP(transition: Transition): string {

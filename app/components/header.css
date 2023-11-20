@@ -1,0 +1,37 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  background: rgb(40 40 40);
+  height: 36px;
+  padding: 0.5rem;
+
+  h1 {
+    margin: 0;
+    color: white;
+  }
+
+  .preem__site-theme-toggle {
+    label {
+      height: 30px;
+    }
+  }
+}
+
+a.github {
+  align-items: center;
+  color: var(--github-font);
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+}
+
+a.github:hover {
+  text-decoration: underline;
+}
+
+a.github img {
+  mix-blend-mode: difference;
+  max-height: 1.2rem;
+}

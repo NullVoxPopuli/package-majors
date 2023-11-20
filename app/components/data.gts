@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import { modifier } from 'ember-modifier';
+import { colorScheme } from 'ember-primitives/color-scheme';
 import { groupByMajor, type Grouped } from 'package-majors/utils';
 
 import type { TOC } from '@ember/component/template-only';
@@ -44,9 +45,6 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
     options: {
       responsive: true,
       plugins: {
-        // colors: {
-        //   forceOverride: true,
-        // },
         tooltip: {
           enabled: true,
           padding: 8,
@@ -61,7 +59,7 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
         },
         legend: {
           labels: {
-            color: 'white',
+            color: 'currentColor',
             font: {
               size: 16,
             },
@@ -69,11 +67,11 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
         },
       },
       scales: {
-        y: { ticks: { color: 'white' } },
+        y: { ticks: { color: 'currentColor' } },
         x: {
           type: 'category',
           ticks: {
-            color: 'white',
+            color: 'currentColor',
             callback: function (value: string | number) {
               return `v${this.getLabelForValue(value as number)}`;
             },
@@ -96,7 +94,14 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
     },
   });
 
-  return () => chart.destroy();
+  let update = () => chart.update();
+
+  colorScheme.on.update(update);
+
+  return () => {
+    colorScheme.off.update(update);
+    chart.destroy();
+  };
 });
 
 const DataChart: TOC<{

@@ -1,8 +1,21 @@
+import semverCoerce from 'semver/functions/coerce';
+import semverCompare from 'semver/functions/compare';
 import getMajor from 'semver/functions/major';
+import getMinor from 'semver/functions/minor';
 
 import type { DownloadsResponse, ErrorResponse } from './types';
 
 export type Grouped = ReturnType<typeof groupByMajor>;
+
+export function versionComparator(a: number | string, b: number | string) {
+  let semverA = semverCoerce(a);
+  let semverB = semverCoerce(b);
+
+  if (semverA === null) return -1;
+  if (semverB === null) return 1;
+
+  return semverCompare(semverA, semverB);
+}
 
 export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   let groups: Record<number, number> = {};
@@ -15,7 +28,24 @@ export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   }
 
   return Object.entries(groups).map(([major, downloadCount]) => {
-    return { major, downloadCount };
+    return { version: major, downloadCount };
+  });
+}
+
+export function groupByMinor(downloads: DownloadsResponse['downloads']): Grouped {
+  let groups: Record<string, number> = {};
+
+  for (let [version, downloadCount] of Object.entries(downloads)) {
+    let major = getMajor(version);
+    let minor = getMinor(version);
+    let majorMinor = `${major}.${minor}`;
+
+    groups[majorMinor] ||= 0;
+    groups[majorMinor] += downloadCount;
+  }
+
+  return Object.entries(groups).map(([majorMinor, downloadCount]) => {
+    return { version: majorMinor, downloadCount };
   });
 }
 

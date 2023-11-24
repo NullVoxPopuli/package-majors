@@ -40,6 +40,9 @@ export default class Query extends Route {
     packages: {
       refreshModel: true,
     },
+    minors: {
+      refreshModel: false,
+    },
   };
 
   async model(_: unknown, transition: Transition) {

@@ -5,6 +5,7 @@ import { service } from '@ember/service';
 import { Form } from 'ember-primitives';
 
 import { NameInput } from './name-input';
+import { ShowMinors } from './show-minors';
 
 import type RouterService from '@ember/routing/router-service';
 import type { DownloadsResponse } from 'package-majors/types';
@@ -17,12 +18,15 @@ function handleSubmit(onChange: (data: SearchFormData) => void, data: unknown, e
 
 interface SearchFormData {
   packageName: string;
+  showMinors?: 'on';
 }
 
 export class Search extends Component<{ Blocks: { default: [data: DownloadsResponse] } }> {
   <template>
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
       <NameInput @value={{this.lastSubmitted}} />
+
+      <ShowMinors />
     </Form>
   </template>
 
@@ -35,11 +39,12 @@ export class Search extends Component<{ Blocks: { default: [data: DownloadsRespo
   }
 
   updateSearch = (data: SearchFormData) => {
-    let packageNames = data.packageName;
+    let { packageName: packages, showMinors: minors } = data;
 
     this.router.transitionTo('query', {
       queryParams: {
-        packages: packageNames,
+        packages,
+        minors,
       },
     });
   };

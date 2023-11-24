@@ -26,11 +26,19 @@ export class Search extends Component<{ Blocks: { default: [data: DownloadsRespo
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
       <NameInput @value={{this.lastSubmitted}} />
 
-      <ShowMinors />
+      <ShowMinors checked={{this.lastShowingMinors}} />
     </Form>
   </template>
 
   @service declare router: RouterService;
+
+  get lastShowingMinors() {
+    let minors = this.router.currentRoute?.queryParams?.['minors'];
+
+    if (!minors) return;
+
+    return `${minors}`;
+  }
 
   get lastSubmitted() {
     let packages = this.router.currentRoute?.queryParams?.['packages'];

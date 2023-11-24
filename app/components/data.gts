@@ -13,7 +13,7 @@ import {
 } from 'chart.js';
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
-import { groupByMajor, groupByMinor, type Grouped,versionComparator } from 'package-majors/utils';
+import { groupByMajor, groupByMinor, type Grouped, versionComparator } from 'package-majors/utils';
 
 import type { TOC } from '@ember/component/template-only';
 import type RouterService from '@ember/routing/router-service';
@@ -132,9 +132,8 @@ interface FormattedData {
 
 function format(data: DownloadsResponse[], groupBy: 'minors' | 'majors') {
   const grouped = data.map((datum) => {
-    let downloads = groupBy === 'minors'
-      ? groupByMinor(datum.downloads)
-      : groupByMajor(datum.downloads);
+    let downloads =
+      groupBy === 'minors' ? groupByMinor(datum.downloads) : groupByMajor(datum.downloads);
 
     return {
       name: datum.package,

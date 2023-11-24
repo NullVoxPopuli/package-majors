@@ -42,7 +42,7 @@ export default class Query extends Route {
     },
     minors: {
       refreshModel: false,
-    }
+    },
   };
 
   async model(_: unknown, transition: Transition) {

@@ -1,3 +1,5 @@
+import './show-minors.css';
+
 import { assert } from '@ember/debug';
 import { on } from '@ember/modifier';
 
@@ -12,12 +14,18 @@ function submit(event: Event) {
 }
 
 export const ShowMinors = <template>
-  <Switch as |s|>
-    <s.Control name="showMinors" {{on "click" submit}} />
-    <s.Label>
-      <span class="sr-only">
-        Toggle showing minors or majors
-      </span>
-    </s.Label>
+  <Switch class="fun-switch" as |s|>
+    <span class="secondary-label">Majors</span>
+
+    <span>
+      <s.Control name="showMinors" {{on "click" submit}} />
+      <s.Label>
+        <span class="sr-only">
+          Toggle showing minors or majors
+        </span>
+      </s.Label>
+    </span>
+
+    <span class="secondary-label">Minors</span>
   </Switch>
 </template>;

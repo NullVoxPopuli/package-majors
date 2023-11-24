@@ -30,7 +30,7 @@
     position: relative;
   }
 
-  label:after {
+  label::after {
     content: "";
     position: absolute;
     top: 4px;
@@ -42,17 +42,16 @@
     transition: 0.3s;
   }
 
-  input:checked + label {
-    background: #88cc44;
-  }
-
-  input:checked + label:after {
-    left: calc(100% - 5px);
-    transform: translateX(-100%);
-  }
-
-  label:active:after {
+  label:active::after {
     width: 65px;
   }
 
+  input:checked + label {
+    background: #8c4;
+  }
+
+  input:checked + label::after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  }
 }

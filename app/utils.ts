@@ -1,9 +1,21 @@
+import semverCoerce from 'semver/functions/coerce';
+import semverCompare from 'semver/functions/compare';
 import getMajor from 'semver/functions/major';
 import getMinor from 'semver/functions/minor';
 
 import type { DownloadsResponse, ErrorResponse } from './types';
 
 export type Grouped = ReturnType<typeof groupByMajor>;
+
+export function versionComparator(a: number | string, b: number | string) {
+  let semverA = semverCoerce(a);
+  let semverB = semverCoerce(b);
+
+  if (semverA === null) return -1;
+  if (semverB === null) return 1;
+
+  return semverCompare(semverA, semverB);
+}
 
 export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   let groups: Record<number, number> = {};

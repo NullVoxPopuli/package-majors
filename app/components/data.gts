@@ -13,8 +13,7 @@ import {
 } from 'chart.js';
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
-import { groupByMajor, groupByMinor, type Grouped } from 'package-majors/utils';
-import semverCompare from 'semver/functions/compare';
+import { groupByMajor, groupByMinor, type Grouped,versionComparator } from 'package-majors/utils';
 
 import type { TOC } from '@ember/component/template-only';
 import type RouterService from '@ember/routing/router-service';
@@ -31,7 +30,7 @@ function sortLabels(data: FormattedData[]): string[] {
     }
   }
 
-  return [...versions].sort(semverCompare);
+  return [...versions].sort(versionComparator);
 }
 
 const colors = ['#8844cc', '#44cc88', '#cc8844', '#cc4488', '#88cc44', '#4488cc'];
@@ -87,7 +86,7 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
         },
       },
       parsing: {
-        xAxisKey: 'major',
+        xAxisKey: 'version',
         yAxisKey: 'downloadCount',
       },
       transitions: {

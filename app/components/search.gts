@@ -2,9 +2,10 @@ import Component from '@glimmer/component';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 
-import { Form, Switch } from 'ember-primitives';
+import { Form } from 'ember-primitives';
 
 import { NameInput } from './name-input';
+import { ShowMinors } from './show-minors';
 
 import type RouterService from '@ember/routing/router-service';
 import type { DownloadsResponse } from 'package-majors/types';
@@ -17,6 +18,7 @@ function handleSubmit(onChange: (data: SearchFormData) => void, data: unknown, e
 
 interface SearchFormData {
   packageName: string;
+  showMinors?: 'on';
 }
 
 export class Search extends Component<{ Blocks: { default: [data: DownloadsResponse] } }> {
@@ -24,13 +26,7 @@ export class Search extends Component<{ Blocks: { default: [data: DownloadsRespo
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
       <NameInput @value={{this.lastSubmitted}} />
 
-      <Switch as |s|>
-       <s.Control class="form-check-input" />
-        <s.Label class="form-check-label">
-          Toggle on or off
-        </s.Label>
-      </Switch>
-
+      <ShowMinors />
     </Form>
   </template>
 
@@ -43,11 +39,12 @@ export class Search extends Component<{ Blocks: { default: [data: DownloadsRespo
   }
 
   updateSearch = (data: SearchFormData) => {
-    let packageNames = data.packageName;
+    let { packageName: packages, showMinors: minors } = data;
 
     this.router.transitionTo('query', {
       queryParams: {
-        packages: packageNames,
+        packages,
+        minors,
       },
     });
   };

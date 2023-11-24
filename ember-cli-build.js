@@ -13,9 +13,11 @@ module.exports = function (defaults) {
       plugins: [
         // add the new transform.
         [
+          // eslint-disable-next-line n/no-missing-require
           require.resolve('decorator-transforms'),
           {
             runtime: {
+              // eslint-disable-next-line n/no-missing-require
               import: require.resolve('decorator-transforms/runtime'),
             },
           },

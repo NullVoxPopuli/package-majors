@@ -4,6 +4,7 @@ import { colorScheme } from 'ember-primitives/color-scheme';
 import Route from 'ember-route-template';
 
 import { Header } from '../components/header';
+import { IntroText } from '../components/intro-text';
 import { Search } from '../components/search';
 
 function syncColorScheme() {
@@ -26,11 +27,7 @@ export default Route(
 
       <main>
         <Search />
-
-        <p>
-          Reveal problems users are having with upgrading to the next major. <br>
-          Search for a package to see if its ecosystem has an upgrading problem.
-        </p>
+        <IntroText />
 
         {{outlet}}
       </main>

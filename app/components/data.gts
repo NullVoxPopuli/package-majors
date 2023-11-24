@@ -1,3 +1,6 @@
+import Component from '@glimmer/component';
+import { service } from '@ember/service';
+
 import {
   BarController,
   BarElement,
@@ -10,23 +13,25 @@ import {
 } from 'chart.js';
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
-import { groupByMajor, type Grouped } from 'package-majors/utils';
+import { groupByMajor, groupByMinor, type Grouped } from 'package-majors/utils';
+import semverCompare from 'semver/functions/compare';
 
 import type { TOC } from '@ember/component/template-only';
+import type RouterService from '@ember/routing/router-service';
 import type { DownloadsResponse } from 'package-majors/types';
 
 Chart.register(Colors, BarController, BarElement, CategoryScale, LinearScale, Legend, Tooltip);
 
-function allMajors(data: FormattedData[]): string[] {
-  let majors = new Set<string>();
+function sortLabels(data: FormattedData[]): string[] {
+  let versions = new Set<string>();
 
   for (let datum of data) {
     for (let downloadStat of datum.downloads) {
-      majors.add(downloadStat.major);
+      versions.add(downloadStat.version);
     }
   }
 
-  return [...majors].sort((a, b) => Number(a) - Number(b));
+  return [...versions].sort(semverCompare);
 }
 
 const colors = ['#8844cc', '#44cc88', '#cc8844', '#cc4488', '#88cc44', '#4488cc'];
@@ -35,7 +40,7 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
   let chart = new Chart(element, {
     type: 'bar',
     data: {
-      labels: allMajors(data),
+      labels: sortLabels(data),
       datasets: data.map((packageData, i) => {
         return {
           label: packageData.name,
@@ -126,30 +131,48 @@ interface FormattedData {
   downloads: Grouped;
 }
 
-function format(data: DownloadsResponse[]) {
+function format(data: DownloadsResponse[], groupBy: 'minors' | 'majors') {
   const grouped = data.map((datum) => {
+    let downloads = groupBy === 'minors'
+      ? groupByMinor(datum.downloads)
+      : groupByMajor(datum.downloads);
+
     return {
       name: datum.package,
-      downloads: groupByMajor(datum.downloads),
+      downloads,
     };
   });
 
   return grouped;
 }
 
-export const Data: TOC<{
+export class Data extends Component<{
   Args: {
     data: {
       packages: string[];
       stats: DownloadsResponse[];
     };
   };
-}> = <template>
-  {{#if @data.stats}}
-    {{#let (format @data.stats) as |formattedData|}}
+}> {
+  <template>
+    {{#if @data.stats}}
+      <DataChart @data={{this.formattedData}} />
+    {{/if}}
+  </template>
 
-      <DataChart @data={{formattedData}} />
+  @service declare router: RouterService;
 
-    {{/let}}
-  {{/if}}
-</template>;
+  get groupBy(): 'minors' | 'majors' {
+    let qps = this.router.currentRoute?.queryParams;
+
+    if (qps?.['minors']) {
+      return 'minors';
+    }
+
+    return 'majors';
+  }
+
+  get formattedData() {
+    return format(this.args.data.stats, this.groupBy);
+  }
+}

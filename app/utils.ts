@@ -1,4 +1,5 @@
 import getMajor from 'semver/functions/major';
+import getMinor from 'semver/functions/minor';
 
 import type { DownloadsResponse, ErrorResponse } from './types';
 
@@ -15,7 +16,24 @@ export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   }
 
   return Object.entries(groups).map(([major, downloadCount]) => {
-    return { major, downloadCount };
+    return { version: major, downloadCount };
+  });
+}
+
+export function groupByMinor(downloads: DownloadsResponse['downloads']): Grouped {
+  let groups: Record<string, number> = {};
+
+  for (let [version, downloadCount] of Object.entries(downloads)) {
+    let major = getMajor(version);
+    let minor = getMinor(version);
+    let majorMinor = `${major}.${minor}`;
+
+    groups[majorMinor] ||= 0;
+    groups[majorMinor] += downloadCount;
+  }
+
+  return Object.entries(groups).map(([majorMinor, downloadCount]) => {
+    return { version: majorMinor, downloadCount };
   });
 }
 

@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 
-import { Form } from 'ember-primitives';
+import { Form, Switch } from 'ember-primitives';
 
 import { NameInput } from './name-input';
 
@@ -23,6 +23,14 @@ export class Search extends Component<{ Blocks: { default: [data: DownloadsRespo
   <template>
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
       <NameInput @value={{this.lastSubmitted}} />
+
+      <Switch as |s|>
+       <s.Control class="form-check-input" />
+        <s.Label class="form-check-label">
+          Toggle on or off
+        </s.Label>
+      </Switch>
+
     </Form>
   </template>
 

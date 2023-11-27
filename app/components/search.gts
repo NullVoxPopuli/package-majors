@@ -6,10 +6,18 @@ import { Form } from 'ember-primitives';
 
 import { NameInput } from './name-input';
 import { ShowMinors } from './show-minors';
+import { ShowOld } from './show-old';
 
 import type RouterService from '@ember/routing/router-service';
 import type { DownloadsResponse } from 'package-majors/types';
 
+/**
+ * This is triggered on every value change,
+ * which we don't need for this app.
+ * The early return makes it a normal submit,
+ * so the <Form> abstraction is basically just doing the
+ * `FormData` conversion for us.
+ */
 function handleSubmit(onChange: (data: SearchFormData) => void, data: unknown, eventType: string) {
   if (eventType !== 'submit') return;
 
@@ -19,40 +27,44 @@ function handleSubmit(onChange: (data: SearchFormData) => void, data: unknown, e
 interface SearchFormData {
   packageName: string;
   showMinors?: 'on';
+  showOld?: 'on';
 }
 
-export class Search extends Component<{ Blocks: { default: [data: DownloadsResponse] } }> {
+export class Search extends Component<{
+  Blocks: { default: [data: DownloadsResponse] };
+}> {
   <template>
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
-      <NameInput @value={{this.lastSubmitted}} />
+      <NameInput @value={{this.last.packages}} />
 
-      <ShowMinors checked={{this.lastShowingMinors}} />
+      <ShowMinors checked={{this.last.minors}} />
+      <ShowOld checked={{this.last.old}} />
     </Form>
   </template>
 
   @service declare router: RouterService;
 
-  get lastShowingMinors() {
-    let minors = this.router.currentRoute?.queryParams?.['minors'];
+  get last() {
+    let qps = this.router.currentRoute?.queryParams;
+    let minors = qps?.['minors'];
+    let packages = qps?.['packages'];
+    let old = qps?.['old'];
 
-    if (!minors) return;
-
-    return `${minors}`;
-  }
-
-  get lastSubmitted() {
-    let packages = this.router.currentRoute?.queryParams?.['packages'];
-
-    return packages ? `${packages}` : '';
+    return {
+      packages: packages ? `${packages}` : '',
+      minors: minors ? `${minors}` : undefined,
+      old: old ? `${old}` : undefined,
+    };
   }
 
   updateSearch = (data: SearchFormData) => {
-    let { packageName: packages, showMinors: minors } = data;
+    let { packageName: packages, showMinors: minors, showOld: old } = data;
 
     this.router.transitionTo('query', {
       queryParams: {
         packages,
         minors,
+        old,
       },
     });
   };

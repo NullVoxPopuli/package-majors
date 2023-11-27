@@ -127,7 +127,7 @@ main {
 form {
   display: grid;
   gap: 1rem;
-  max-height: 170px;
+  max-height: min-content;
 }
 
 main > div,

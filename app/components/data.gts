@@ -13,7 +13,14 @@ import {
 } from 'chart.js';
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
-import { groupByMajor, groupByMinor, type Grouped, versionComparator } from 'package-majors/utils';
+import {
+  filterDownloads,
+  getTotalDownloads,
+  groupByMajor,
+  groupByMinor,
+  type Grouped,
+  versionComparator,
+} from 'package-majors/utils';
 
 import type { TOC } from '@ember/component/template-only';
 import type RouterService from '@ember/routing/router-service';
@@ -130,10 +137,18 @@ interface FormattedData {
   downloads: Grouped;
 }
 
-function format(data: DownloadsResponse[], groupBy: 'minors' | 'majors') {
+function format(data: DownloadsResponse[], groupBy: 'minors' | 'majors', showOld: boolean) {
   const grouped = data.map((datum) => {
-    let downloads =
-      groupBy === 'minors' ? groupByMinor(datum.downloads) : groupByMajor(datum.downloads);
+    let dls = datum.downloads;
+
+    if (!showOld) {
+      let total = getTotalDownloads(dls);
+      let onePercent = total * 0.01;
+
+      dls = filterDownloads(dls, onePercent);
+    }
+
+    let downloads = groupBy === 'minors' ? groupByMinor(dls) : groupByMajor(dls);
 
     return {
       name: datum.package,
@@ -170,7 +185,13 @@ export class Data extends Component<{
     return 'majors';
   }
 
+  get showOld(): boolean {
+    let qps = this.router.currentRoute?.queryParams;
+
+    return qps?.['old'] === 'on';
+  }
+
   get formattedData() {
-    return format(this.args.data.stats, this.groupBy);
+    return format(this.args.data.stats, this.groupBy, this.showOld);
   }
 }

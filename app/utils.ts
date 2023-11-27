@@ -18,11 +18,13 @@ export function versionComparator(a: number | string, b: number | string) {
 }
 
 /**
- * Filters minimum downloads up until the first version that contains more than 
- * `minDownloads` 
+ * Filters minimum downloads up until the first version that contains more than
+ * `minDownloads`
  */
-export function filterDownloads(downloads: DownloadsResponse['downloads'], minDownloads: number): DownloadsResponse['downloads'] {
-
+export function filterDownloads(
+  downloads: DownloadsResponse['downloads'],
+  minDownloads: number
+): DownloadsResponse['downloads'] {
   // We must copy the object, becaues it's cached and long lived, se we can't mutate it.
   let copy = { ...downloads };
 

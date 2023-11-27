@@ -13,7 +13,14 @@ import {
 } from 'chart.js';
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
-import { filterDownloads,getTotalDownloads, groupByMajor, groupByMinor, type Grouped, versionComparator } from 'package-majors/utils';
+import {
+  filterDownloads,
+  getTotalDownloads,
+  groupByMajor,
+  groupByMinor,
+  type Grouped,
+  versionComparator,
+} from 'package-majors/utils';
 
 import type { TOC } from '@ember/component/template-only';
 import type RouterService from '@ember/routing/router-service';
@@ -134,7 +141,6 @@ function format(data: DownloadsResponse[], groupBy: 'minors' | 'majors', showOld
   const grouped = data.map((datum) => {
     let dls = datum.downloads;
 
-
     if (!showOld) {
       let total = getTotalDownloads(dls);
       let onePercent = total * 0.01;
@@ -142,8 +148,7 @@ function format(data: DownloadsResponse[], groupBy: 'minors' | 'majors', showOld
       dls = filterDownloads(dls, onePercent);
     }
 
-    let downloads =
-      groupBy === 'minors' ? groupByMinor(dls) : groupByMajor(dls);
+    let downloads = groupBy === 'minors' ? groupByMinor(dls) : groupByMajor(dls);
 
     return {
       name: datum.package,

@@ -12,12 +12,12 @@ import type RouterService from '@ember/routing/router-service';
 import type { DownloadsResponse } from 'package-majors/types';
 
 /**
-  * This is triggered on every value change,
-  * which we don't need for this app.
-  * The early return makes it a normal submit,
-  * so the <Form> abstraction is basically just doing the
-  * `FormData` conversion for us.
-  */
+ * This is triggered on every value change,
+ * which we don't need for this app.
+ * The early return makes it a normal submit,
+ * so the <Form> abstraction is basically just doing the
+ * `FormData` conversion for us.
+ */
 function handleSubmit(onChange: (data: SearchFormData) => void, data: unknown, eventType: string) {
   if (eventType !== 'submit') return;
 
@@ -31,7 +31,7 @@ interface SearchFormData {
 }
 
 export class Search extends Component<{
-  Blocks: { default: [data: DownloadsResponse] }
+  Blocks: { default: [data: DownloadsResponse] };
 }> {
   <template>
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
@@ -51,14 +51,14 @@ export class Search extends Component<{
     let old = qps?.['old'];
 
     return {
-      packages: packages? `${packages}` : '',
+      packages: packages ? `${packages}` : '',
       minors: minors ? `${minors}` : undefined,
       old: old ? `${old}` : undefined,
-    }
+    };
   }
 
   updateSearch = (data: SearchFormData) => {
-    let { packageName: packages, showMinors: minors, showOld: old, } = data;
+    let { packageName: packages, showMinors: minors, showOld: old } = data;
 
     this.router.transitionTo('query', {
       queryParams: {

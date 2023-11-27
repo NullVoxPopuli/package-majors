@@ -3,7 +3,7 @@ import './switch.css';
 import { assert } from '@ember/debug';
 import { on } from '@ember/modifier';
 
-import { Switch as StylelessSwitch} from 'ember-primitives';
+import { Switch as StylelessSwitch } from 'ember-primitives';
 
 import type { TOC } from '@ember/component/template-only';
 
@@ -18,10 +18,10 @@ function submit(event: Event) {
 export const Switch: TOC<{
   Element: HTMLInputElement;
   Blocks: {
-    before: [],
-    label: [],
-    after: [],
-  }
+    before: [];
+    label: [];
+    after: [];
+  };
 }> = <template>
   <StylelessSwitch class="fun-switch" as |s|>
     {{#if (has-block "before")}}

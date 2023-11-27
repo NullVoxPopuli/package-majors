@@ -1,4 +1,5 @@
 import Application from '@ember/application';
+import { isTesting, macroCondition } from '@embroider/macros';
 
 import loadInitializers from 'ember-load-initializers';
 import { sync } from 'ember-primitives/color-scheme';
@@ -12,4 +13,10 @@ export default class App extends Application {
 }
 
 loadInitializers(App, config.modulePrefix);
-sync();
+
+if (macroCondition(isTesting())) {
+  // No themes in testing... yet?
+  // (QUnit doesn't have good dark mode CSS)
+} else {
+  sync();
+}

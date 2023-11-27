@@ -107,6 +107,7 @@
     "edition": "octane"
   },
   "dependencies": {
+    "@embroider/macros": "^1.13.3",
     "@universal-ember/preem": "^0.1.7",
     "chart.js": "^4.4.0",
     "ember-modifier": "^4.1.0",

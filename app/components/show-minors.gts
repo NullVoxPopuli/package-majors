@@ -5,7 +5,7 @@ import type { TOC } from '@ember/component/template-only';
 export const ShowMinors: TOC<{
   Element: HTMLInputElement;
 }> = <template>
-  <Switch ...attributes name="showMinors" as |s|>
+  <Switch ...attributes name="showMinors">
     <:before>Majors</:before>
     <:after>Minors</:after>
     <:label>

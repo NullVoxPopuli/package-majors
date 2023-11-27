@@ -17,6 +17,41 @@ export function versionComparator(a: number | string, b: number | string) {
   return semverCompare(semverA, semverB);
 }
 
+/**
+ * Filters minimum downloads up until the first version that contains more than 
+ * `minDownloads` 
+ */
+export function filterDownloads(downloads: DownloadsResponse['downloads'], minDownloads: number): DownloadsResponse['downloads'] {
+
+  // We must copy the object, becaues it's cached and long lived, se we can't mutate it.
+  let copy = { ...downloads };
+
+  let sortedVersions = Object.keys(downloads).sort(versionComparator);
+
+  for (let version of sortedVersions) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    let downloadCount = downloads[version]!;
+
+    if (downloadCount < minDownloads) {
+      delete copy[version];
+    } else {
+      break;
+    }
+  }
+
+  return copy;
+}
+
+export function getTotalDownloads(downloads: DownloadsResponse['downloads']): number {
+  let total = 0;
+
+  for (let [, downloadCount] of Object.entries(downloads)) {
+    total += downloadCount;
+  }
+
+  return total;
+}
+
 export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   let groups: Record<number, number> = {};
 

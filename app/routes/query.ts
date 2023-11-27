@@ -19,7 +19,7 @@ async function getStats(packageName: string) {
 
   CACHE.set(packageName, result);
 
-  return result;
+  return Object.freeze(result);
 }
 
 function getQP(transition: Transition): string {
@@ -40,9 +40,15 @@ export default class Query extends Route {
     packages: {
       refreshModel: true,
     },
+    /*
+     * Toggles:
+     */
     minors: {
       refreshModel: false,
     },
+    old: {
+      refreshModel: false,
+    }
   };
 
   async model(_: unknown, transition: Transition) {

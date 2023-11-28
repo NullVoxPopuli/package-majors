@@ -27,6 +27,7 @@ module.exports = function (defaults) {
   });
 
   const { Webpack } = require('@embroider/webpack');
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
   return require('@embroider/compat').compatBuild(app, Webpack, {
     extraPublicTrees: [],
@@ -40,8 +41,30 @@ module.exports = function (defaults) {
       es: [],
     },
     // splitAtRoutes: ['route.name'], // can also be a RegExp
-    // packagerOptions: {
-    //    webpackConfig: { }
-    // }
+    packagerOptions: {
+       webpackConfig: {
+        devtool: 'source-map',
+        plugins: [
+          new BundleAnalyzerPlugin(
+            {
+              analyzerMode: 'static',
+              openAnalyzer: false,
+              reportFilename: 'bundle.html',
+              stats: {
+                all: true,
+                assets: true,
+                moduleAssets: true,
+                nestedModules: true,
+                runtimeModules: true,
+                dependentModules: true,
+                children: true,
+                chunks: true,
+                depth: true,
+              }
+            }
+          )
+        ]
+       }
+    }
   });
 };

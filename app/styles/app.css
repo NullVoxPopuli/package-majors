@@ -122,6 +122,7 @@ main {
   grid-auto-columns: 1fr;
   gap: 4rem;
   max-height: calc(100dvh - 52px);
+  grid-template-rows: min-content 1fr;
 }
 
 form {

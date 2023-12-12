@@ -43,6 +43,10 @@ function sortLabels(data: FormattedData[]): string[] {
 const colors = ['#8844cc', '#44cc88', '#cc8844', '#cc4488', '#88cc44', '#4488cc'];
 
 const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData[]]) => {
+  // Chart.JS + Chrome does not support `currentColor` for label/tick colors.
+  let textColor = colorScheme.current === 'dark' ? 'white' : 'black';
+  let gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
+
   let chart = new Chart(element, {
     type: 'bar',
     data: {
@@ -73,7 +77,7 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
         },
         legend: {
           labels: {
-            color: 'currentColor',
+            color: textColor,
             font: {
               size: 16,
             },
@@ -81,11 +85,19 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData
         },
       },
       scales: {
-        y: { ticks: { color: 'currentColor' } },
+        y: {
+          ticks: { color: textColor },
+          grid: {
+            color: gridColor,
+          },
+        },
         x: {
           type: 'category',
+          grid: {
+            color: gridColor,
+          },
           ticks: {
-            color: 'currentColor',
+            color: textColor,
             callback: function (value: string | number) {
               return `v${this.getLabelForValue(value as number)}`;
             },

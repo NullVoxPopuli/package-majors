@@ -27,9 +27,10 @@ export default Route(
 
       <main>
         <Search />
-        <IntroText />
 
         {{outlet}}
+
+        <IntroText />
       </main>
     </div>
   </template>

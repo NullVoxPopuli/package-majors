@@ -89,6 +89,16 @@
   },
   "packageManager": "pnpm@8.9.0",
   "pnpm": {
+    "packageExtensions": {
+      "@glint/environment-ember-template-imports": {
+        "dependencies": {
+          "ember-template-imports": "^3.0.0"
+        },
+        "peerDependencies": {
+          "ember-template-imports": null
+        }
+      }
+    },
     "overrides": {
       "@glimmer/component": "^1.1.2",
       "@glimmer/tracking": "^1.1.2",

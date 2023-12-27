@@ -8,7 +8,6 @@ import {
 
 import type { DownloadsResponse } from 'package-majors/types';
 
-
 export interface FormattedData {
   name: string;
   downloads: Grouped;
@@ -35,4 +34,3 @@ export function format(data: DownloadsResponse[], groupBy: 'minors' | 'majors', 
 
   return grouped;
 }
-

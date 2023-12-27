@@ -40,8 +40,10 @@ module.exports = function (defaults) {
       es: [],
     },
     // splitAtRoutes: ['route.name'], // can also be a RegExp
-    // packagerOptions: {
-    //    webpackConfig: { }
-    // }
+    packagerOptions: {
+      webpackConfig: {
+        devtool: 'source-map',
+      },
+    },
   });
 };

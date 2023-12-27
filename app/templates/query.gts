@@ -2,7 +2,7 @@
 import pageTitle from 'ember-page-title/helpers/page-title';
 import Route from 'ember-route-template';
 
-import { Data } from '../components/data';
+import { Data } from '../components/data/index';
 
 import type { DownloadsResponse } from 'package-majors/types';
 
@@ -14,8 +14,8 @@ export default Route<{
   Args: {
     model: {
       packages: string[];
-      stats: DownloadsResponse[]; 
-    } 
+      stats: DownloadsResponse[];
+    }
   }
 }>(
   <template>

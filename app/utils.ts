@@ -2,6 +2,7 @@ import semverCoerce from 'semver/functions/coerce';
 import semverCompare from 'semver/functions/compare';
 import getMajor from 'semver/functions/major';
 import getMinor from 'semver/functions/minor';
+import isValid from 'semver/functions/valid';
 
 import type { DownloadsResponse, ErrorResponse } from './types';
 
@@ -58,6 +59,12 @@ export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   let groups: Record<number, number> = {};
 
   for (let [version, downloadCount] of Object.entries(downloads)) {
+    if (!isValid(version)) {
+      console.error(`${version} is invalid and will be omitted from the dataset.`);
+
+      continue;
+    }
+
     let major = getMajor(version);
 
     groups[major] ||= 0;
@@ -73,6 +80,12 @@ export function groupByMinor(downloads: DownloadsResponse['downloads']): Grouped
   let groups: Record<string, number> = {};
 
   for (let [version, downloadCount] of Object.entries(downloads)) {
+    if (!isValid(version)) {
+      console.error(`${version} is invalid and will be omitted from the dataset.`);
+
+      continue;
+    }
+
     let major = getMajor(version);
     let minor = getMinor(version);
     let majorMinor = `${major}.${minor}`;

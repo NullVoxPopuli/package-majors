@@ -58,10 +58,16 @@ export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   let groups: Record<number, number> = {};
 
   for (let [version, downloadCount] of Object.entries(downloads)) {
-    let major = getMajor(version);
+    try {
+      let major = getMajor(version);
 
-    groups[major] ||= 0;
-    groups[major] += downloadCount;
+      groups[major] ||= 0;
+      groups[major] += downloadCount;
+    } catch (e) {
+      console.group(`An error occurred and ${version} will be omitted from the dataset`);
+      console.error(e);
+      console.groupEnd();
+    }
   }
 
   return Object.entries(groups).map(([major, downloadCount]) => {
@@ -73,12 +79,18 @@ export function groupByMinor(downloads: DownloadsResponse['downloads']): Grouped
   let groups: Record<string, number> = {};
 
   for (let [version, downloadCount] of Object.entries(downloads)) {
-    let major = getMajor(version);
-    let minor = getMinor(version);
-    let majorMinor = `${major}.${minor}`;
+    try {
+      let major = getMajor(version);
+      let minor = getMinor(version);
+      let majorMinor = `${major}.${minor}`;
 
-    groups[majorMinor] ||= 0;
-    groups[majorMinor] += downloadCount;
+      groups[majorMinor] ||= 0;
+      groups[majorMinor] += downloadCount;
+    } catch (e) {
+      console.group(`An error occurred and ${version} will be omitted from the dataset`);
+      console.error(e);
+      console.groupEnd();
+    }
   }
 
   return Object.entries(groups).map(([majorMinor, downloadCount]) => {

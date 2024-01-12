@@ -2,6 +2,7 @@ import semverCoerce from 'semver/functions/coerce';
 import semverCompare from 'semver/functions/compare';
 import getMajor from 'semver/functions/major';
 import getMinor from 'semver/functions/minor';
+import isValid from 'semver/functions/valid';
 
 import type { DownloadsResponse, ErrorResponse } from './types';
 
@@ -58,16 +59,16 @@ export function groupByMajor(downloads: DownloadsResponse['downloads']) {
   let groups: Record<number, number> = {};
 
   for (let [version, downloadCount] of Object.entries(downloads)) {
-    try {
-      let major = getMajor(version);
+    if (!isValid(version)) {
+      console.error(`${version} is invalid and will be omitted from the dataset.`);
 
-      groups[major] ||= 0;
-      groups[major] += downloadCount;
-    } catch (e) {
-      console.group(`An error occurred and ${version} will be omitted from the dataset`);
-      console.error(e);
-      console.groupEnd();
+      continue;
     }
+
+    let major = getMajor(version);
+
+    groups[major] ||= 0;
+    groups[major] += downloadCount;
   }
 
   return Object.entries(groups).map(([major, downloadCount]) => {
@@ -79,18 +80,18 @@ export function groupByMinor(downloads: DownloadsResponse['downloads']): Grouped
   let groups: Record<string, number> = {};
 
   for (let [version, downloadCount] of Object.entries(downloads)) {
-    try {
-      let major = getMajor(version);
-      let minor = getMinor(version);
-      let majorMinor = `${major}.${minor}`;
+    if (!isValid(version)) {
+      console.error(`${version} is invalid and will be omitted from the dataset.`);
 
-      groups[majorMinor] ||= 0;
-      groups[majorMinor] += downloadCount;
-    } catch (e) {
-      console.group(`An error occurred and ${version} will be omitted from the dataset`);
-      console.error(e);
-      console.groupEnd();
+      continue;
     }
+
+    let major = getMajor(version);
+    let minor = getMinor(version);
+    let majorMinor = `${major}.${minor}`;
+
+    groups[majorMinor] ||= 0;
+    groups[majorMinor] += downloadCount;
   }
 
   return Object.entries(groups).map(([majorMinor, downloadCount]) => {

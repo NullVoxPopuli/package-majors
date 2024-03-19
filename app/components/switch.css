@@ -4,54 +4,54 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+}
 
-  .secondary-label {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--page-font);
-    font-size: 0.9rem;
-  }
+.fun-switch .secondary-label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--page-font);
+  font-size: 0.9rem;
+}
 
-  input[type="checkbox"] {
-    height: 0;
-    width: 0;
-    visibility: hidden;
-    position: absolute;
-  }
+.fun-switch input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  position: absolute;
+}
 
-  label {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 100px;
-    height: 50px;
-    background: grey;
-    display: block;
-    border-radius: 100px;
-    position: relative;
-  }
+.fun-switch label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 100px;
+  height: 50px;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+}
 
-  label::after {
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 42px;
-    height: 42px;
-    background: #fff;
-    border-radius: 42px;
-    transition: 0.3s;
-  }
+.fun-switch label::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 42px;
+  height: 42px;
+  background: #fff;
+  border-radius: 42px;
+  transition: 0.3s;
+}
 
-  label:active::after {
-    width: 65px;
-  }
+.fun-switch label:active::after {
+  width: 65px;
+}
 
-  input:checked + label {
-    background: #8c4;
-  }
+.fun-switch input:checked + label {
+  background: #8c4;
+}
 
-  input:checked + label::after {
-    left: calc(100% - 5px);
-    transform: translateX(-100%);
-  }
+.fun-switch input:checked + label::after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
 }

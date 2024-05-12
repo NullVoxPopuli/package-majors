@@ -1,6 +1,6 @@
 .fun-switch {
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: 1fr max-content 1fr;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
@@ -11,6 +11,12 @@
   letter-spacing: 0.1em;
   color: var(--page-font);
   font-size: 0.9rem;
+}
+.fun-switch .secondary-label {
+  justify-self: end;
+}
+.fun-switch .secondary-label + span + .secondary-label {
+  justify-self: start;
 }
 
 .fun-switch input[type="checkbox"] {

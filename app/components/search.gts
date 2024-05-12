@@ -37,8 +37,10 @@ export class Search extends Component<{
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
       <NameInput @value={{this.last.packages}} />
 
-      <ShowMinors checked={{this.last.minors}} />
-      <ShowOld checked={{this.last.old}} />
+      <div style="display: grid; gap: 0.5rem;">
+        <ShowMinors checked={{this.last.minors}} />
+        <ShowOld checked={{this.last.old}} />
+      </div>
     </Form>
   </template>
 

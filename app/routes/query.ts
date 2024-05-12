@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 
 import { getPackagesData, getQP, type Transition } from './-request';
 
-
+import type { QueryData } from 'package-majors/types';
 
 export default class Query extends Route {
   queryParams = {
@@ -20,7 +20,7 @@ export default class Query extends Route {
     },
   };
 
-  async model(_: unknown, transition: Transition) {
+  async model(_: unknown, transition: Transition): Promise<QueryData> {
     let rawPackages = getQP(transition);
     let packages = rawPackages
       .split(',')

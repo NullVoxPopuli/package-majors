@@ -1,6 +1,7 @@
 import { assert } from '@ember/debug';
 
 import type RouterService from '@ember/routing/router-service';
+import type { Histories, PackageManifest } from 'package-majors/types';
 export type Transition = ReturnType<RouterService['transitionTo']>;
 
 const CACHE = new Map();
@@ -38,19 +39,12 @@ async function getStats(packages: string[]) {
   return stats;
 }
 
-interface Manifest {
-  // Date timestamp
-  lastUpdated: string;
-  // urls
-  snapshots: string[];
-}
-
-async function getHistories(packages: string[]): Promise<Record<string, Manifest | null>> {
-  let ordered = await Promise.allSettled<Manifest>(packages.map(packageName => {
+async function getHistories(packages: string[]): Promise<Histories> {
+  let ordered = await Promise.allSettled<PackageManifest>(packages.map(packageName => {
     return cached.get(historyManifestURLFor(packageName));
   }))
 
-  let result: Record<string, Manifest | null> = {};
+  let result: Histories = {};
 
   for (let i = 0; i < packages.length; i++) {
     let name = packages[i];

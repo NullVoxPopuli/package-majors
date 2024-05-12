@@ -10,7 +10,7 @@ import { format } from './util';
 import type { FormattedData } from './util';
 import type { TOC } from '@ember/component/template-only';
 import type RouterService from '@ember/routing/router-service';
-import type { DownloadsResponse } from 'package-majors/types';
+import type { QueryData } from 'package-majors/types';
 
 const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData[]]) => {
   let chart = createChart(element, data);
@@ -38,17 +38,30 @@ const DataChart: TOC<{
   ><canvas {{renderChart @data}}></canvas></div>
 </template>;
 
+function hasHistories(x: Record<string, unknown>) {
+  return Object.keys(x).length > 0;
+}
+
+const History: TOC<{
+  Args: {
+    data: QueryData['histories']
+  }
+}> = <template>
+  {{#if (hasHistories @data)}}
+    {{log @data}}
+    <div>what to put here</div>
+  {{/if}}
+</template>;
+
 export class Data extends Component<{
   Args: {
-    data: {
-      packages: string[];
-      stats: DownloadsResponse[];
-    };
+    data: QueryData;
   };
 }> {
   <template>
     {{#if @data.stats}}
       <DataChart @data={{this.formattedData}} />
+      <History @data={{@data.histories}} />
     {{/if}}
   </template>
 

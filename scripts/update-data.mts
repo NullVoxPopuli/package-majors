@@ -1,7 +1,14 @@
 import { PACKAGES } from './packages.mts';
 import { ensureDir } from 'fs-extra/esm';
 
-import { checkErrors, getWeek, tryGet, urlFor, ensureDirs } from './utils.mts';
+import {
+  checkErrors,
+  tryGet,
+  ensureDirs,
+  storeSnapshot,
+  ensureManifest,
+  updateManifest,
+} from './utils.mts';
 
 /**
  * Requirements: Node 22
@@ -24,12 +31,13 @@ import { checkErrors, getWeek, tryGet, urlFor, ensureDirs } from './utils.mts';
  * (no runnable code), so it should be safe.
  */
 
-async function snapshotFor(packageName: string) {
-  await ensureDirs(packageName);
-}
-
 for (let packageName of PACKAGES) {
-  await tryGet(() => snapshotFor(packageName));
+  await tryGet(packageName, async () => {
+    await ensureDirs(packageName);
+    await ensureManifest(packageName);
+    await storeSnapshot(packageName);
+    await updateManifest(packageName);
+  });
 }
 
 checkErrors();

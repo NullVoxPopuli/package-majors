@@ -19,8 +19,6 @@ jobs:
     steps:
       - uses: wyvox/action@v1
       - run: pnpm esyes ./scripts/update-data.mts
-        env:
-          GITHUB_AUTH: ${{ secrets.GH_REFRESH_DATA }}
 
       - uses: peter-evans/create-pull-request@v5
         with:

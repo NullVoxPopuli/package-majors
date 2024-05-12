@@ -1,0 +1,43 @@
+name: Update Data
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # weekly on Monday
+    - cron: '0 0 * * 1'
+
+concurrency:
+  group: update-data-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update-data:
+    name: "Update Data"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: wyvox/action@v1
+      - run: pnpm esyes ./scripts/update-data.mts
+        env:
+          GITHUB_AUTH: ${{ secrets.GH_REFRESH_DATA }}
+
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GH_CREATE_PR }}
+          commit-message: "[update-data.yml]: The NPM Stats for the week"
+          author: "github-actions[bot] <github-actions-bot@users.noreply.github.com>"
+          labels: "internal"
+          branch: "update-historical-npm-data"
+          title: "Update Historical NPM Data for tracked packages"
+          body: |
+            This PR contains the results of running these commands
+
+            ```bash
+            pnpm esyes ./scripts/update-data.mts
+            ```
+
+            This generates json files per tracked npm package
+
+            - [package-name] contains URLs to the historical data
+            - [package-name-week-date] the npm response for the week

@@ -14,6 +14,7 @@ export function urlFor(packageName: string) {
 }
 
 export async function getStats(packageName: string): Promise<DownloadResponse> {
+  // eslint-disable-next-line n/no-unsupported-features/node-builtins
   let result = await fetch(urlFor(packageName)).then((response) => response.json());
 
   return Object.freeze(result);

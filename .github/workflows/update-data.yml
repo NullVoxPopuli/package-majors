@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.GH_CREATE_PR }}
           commit-message: "[update-data.yml]: The NPM Stats for the week"
           author: "github-actions[bot] <github-actions-bot@users.noreply.github.com>"
-          labels: "internal"
+          labels: "internal,automerge"
           branch: "update-historical-npm-data"
           title: "Update Historical NPM Data for tracked packages"
           body: |

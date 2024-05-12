@@ -1,8 +1,9 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import { ensureDir, pathExists } from 'fs-extra/esm';
+import fs from "node:fs/promises";
+import path from "node:path";
 
-import type { DownloadResponse, ErrorResponse } from '../app/types.ts';
+import { ensureDir, pathExists } from "fs-extra/esm";
+
+import type { DownloadResponse } from "../app/types.ts";
 
 let now = new Date();
 let year = now.getUTCFullYear();
@@ -23,12 +24,15 @@ export async function storeSnapshot(packageName: string) {
 
   let stats = await getStats(packageName);
 
-  await fs.writeFile(snapshotPath, JSON.stringify({
-    timestamp: now,
-    year: year,
-    week: week,
-    response: stats,
-  }));
+  await fs.writeFile(
+    snapshotPath,
+    JSON.stringify({
+      timestamp: now,
+      year: year,
+      week: week,
+      response: stats,
+    }),
+  );
 }
 
 function snapshotPathFor(packageName: string) {
@@ -39,23 +43,25 @@ export async function updateManifest(packageName: string) {
   let snapshots = await getSnapshotPaths(packageName);
   let manifestPath = manifestPathFor(packageName);
 
-
-  await fs.writeFile(manifestPath, JSON.stringify({
-    lastUpdated: now,
-    snapshots
-  }));
+  await fs.writeFile(
+    manifestPath,
+    JSON.stringify({
+      lastUpdated: now,
+      snapshots,
+    }),
+  );
 }
 
 async function getSnapshotPaths(packageName: string) {
   let paths = [];
 
-  for await (let entry of fs.glob('**/*.json', { cwd: `./public/history/${packageName}/` })) {
+  for await (let entry of fs.glob("**/*.json", { cwd: `./public/history/${packageName}/` })) {
     paths.push(entry);
   }
 
   let snapshots = paths
-    .filter(p => !p.endsWith('manifest.json'))
-    .map(p => path.join(`/history/${packageName}/`, p));
+    .filter((p) => !p.endsWith("manifest.json"))
+    .map((p) => path.join(`/history/${packageName}/`, p));
 
   return snapshots;
 }
@@ -80,26 +86,26 @@ export async function ensureManifest(packageName: string) {
     return;
   }
 
-  await fs.writeFile(manifest, '{}');
+  await fs.writeFile(manifest, "{}");
 }
-
 
 // https://www.geeksforgeeks.org/calculate-current-week-number-in-javascript/
 export function getWeek(currentDate: Date): number {
-    const januaryFirst =
-        new Date(currentDate.getFullYear(), 0, 1);
+  const januaryFirst = new Date(currentDate.getFullYear(), 0, 1);
 
-    const daysToNextMonday =
-        (januaryFirst.getDay() === 1) ? 0 :
-        (7 - januaryFirst.getDay()) % 7;
+  const daysToNextMonday = januaryFirst.getDay() === 1 ? 0 : (7 - januaryFirst.getDay()) % 7;
 
-    const nextMonday =
-        new Date(currentDate.getFullYear(), 0,
-        januaryFirst.getDate() + daysToNextMonday);
+  const nextMonday = new Date(
+    currentDate.getFullYear(),
+    0,
+    januaryFirst.getDate() + daysToNextMonday,
+  );
 
-    return (currentDate < nextMonday) ? 52 :
-    (currentDate > nextMonday ? Math.ceil(
-    (currentDate - nextMonday) / (24 * 3600 * 1000) / 7) : 1);
+  return currentDate < nextMonday
+    ? 52
+    : currentDate > nextMonday
+      ? Math.ceil((currentDate - nextMonday) / (24 * 3600 * 1000) / 7)
+      : 1;
 }
 
 let errors = [];
@@ -108,14 +114,14 @@ export async function tryGet(packageName: string, fn: () => Promise<void>) {
   try {
     await fn();
   } catch (e) {
-     errors.push({ packageName, error: e });
+    errors.push({ packageName, error: e });
   }
 }
 
-
 export function checkErrors() {
-if (errors.length) {
-  console.error(errors);
-  process.exit(1);
-}
+  if (errors.length) {
+    console.error(errors);
+    // eslint-disable-next-line n/no-process-exit
+    process.exit(1);
+  }
 }

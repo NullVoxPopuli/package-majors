@@ -1,7 +1,6 @@
-import validate from 'validate-npm-package-name';
+import validate from "validate-npm-package-name";
 
-export const PACKAGES =
-`
+export const PACKAGES = `
 ###############
 # Angular
 ###############
@@ -63,18 +62,22 @@ svelte
 vue
 nuxt
 
-`.split('\n').map(x => x.trim()).filter(isPackage);
+`
+  .split("\n")
+  .map((x) => x.trim())
+  .filter(isPackage);
 
 function isPackage(line) {
   if (!line) return false;
-  if (line.startsWith('#')) return false;
+  if (line.startsWith("#")) return false;
 
   let result = validate(line);
 
   let hasProblem = result.errors || result.warnings;
+
   if (!hasProblem) return true;
 
   let problems = [...(result.errors || []), ...(result.warnings || [])];
 
-  throw new Error(`Invalid package: ${line}\n${problems.join('\n')}`);
+  throw new Error(`Invalid package: ${line}\n${problems.join("\n")}`);
 }

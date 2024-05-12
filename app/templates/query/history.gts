@@ -3,18 +3,15 @@ import Route from 'ember-route-template';
 
 import type { QueryData } from 'package-majors/types';
 
-function toTitle(packages: string[]) {
-  return packages.join(', ');
-}
-
 export default Route<{
   Args: {
-    model: QueryData
+    queryData: QueryData
+    histories: unknown;
   }
 }>(
   <template>
-    {{pageTitle (toTitle @model.packages)}}
+    {{pageTitle "History"}}
 
-    {{outlet}}
+    TODO
   </template>
 );

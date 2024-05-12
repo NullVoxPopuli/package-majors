@@ -4,7 +4,7 @@ import getMajor from 'semver/functions/major';
 import getMinor from 'semver/functions/minor';
 import isValid from 'semver/functions/valid';
 
-import type { DownloadsResponse, ErrorResponse } from './types';
+import type { DownloadsResponse, ErrorResponse, QueryData } from './types';
 
 export type Grouped = ReturnType<typeof groupByMajor>;
 
@@ -116,4 +116,8 @@ export function isError(data: unknown): data is ErrorResponse {
   if (data === null) return false;
 
   return 'error' in data;
+}
+
+export function hasHistory(histories: QueryData['histories']) {
+  return Object.values(histories).filter(Boolean).length > 0
 }

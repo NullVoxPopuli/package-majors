@@ -38,21 +38,6 @@ const DataChart: TOC<{
   ><canvas {{renderChart @data}}></canvas></div>
 </template>;
 
-function hasHistories(x: Record<string, unknown>) {
-  return Object.keys(x).length > 0;
-}
-
-const History: TOC<{
-  Args: {
-    data: QueryData['histories']
-  }
-}> = <template>
-  {{#if (hasHistories @data)}}
-    {{log @data}}
-    <div>what to put here</div>
-  {{/if}}
-</template>;
-
 export class Data extends Component<{
   Args: {
     data: QueryData;
@@ -61,7 +46,6 @@ export class Data extends Component<{
   <template>
     {{#if @data.stats}}
       <DataChart @data={{this.formattedData}} />
-      <History @data={{@data.histories}} />
     {{/if}}
   </template>
 

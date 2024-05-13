@@ -3,13 +3,13 @@ import { LinkTo } from '@ember/routing';
 import Route from 'ember-route-template';
 import { hasHistory } from 'package-majors/utils';
 
-import { Data } from '../../components/data/index';
+import { Data } from './graphing/current';
 
 import type { QueryData } from 'package-majors/types';
 
 export default Route<{
   Args: {
-    model: QueryData
+    model: QueryData;
   }
 }>(
   <template>

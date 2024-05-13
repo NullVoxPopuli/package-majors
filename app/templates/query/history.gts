@@ -1,17 +1,22 @@
+import { LinkTo } from '@ember/routing';
+
 import { pageTitle } from 'ember-page-title';
 import Route from 'ember-route-template';
 
-import type { QueryData } from 'package-majors/types';
+import { Data } from './graphing/history';
+
+import type { HistoryData } from 'package-majors/types';
 
 export default Route<{
   Args: {
-    queryData: QueryData
-    histories: unknown;
+    model: HistoryData
   }
 }>(
   <template>
     {{pageTitle "History"}}
 
-    TODO
+    <Data @data={{@model}} />
+
+    <LinkTo @route="query">Back</LinkTo>
   </template>
 );

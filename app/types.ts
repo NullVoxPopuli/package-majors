@@ -27,3 +27,15 @@ export interface QueryData {
   stats: DownloadsResponse[];
   histories: Histories;
 }
+
+export interface HistoryData {
+  current: { [packageName: string]: DownloadsResponse; }
+  history: { [packageName: string]: HistoryResponse[]; }
+}
+
+export interface HistoryResponse {
+  week: number;
+  year: number;
+  timestamp: string;
+  response: DownloadsResponse;
+}

@@ -43,6 +43,10 @@ export function createChart(element: HTMLCanvasElement, data: ReshapedHistorical
     options: {
       maintainAspectRatio: false,
       responsive: true,
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
       plugins: {
         tooltip: {
           enabled: true,

@@ -7,7 +7,7 @@ type QPs = Record<string, string | number | undefined>;
 
 export const HAS_HISTORY = Symbol('HISTORY');
 
-const stringOr = <T, O>(x: T, y: O | undefined = undefined) => x ? String(x) : y;
+const stringOr = <T, O>(x: T, y: O | undefined = undefined) => (x ? String(x) : y);
 
 export default class Settings extends Service {
   @service declare router: RouterService;
@@ -39,7 +39,6 @@ export default class Settings extends Service {
       this.#setQP({ [key]: value });
     }
   }
-
 
   /**
    * Allows batching QP updates

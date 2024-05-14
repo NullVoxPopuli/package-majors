@@ -9,8 +9,8 @@ import type { HistoryData } from 'package-majors/types';
 
 export default Route<{
   Args: {
-    model: HistoryData
-  }
+    model: HistoryData;
+  };
 }>(
   <template>
     {{pageTitle "History"}}

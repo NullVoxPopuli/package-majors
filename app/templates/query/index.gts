@@ -10,7 +10,7 @@ import type { QueryData } from 'package-majors/types';
 export default Route<{
   Args: {
     model: QueryData;
-  }
+  };
 }>(
   <template>
     <Data @data={{@model}} />

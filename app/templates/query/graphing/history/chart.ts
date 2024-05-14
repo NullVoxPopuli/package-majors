@@ -7,9 +7,9 @@ function sortLabels(data: ReshapedHistoricalData) {
 
   for (let byVersion of Object.values(data)) {
     for (let timeSeries of Object.values(byVersion)) {
-      let keys = Object.keys(timeSeries)
+      let keys = Object.keys(timeSeries);
 
-      keys.forEach(key => labels.add(key));
+      keys.forEach((key) => labels.add(key));
     }
   }
 
@@ -21,7 +21,6 @@ function datasetsFor(data: ReshapedHistoricalData) {
 
   for (let [packageName, byVersion] of Object.entries(data)) {
     for (let [version, byTime] of Object.entries(byVersion)) {
-
       result.push({
         label: `${packageName} @ ${version}`,
         data: Object.entries(byTime).map(([week, count]) => {
@@ -34,9 +33,7 @@ function datasetsFor(data: ReshapedHistoricalData) {
   return result;
 }
 
-
 export function createChart(element: HTMLCanvasElement, data: ReshapedHistoricalData) {
-
   return new Chart(element, {
     type: 'line',
     data: {
@@ -70,7 +67,7 @@ export function createChart(element: HTMLCanvasElement, data: ReshapedHistorical
       },
       parsing: {
         xAxisKey: 'week',
-        yAxisKey: 'count'
+        yAxisKey: 'count',
       },
       transitions: {
         show: {

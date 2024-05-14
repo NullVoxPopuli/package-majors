@@ -71,10 +71,9 @@ export class Search extends Component<{
     let { packageName: packages, showMinors: minors, showOld: old } = data;
 
     this.settings.updateQPs({
-        packages,
-        minors,
-        old,
+      packages,
+      minors,
+      old,
     });
-
   };
 }

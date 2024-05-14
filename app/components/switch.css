@@ -12,9 +12,11 @@
   color: var(--page-font);
   font-size: 0.9rem;
 }
+
 .fun-switch .secondary-label {
   justify-self: end;
 }
+
 .fun-switch .secondary-label + span + .secondary-label {
   justify-self: start;
 }

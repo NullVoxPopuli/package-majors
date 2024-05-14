@@ -18,8 +18,8 @@ export const cached = {
     CACHE.set(url, result);
 
     return Object.freeze(result);
-  }
-}
+  },
+};
 
 function statsURLFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
@@ -40,9 +40,11 @@ async function getStats(packages: string[]) {
 }
 
 async function getHistories(packages: string[]): Promise<Histories> {
-  let ordered = await Promise.allSettled<PackageManifest>(packages.map(packageName => {
-    return cached.get(historyManifestURLFor(packageName));
-  }))
+  let ordered = await Promise.allSettled<PackageManifest>(
+    packages.map((packageName) => {
+      return cached.get(historyManifestURLFor(packageName));
+    })
+  );
 
   let result: Histories = {};
 
@@ -56,18 +58,13 @@ async function getHistories(packages: string[]): Promise<Histories> {
     let history = promiseState?.status === 'fulfilled' ? promiseState.value : null;
 
     result[name] = history;
-
   }
 
   return result;
 }
 
-
 export async function getPackagesData(packages: string[]) {
-  let [stats, histories] = await Promise.all([
-    getStats(packages),
-    getHistories(packages),
-  ]);
+  let [stats, histories] = await Promise.all([getStats(packages), getHistories(packages)]);
 
   return { stats, histories };
 }
@@ -84,4 +81,3 @@ export function getQP(transition: Transition): string {
 
   return packages || '';
 }
-

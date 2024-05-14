@@ -119,5 +119,5 @@ export function isError(data: unknown): data is ErrorResponse {
 }
 
 export function hasHistory(histories: QueryData['histories']) {
-  return Object.values(histories).filter(Boolean).length > 0
+  return Object.values(histories).filter(Boolean).length > 0;
 }

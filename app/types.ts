@@ -1,5 +1,5 @@
 export interface VersionRecord {
-    [version: string]: number;
+  [version: string]: number;
 }
 
 export interface DownloadsResponse {
@@ -13,7 +13,6 @@ export interface ErrorResponse {
 }
 
 export type DownloadsByMajor = [major: number, downloads: number][];
-
 
 export interface PackageManifest {
   // Date timestamp
@@ -31,8 +30,8 @@ export interface QueryData {
 }
 
 export interface HistoryData {
-  current: { [packageName: string]: DownloadsResponse; }
-  history: { [packageName: string]: HistoryResponse[]; }
+  current: { [packageName: string]: DownloadsResponse };
+  history: { [packageName: string]: HistoryResponse[] };
 }
 
 export interface HistoryResponse {

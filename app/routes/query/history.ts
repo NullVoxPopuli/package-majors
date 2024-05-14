@@ -12,8 +12,8 @@ export default class History extends Route {
     },
     week: {
       refreshModel: false,
-    }
-  }
+    },
+  };
 
   async model(): Promise<HistoryData> {
     let queryData = this.modelFor('query') as QueryData;
@@ -22,7 +22,7 @@ export default class History extends Route {
     return {
       current: byPackage(queryData.stats),
       history,
-    }
+    };
   }
 }
 
@@ -30,7 +30,7 @@ function byPackage(stats: QueryData['stats']) {
   let result: Record<string, QueryData['stats'][number]> = {};
 
   for (let stat of stats) {
-   let { package: packageName } = stat;
+    let { package: packageName } = stat;
 
     result[packageName] = stat;
   }
@@ -48,7 +48,7 @@ async function getHistory(queryData: QueryData) {
       return;
     }
 
-     let promises = manifest.snapshots.map(url => {
+    let promises = manifest.snapshots.map((url) => {
       return cached.get(url);
     });
 

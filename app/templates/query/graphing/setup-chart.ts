@@ -12,6 +12,17 @@ import {
   Tooltip,
 } from 'chart.js';
 
-Chart.register(Colors, BarController, BarElement, CategoryScale, LinearScale, Legend, Tooltip, LineController,LineElement, PointElement);
+Chart.register(
+  Colors,
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Legend,
+  Tooltip,
+  LineController,
+  LineElement,
+  PointElement
+);
 
 export { Chart };

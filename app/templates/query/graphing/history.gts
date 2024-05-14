@@ -1,37 +1,37 @@
-import { modifier } from "ember-modifier";
-import { colorScheme } from "ember-primitives/color-scheme";
-import { groupByMajor } from "package-majors/utils";
+import { modifier } from 'ember-modifier';
+import { colorScheme } from 'ember-primitives/color-scheme';
+import { groupByMajor } from 'package-majors/utils';
 
-import { format } from "./current/util";
-import { createChart } from "./history/chart";
+import { format } from './current/util';
+import { createChart } from './history/chart';
 
-import type { ReshapedHistoricalData } from "./history/util";
+import type { ReshapedHistoricalData } from './history/util';
 import type { TOC } from '@ember/component/template-only';
-import type { DownloadsResponse, HistoryData, VersionRecord } from "package-majors/types";
+import type { DownloadsResponse, HistoryData, VersionRecord } from 'package-majors/types';
 
 let now = new Date();
 let currentTime = now.toISOString().slice(0, 10);
 
 /**
-  * Reshapes the data fetched from the network
-  * for chart.js' line graphs
-  *
-  * each line/data-set is a version (major)
-  *   (this type of chart will not support minors, as it would be too busy.
-  *    we probably could do it though if the data were filtered to have fewer lines some how
-  *   )
-  * y-axis is is download count (same as the main chart)
-  * x-axis is time (unlike the main chart)
-  * But this will be reshaped again for the graph.
-  * Here, we want a stable sane shape that's for humans to understand,
-  * as chart.js may not be used forever (but it's pretty good).
-  *
-  * Adding to the complication here, is that multiple packages
-  * can be queried at the same time.
-  * (Not decided here)
-  * Each package should have its own color-range.
-  * So maybe versions are each a range of the same color?
-  */
+ * Reshapes the data fetched from the network
+ * for chart.js' line graphs
+ *
+ * each line/data-set is a version (major)
+ *   (this type of chart will not support minors, as it would be too busy.
+ *    we probably could do it though if the data were filtered to have fewer lines some how
+ *   )
+ * y-axis is is download count (same as the main chart)
+ * x-axis is time (unlike the main chart)
+ * But this will be reshaped again for the graph.
+ * Here, we want a stable sane shape that's for humans to understand,
+ * as chart.js may not be used forever (but it's pretty good).
+ *
+ * Adding to the complication here, is that multiple packages
+ * can be queried at the same time.
+ * (Not decided here)
+ * Each package should have its own color-range.
+ * So maybe versions are each a range of the same color?
+ */
 function reshape(data: HistoryData): ReshapedHistoricalData {
   let { current, history } = data;
 
@@ -79,7 +79,6 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [ReshapedHisto
   };
 });
 
-
 const DataChart: TOC<{
   Args: {
     data: ReshapedHistoricalData;
@@ -94,13 +93,8 @@ const DataChart: TOC<{
   ><canvas {{renderChart @data}}></canvas></div>
 </template>;
 
-
 export const Data: TOC<{
   Args: {
     data: HistoryData;
   };
-}> =
-  <template>
-    <DataChart @data={{reshape @data}} />
-  </template>
-
+}> = <template><DataChart @data={{reshape @data}} /></template>;

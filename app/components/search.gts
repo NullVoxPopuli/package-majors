@@ -8,6 +8,7 @@ import { NameInput } from './name-input';
 import { ShowMinors } from './show-minors';
 import { ShowOld } from './show-old';
 
+import type RouterService from '@ember/routing/router-service';
 import type Settings from 'package-majors/services/settings';
 import type { DownloadsResponse } from 'package-majors/types';
 
@@ -37,14 +38,21 @@ export class Search extends Component<{
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
       <NameInput @value={{this.last.packages}} />
 
-      <div style="display: grid; gap: 0.5rem;">
-        <ShowMinors checked={{this.last.minors}} />
-        <ShowOld checked={{this.last.old}} />
-      </div>
+      {{#if this.isNotViewingHistory}}
+        <div style="display: grid; gap: 0.5rem;">
+          <ShowMinors checked={{this.last.minors}} />
+          <ShowOld checked={{this.last.old}} />
+        </div>
+      {{/if}}
     </Form>
   </template>
 
   @service declare settings: Settings;
+  @service declare router: RouterService;
+
+  get isNotViewingHistory() {
+    return !this.router.currentRouteName?.includes('history');
+  }
 
   // For the initial form values
   get last() {

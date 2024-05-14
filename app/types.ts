@@ -1,8 +1,10 @@
+export interface VersionRecord {
+    [version: string]: number;
+}
+
 export interface DownloadsResponse {
   package: string;
-  downloads: {
-    [version: string]: number;
-  };
+  downloads: VersionRecord;
 }
 
 export interface ErrorResponse {

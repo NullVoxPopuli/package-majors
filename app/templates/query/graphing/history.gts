@@ -1,13 +1,12 @@
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
-import { groupByMajor } from 'package-majors/utils';
 
 import { format } from './current/util';
 import { createChart } from './history/chart';
 
 import type { ReshapedHistoricalData } from './history/util';
 import type { TOC } from '@ember/component/template-only';
-import type { DownloadsResponse, HistoryData, VersionRecord } from 'package-majors/types';
+import type { DownloadsResponse, HistoryData } from 'package-majors/types';
 
 let now = new Date();
 let currentTime = now.toISOString().slice(0, 10);

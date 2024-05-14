@@ -33,6 +33,7 @@ ember-cli-mirage
 ###############
 # Generic JS
 ###############
+eslint
 execa
 rollup
 typescript

@@ -4,6 +4,8 @@ import { Chart, colors } from '../setup-chart';
 
 import type { ReshapedHistoricalData } from './util';
 
+const formatter = new Intl.NumberFormat('en-US');
+
 function sortLabels(data: ReshapedHistoricalData) {
   let labels = new Set();
 
@@ -24,7 +26,6 @@ function datasetsFor(data: ReshapedHistoricalData) {
   let result = [];
   let packageNames = Object.keys(data);
   let numPackages = packageNames.length;
-  let usedColors = new Set();
 
   function colorFor(packageName: string, version: string) {
     if (numPackages === 1) {
@@ -73,7 +74,7 @@ function datasetsFor(data: ReshapedHistoricalData) {
 
 // Use this:
 // https://chartjs-plugin-datalabels.netlify.app/samples/scriptable/interactions.html
-export function createChart(element: HTMLCanvasElement, data: ReshapedHistoricalData) {
+export function createChart(element: HTMLCanvasElement, data: ReshapedHistoricalData, updateTooltip: (context: IDC) => void) {
   return new Chart(element, {
     type: 'line',
     data: {
@@ -100,12 +101,26 @@ export function createChart(element: HTMLCanvasElement, data: ReshapedHistorical
         //  forceOverride: true,
         //},
         tooltip: {
+        external: updateTooltip,
+          enabled: false,
+          // ignored
           mode: 'index',
-          enabled: true,
+          intersect: false,
           position: 'nearest',
           padding: 8,
           bodyFont: {
             size: 16,
+          },
+          callbacks: {
+            footer: (items) => {
+              let sum = 0;
+
+              items.forEach((item) => {
+                sum += item.parsed.y;
+              });
+
+              return `Total: ${formatter.format(sum)}`;
+            },
           },
         },
         legend: {
@@ -133,3 +148,4 @@ export function createChart(element: HTMLCanvasElement, data: ReshapedHistorical
     },
   });
 }
+

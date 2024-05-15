@@ -1,10 +1,14 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
 
 import { format } from './current/util';
 import { createChart } from './history/chart';
+import { Tooltip } from './history/tooltip';
 
-import type { ReshapedHistoricalData } from './history/util';
+import type { IDC, ReshapedHistoricalData } from './history/util';
 import type { TOC } from '@ember/component/template-only';
 import type { DownloadsResponse, HistoryData } from 'package-majors/types';
 
@@ -66,8 +70,8 @@ function reshape(data: HistoryData): ReshapedHistoricalData {
   return result;
 }
 
-const renderChart = modifier((element: HTMLCanvasElement, [data]: [ReshapedHistoricalData]) => {
-  let chart = createChart(element, data);
+const renderChart = modifier((element: HTMLCanvasElement, [data, updateTooltip]: [ReshapedHistoricalData, (context: IDC) => void]) => {
+  let chart = createChart(element, data, updateTooltip);
   let update = () => chart.update();
 
   colorScheme.on.update(update);
@@ -78,19 +82,25 @@ const renderChart = modifier((element: HTMLCanvasElement, [data]: [ReshapedHisto
   };
 });
 
-const DataChart: TOC<{
+class DataChart extends Component<{
   Args: {
     data: ReshapedHistoricalData;
   };
-}> = <template>
-  <div
-    style="
-      display: grid;
-      min-width: 100%;
-      justify-content: center;
-    "
-  ><canvas {{renderChart @data}}></canvas></div>
-</template>;
+}>{ 
+  @tracked tooltipContext: IDC;
+  updateTooltip = (context: IDC) => this.tooltipContext = context;
+
+  <template>
+    <div
+      style="
+        display: grid;
+        min-width: 100%;
+        justify-content: center;
+      "
+    ><canvas {{renderChart @data this.updateTooltip}}></canvas></div>
+    <Tooltip @context={{this.tooltipContext}} />
+  </template>
+}
 
 export const Data: TOC<{
   Args: {

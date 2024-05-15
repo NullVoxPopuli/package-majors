@@ -22,7 +22,7 @@ function datasetsFor(data: ReshapedHistoricalData) {
   for (let [packageName, byVersion] of Object.entries(data)) {
     for (let [version, byTime] of Object.entries(byVersion)) {
       result.push({
-        label: `${packageName} @ ${version}`,
+        label: `${packageName} @ ${version}.x`,
         data: Object.entries(byTime).map(([week, count]) => {
           return { week, count };
         }),
@@ -50,15 +50,19 @@ export function createChart(element: HTMLCanvasElement, data: ReshapedHistorical
       plugins: {
         tooltip: {
           enabled: true,
+          //usePointStyle: true,
+          //labelPointStyle: function (/* context */) {
+          //  return {
+          //    pointStyle: 'triangle',
+          //    rotation: 0,
+          //  };
+          //},
+          position: 'nearest',
           padding: 8,
           bodyFont: {
             size: 16,
           },
-          //callbacks: {
-          //  title: (items) => {
-          //    return items.map((i) => `v${i.label}`);
-          //  },
-          //},
+          callbacks: {},
         },
         legend: {
           labels: {

@@ -26,3 +26,5 @@ Chart.register(
 );
 
 export { Chart };
+
+export const colors = ['#8844cc', '#44cc88', '#cc8844', '#cc4488', '#88cc44', '#4488cc'];

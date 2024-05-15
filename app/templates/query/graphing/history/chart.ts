@@ -1,4 +1,6 @@
-import { Chart } from '../setup-chart';
+import Color from 'color';
+
+import { Chart, colors } from '../setup-chart';
 
 import type { ReshapedHistoricalData } from './util';
 
@@ -16,13 +18,49 @@ function sortLabels(data: ReshapedHistoricalData) {
   return [...labels].sort();
 }
 
+const increments = [0.1, 0.2, 0.3, 0.4, 0.5];
+
 function datasetsFor(data: ReshapedHistoricalData) {
   let result = [];
+  let packageNames = Object.keys(data);
+  let numPackages = packageNames.length;
+  let usedColors = new Set();
+
+  function colorFor(packageName: string, version: string) {
+    if (numPackages === 1) {
+      let versions = Object.keys(data[packageName]);
+      let i = versions.indexOf(version);
+      let chosen = colors[i % colors.length];
+
+      return new Color(chosen).rgb().string();
+    }
+
+    let i = packageNames.indexOf(packageName);
+    let baseColor = colors[i % colors.length];
+
+    let color = new Color(baseColor);
+
+    let rand1 = Math.random() * increments.length;
+    let rand2 = Math.random() * increments.length;
+    let inc1 = increments[Math.floor(rand1) % increments.length];
+    let inc2 = increments[Math.floor(rand2) % increments.length];
+
+    color = rand1 < 2.5 ? color.saturate(inc1) : color.desaturate(inc1);
+    color = rand2 < 2.5 ? color.lighten(inc2) : color.darken(inc2);
+
+    return color.rgb().string();
+  }
 
   for (let [packageName, byVersion] of Object.entries(data)) {
     for (let [version, byTime] of Object.entries(byVersion)) {
+      let color = colorFor(packageName, version);
+
       result.push({
         label: `${packageName} @ ${version}.x`,
+        backgroundColor: color,
+        pointHoverBorderWidth: 5,
+        hoverBorderWidth: 7,
+        borderColor: color,
         data: Object.entries(byTime).map(([week, count]) => {
           return { week, count };
         }),
@@ -33,6 +71,8 @@ function datasetsFor(data: ReshapedHistoricalData) {
   return result;
 }
 
+// Use this:
+// https://chartjs-plugin-datalabels.netlify.app/samples/scriptable/interactions.html
 export function createChart(element: HTMLCanvasElement, data: ReshapedHistoricalData) {
   return new Chart(element, {
     type: 'line',
@@ -41,28 +81,32 @@ export function createChart(element: HTMLCanvasElement, data: ReshapedHistorical
       datasets: datasetsFor(data),
     },
     options: {
+      clip: 8,
       maintainAspectRatio: false,
       responsive: true,
       interaction: {
         intersect: false,
-        mode: 'index',
+        mode: 'dataset',
       },
+      elements: {
+        line: {
+          borderWidth: 3,
+          hoverBorderWidth: 6,
+        },
+      },
+      scales: {},
       plugins: {
+        //colors: {
+        //  forceOverride: true,
+        //},
         tooltip: {
+          mode: 'index',
           enabled: true,
-          //usePointStyle: true,
-          //labelPointStyle: function (/* context */) {
-          //  return {
-          //    pointStyle: 'triangle',
-          //    rotation: 0,
-          //  };
-          //},
           position: 'nearest',
           padding: 8,
           bodyFont: {
             size: 16,
           },
-          callbacks: {},
         },
         legend: {
           labels: {

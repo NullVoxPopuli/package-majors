@@ -7,11 +7,9 @@
 import { colorScheme } from 'ember-primitives/color-scheme';
 import { versionComparator } from 'package-majors/utils';
 
-import { Chart } from '../setup-chart';
+import { Chart, colors } from '../setup-chart';
 
 import type { FormattedData } from './util';
-
-const colors = ['#8844cc', '#44cc88', '#cc8844', '#cc4488', '#88cc44', '#4488cc'];
 
 function sortLabels(data: FormattedData[]): string[] {
   let versions = new Set<string>();

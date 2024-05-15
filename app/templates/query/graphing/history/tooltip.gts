@@ -2,34 +2,20 @@ import './styles.css';
 
 import { on } from '@ember/modifier';
 
-import { autoPlacement,autoUpdate,computePosition } from '@floating-ui/dom';
+import { autoPlacement, autoUpdate, computePosition } from '@floating-ui/dom';
 import { modifier } from 'ember-modifier';
 
-import type { IDC } from "./util";
-import type { TOC } from "@ember/component/template-only";
+import type { IDC } from './util';
+import type { TOC } from '@ember/component/template-only';
 
 function colorAt(context: IDC, index: number) {
   return context.tooltip.labelColors[index].backgroundColor;
 }
 
-const updatePosition = modifier((element: HTMLElement, [ context ]) => {
-  console.log(context);
+const updatePosition = modifier((element: HTMLElement, [context]) => {
   if (!context) return;
 
-
-  const { chart, tooltip } = context;
-
-  console.log(chart, tooltip);
-
-  const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas;
-
-
-  // Display, position, and set styles for font
-  //element.style.opacity = 1;
-  //element.style.left = positionX + tooltip.caretX + 'px';
-  //element.style.top = positionY + tooltip.caretY + 'px';
-  //element.style.font = tooltip.options.bodyFont.string;
-  //element.style.padding = tooltip.options.padding + 'px ' + tooltip.options.padding + 'px';
+  const { tooltip } = context;
 
   const virtual = {
     getBoundingClientRect() {
@@ -45,10 +31,10 @@ const updatePosition = modifier((element: HTMLElement, [ context ]) => {
         right: x + 4,
         width: 4,
         height: 4,
-      }
+      };
     },
     contextElement: document.querySelector('canvas').parentElement,
-  }
+  };
 
   element.style.opacity = 1;
 
@@ -65,7 +51,7 @@ const updatePosition = modifier((element: HTMLElement, [ context ]) => {
   return () => {
     cleanup();
     element.style.opacity = 0;
-  }
+  };
 });
 
 function hide() {
@@ -75,10 +61,10 @@ function hide() {
 export const Tooltip: TOC<{
   Args: {
     context: IDC;
-  }
+  };
 }> = <template>
   <div id="history-chart-tooltip" {{updatePosition @context}}>
-    <button type="button" class="close" aria-label="Close" {{on 'click' hide}}>×</button>
+    <button type="button" class="close" aria-label="Close" {{on "click" hide}}>×</button>
     <header>
       {{#each @context.tooltip.title as |title|}}
         {{title}}
@@ -92,7 +78,7 @@ export const Tooltip: TOC<{
       </thead>
       <tbody>
         {{#each @context.tooltip.dataPoints as |dataPoint i|}}
-          <tr class="{{if dataPoint.element.active 'active' }}">
+          <tr class="{{if dataPoint.element.active 'active'}}">
             <td><span style="background: {{colorAt @context i}}"></span></td>
             <td>{{dataPoint.dataset.label}}</td>
             <td>{{dataPoint.formattedValue}}</td>
@@ -107,5 +93,4 @@ export const Tooltip: TOC<{
       {{/each}}
     </footer>
   </div>
-</template>
-
+</template>;

@@ -7,4 +7,4 @@ export interface ReshapedHistoricalData {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type  IDC = any;
+export type IDC = any;

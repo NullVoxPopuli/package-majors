@@ -1,5 +1,5 @@
 #history-chart-tooltip {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgb(0 0 0 / 70%);
   border-radius: 0.25rem;
   color: white;
   opacity: 0;
@@ -9,7 +9,7 @@
 
   button {
     position: absolute;
-      width: 1rem;
+    width: 1rem;
     height: 1rem;
     right: 2px;
     top: 2px;

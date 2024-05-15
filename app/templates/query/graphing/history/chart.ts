@@ -74,7 +74,11 @@ function datasetsFor(data: ReshapedHistoricalData) {
 
 // Use this:
 // https://chartjs-plugin-datalabels.netlify.app/samples/scriptable/interactions.html
-export function createChart(element: HTMLCanvasElement, data: ReshapedHistoricalData, updateTooltip: (context: IDC) => void) {
+export function createChart(
+  element: HTMLCanvasElement,
+  data: ReshapedHistoricalData,
+  updateTooltip: (context: IDC) => void
+) {
   return new Chart(element, {
     type: 'line',
     data: {
@@ -101,7 +105,7 @@ export function createChart(element: HTMLCanvasElement, data: ReshapedHistorical
         //  forceOverride: true,
         //},
         tooltip: {
-        external: updateTooltip,
+          external: updateTooltip,
           enabled: false,
           // ignored
           mode: 'index',
@@ -148,4 +152,3 @@ export function createChart(element: HTMLCanvasElement, data: ReshapedHistorical
     },
   });
 }
-

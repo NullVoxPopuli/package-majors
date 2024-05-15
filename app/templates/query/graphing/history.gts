@@ -70,25 +70,30 @@ function reshape(data: HistoryData): ReshapedHistoricalData {
   return result;
 }
 
-const renderChart = modifier((element: HTMLCanvasElement, [data, updateTooltip]: [ReshapedHistoricalData, (context: IDC) => void]) => {
-  let chart = createChart(element, data, updateTooltip);
-  let update = () => chart.update();
+const renderChart = modifier(
+  (
+    element: HTMLCanvasElement,
+    [data, updateTooltip]: [ReshapedHistoricalData, (context: IDC) => void]
+  ) => {
+    let chart = createChart(element, data, updateTooltip);
+    let update = () => chart.update();
 
-  colorScheme.on.update(update);
+    colorScheme.on.update(update);
 
-  return () => {
-    colorScheme.off.update(update);
-    chart.destroy();
-  };
-});
+    return () => {
+      colorScheme.off.update(update);
+      chart.destroy();
+    };
+  }
+);
 
 class DataChart extends Component<{
   Args: {
     data: ReshapedHistoricalData;
   };
-}>{ 
+}> {
   @tracked tooltipContext: IDC;
-  updateTooltip = (context: IDC) => this.tooltipContext = context;
+  updateTooltip = (context: IDC) => (this.tooltipContext = context);
 
   <template>
     <div

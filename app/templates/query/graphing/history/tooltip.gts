@@ -1,6 +1,7 @@
 import './styles.css';
 
 import { on } from '@ember/modifier';
+import { htmlSafe as trusted } from '@ember/template';
 
 import { autoPlacement, autoUpdate, computePosition } from '@floating-ui/dom';
 import { modifier } from 'ember-modifier';
@@ -58,6 +59,10 @@ function hide() {
   document.querySelector('#history-chart-tooltip').style.opacity = 0;
 }
 
+function styleForColor(context: IDC, i: number) {
+  return trusted(`background: ${colorAt(context, i)};`);
+}
+
 export const Tooltip: TOC<{
   Args: {
     context: IDC;
@@ -79,7 +84,9 @@ export const Tooltip: TOC<{
       <tbody>
         {{#each @context.tooltip.dataPoints as |dataPoint i|}}
           <tr class="{{if dataPoint.element.active 'active'}}">
-            <td><span style="background: {{colorAt @context i}}"></span></td>
+            <td><span 
+              style={{styleForColor @context i}}
+              ></span></td>
             <td>{{dataPoint.dataset.label}}</td>
             <td>{{dataPoint.formattedValue}}</td>
           </tr>

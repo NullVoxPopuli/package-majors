@@ -5,6 +5,7 @@
   transition: all 0.1s ease;
   padding: 0.5rem;
   pointer-events: none;
+  z-index: 1000;
 
   header {
     background: none;

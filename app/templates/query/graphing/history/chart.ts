@@ -1,4 +1,5 @@
 import Color from 'color';
+import { colorScheme } from 'ember-primitives/color-scheme';
 
 import { Chart, colors } from '../setup-chart';
 
@@ -77,6 +78,9 @@ export function createChart(
   data: ReshapedHistoricalData,
   updateTooltip: (context: IDC) => void
 ) {
+  let textColor = colorScheme.current === 'dark' ? 'white' : 'black';
+  let gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
+
   return new Chart(element, {
     type: 'line',
     data: {
@@ -97,11 +101,7 @@ export function createChart(
           hoverBorderWidth: 6,
         },
       },
-      scales: {},
       plugins: {
-        //colors: {
-        //  forceOverride: true,
-        //},
         tooltip: {
           external: updateTooltip,
           enabled: false,
@@ -127,7 +127,7 @@ export function createChart(
         },
         legend: {
           labels: {
-            //color: textColor,
+            color: textColor,
             font: {
               size: 16,
             },
@@ -137,6 +137,23 @@ export function createChart(
       parsing: {
         xAxisKey: 'week',
         yAxisKey: 'count',
+      },
+      scales: {
+        y: {
+          ticks: { color: textColor },
+          grid: {
+            color: gridColor,
+          },
+        },
+        x: {
+          type: 'category',
+          grid: {
+            color: gridColor,
+          },
+          ticks: {
+            color: textColor,
+          },
+        },
       },
       transitions: {
         show: {

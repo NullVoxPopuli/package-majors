@@ -4,8 +4,6 @@ import { assert } from '@ember/debug';
 import { on } from '@ember/modifier';
 import { htmlSafe as trusted } from '@ember/template';
 
-import { arrow, autoPlacement, autoUpdate, computePosition, offset, shift } from '@floating-ui/dom';
-import { modifier } from 'ember-modifier';
 import { Popover } from 'ember-primitives/components/popover';
 
 import type { IDC } from './util';
@@ -30,6 +28,8 @@ function updatePosition(context: IDC, setHook: (element: IDC) => void) {
       let x = tooltip.caretX;
       let y = tooltip.caretY;
 
+    console.log(x, y);
+
       return {
         x,
         y,
@@ -39,6 +39,9 @@ function updatePosition(context: IDC, setHook: (element: IDC) => void) {
         right: x + 4,
         width: 4,
         height: 4,
+        toJSON() {
+          return { _: 'not-implemented' };
+        }
       } as const;
     };
 
@@ -46,37 +49,8 @@ function updatePosition(context: IDC, setHook: (element: IDC) => void) {
 
 }
 
-function hide() {
-  let el = document.querySelector('#history-chart-tooltip') as HTMLElement;
-
-  if (!el): return;
-
-    el.style.opacity = 0;
-}
-
-function queryCanvas() {
-  const contextElement = document.querySelector('canvas');
-
-  assert('[BUG]: Lost the context element', contextElement);
-
-  return contextElement;
-}
-
 function styleForColor(context: IDC, i: number) {
-  return trusted(`background: ${colorAt(context, i)};`);
-}
-
-function shiftOptions() {
-  return {
-    elementContext: queryCanvas(),
-  }
-}
-
-function offsetOptions() {
-  return {
-    mainAxis: 8,
-    elementContext: queryCanvas(),
-  }
+  return trusted(`--dataset-color: ${colorAt(context, i)};`);
 }
 
 export const Tooltip: TOC<{
@@ -84,42 +58,39 @@ export const Tooltip: TOC<{
     context: IDC;
   };
 }> = <template>
-  <Popover @offsetOptions={{(offsetOptions)}} @shiftOptions={{(shiftOptions)}} as |p|>
+  <Popover @offsetOptions={{8}} as |p|>
     {{ (updatePosition @context p.setHook) }}
-    <p.Content>
+    <p.Content id="history-chart-tooltip">
       <div class="arrow" {{p.arrow}}></div>
-      <div id="history-chart-tooltip">
-        <button type="button" class="close" aria-label="Close" {{on "click" hide}}>×</button>
-        <header>
-          {{#each @context.tooltip.title as |title|}}
-            {{title}}
-          {{/each}}
-        </header>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
+      <header>
+        {{#each @context.tooltip.title as |title|}}
+          {{title}}
+        {{/each}}
+      </header>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each @context.tooltip.dataPoints as |dataPoint i|}}
+            <tr
+              style={{styleForColor @context i}}
+              class="{{if dataPoint.element.active 'active'}}">
+              <td><span></span></td>
+              <td>{{dataPoint.dataset.label}}</td>
+              <td>{{dataPoint.formattedValue}}</td>
             </tr>
-          </thead>
-          <tbody>
-            {{#each @context.tooltip.dataPoints as |dataPoint i|}}
-              <tr class="{{if dataPoint.element.active 'active'}}">
-                <td><span
-                  style={{styleForColor @context i}}
-                  ></span></td>
-                <td>{{dataPoint.dataset.label}}</td>
-                <td>{{dataPoint.formattedValue}}</td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-
-        <footer>
-          {{#each @context.tooltip.footer as |foot|}}
-            {{foot}}
           {{/each}}
-        </footer>
-      </div>
+        </tbody>
+      </table>
+
+      <footer>
+        {{#each @context.tooltip.footer as |foot|}}
+          {{foot}}
+        {{/each}}
+      </footer>
     </p.Content>
   </Popover>
 </template>;

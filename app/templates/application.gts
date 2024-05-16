@@ -32,7 +32,7 @@ export default Route(
 
         <IntroText />
       </main>
-      <PortalTargets />
     </div>
+    <PortalTargets />
   </template>
 );

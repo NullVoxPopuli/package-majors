@@ -1,7 +1,6 @@
 import './styles.css';
 
 import { assert } from '@ember/debug';
-import { on } from '@ember/modifier';
 import { htmlSafe as trusted } from '@ember/template';
 
 import { Popover } from 'ember-primitives/components/popover';
@@ -25,28 +24,25 @@ function updatePosition(context: IDC, setHook: (element: IDC) => void) {
   let virtual = document.createElement('div');
 
   virtual.getBoundingClientRect = () => {
-      let x = tooltip.caretX;
-      let y = tooltip.caretY;
+    let x = tooltip.caretX;
+    let y = tooltip.caretY;
 
-    console.log(x, y);
-
-      return {
-        x,
-        y,
-        top: y,
-        left: x,
-        bottom: y + 4,
-        right: x + 4,
-        width: 4,
-        height: 4,
-        toJSON() {
-          return { _: 'not-implemented' };
-        }
-      } as const;
-    };
+    return {
+      x,
+      y,
+      top: y,
+      left: x,
+      bottom: y + 4,
+      right: x + 4,
+      width: 4,
+      height: 4,
+      toJSON() {
+        return { _: 'not-implemented' };
+      },
+    } as const;
+  };
 
   setHook(virtual);
-
 }
 
 function styleForColor(context: IDC, i: number) {
@@ -59,7 +55,7 @@ export const Tooltip: TOC<{
   };
 }> = <template>
   <Popover @offsetOptions={{8}} as |p|>
-    {{ (updatePosition @context p.setHook) }}
+    {{updatePosition @context p.setHook}}
     <p.Content id="history-chart-tooltip">
       <div class="arrow" {{p.arrow}}></div>
       <header>
@@ -75,9 +71,7 @@ export const Tooltip: TOC<{
         </thead>
         <tbody>
           {{#each @context.tooltip.dataPoints as |dataPoint i|}}
-            <tr
-              style={{styleForColor @context i}}
-              class="{{if dataPoint.element.active 'active'}}">
+            <tr style={{styleForColor @context i}} class="{{if dataPoint.element.active 'active'}}">
               <td><span></span></td>
               <td>{{dataPoint.dataset.label}}</td>
               <td>{{dataPoint.formattedValue}}</td>

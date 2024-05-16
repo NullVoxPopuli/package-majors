@@ -3,7 +3,7 @@ import { colorScheme } from 'ember-primitives/color-scheme';
 
 import { Chart, colors } from '../setup-chart';
 
-import type { ReshapedHistoricalData } from './util';
+import type { IDC, ReshapedHistoricalData } from './util';
 
 const formatter = new Intl.NumberFormat('en-US');
 
@@ -30,7 +30,7 @@ function datasetsFor(data: ReshapedHistoricalData) {
 
   function colorFor(packageName: string, version: string) {
     if (numPackages === 1) {
-      let versions = Object.keys(data[packageName]);
+      let versions = Object.keys(data[packageName] || {});
       let i = versions.indexOf(version);
       let chosen = colors[i % colors.length];
 
@@ -44,8 +44,10 @@ function datasetsFor(data: ReshapedHistoricalData) {
 
     let rand1 = Math.random() * increments.length;
     let rand2 = Math.random() * increments.length;
-    let inc1 = increments[Math.floor(rand1) % increments.length];
-    let inc2 = increments[Math.floor(rand2) % increments.length];
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    let inc1 = increments[Math.floor(rand1) % increments.length]!;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    let inc2 = increments[Math.floor(rand2) % increments.length]!;
 
     color = rand1 < 2.5 ? color.saturate(inc1) : color.desaturate(inc1);
     color = rand2 < 2.5 ? color.lighten(inc2) : color.darken(inc2);

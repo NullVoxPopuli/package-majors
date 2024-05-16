@@ -46,7 +46,7 @@
 
     td {
       border-top: 1px solid var(--dataset-color);
-      border-bottom: 2px solid var(--dataset-color);
+      border-bottom: 3px solid var(--dataset-color);
       border-radius: 0.5rem;
 
       &:first-child {

@@ -1,5 +1,6 @@
 import { pageTitle } from 'ember-page-title';
 import { colorScheme } from 'ember-primitives/color-scheme';
+import { PortalTargets } from 'ember-primitives/components/portal-targets';
 import Route from 'ember-route-template';
 
 import { Header } from '../components/header';
@@ -32,5 +33,6 @@ export default Route(
         <IntroText />
       </main>
     </div>
+    <PortalTargets />
   </template>
 );

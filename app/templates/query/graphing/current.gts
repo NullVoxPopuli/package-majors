@@ -4,13 +4,13 @@ import { service } from '@ember/service';
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
 
-import { createChart } from './chart';
-import { format } from './util';
+import { createChart } from './current/chart';
+import { format } from './current/util';
 
-import type { FormattedData } from './util';
+import type { FormattedData } from './current/util';
 import type { TOC } from '@ember/component/template-only';
 import type RouterService from '@ember/routing/router-service';
-import type { DownloadsResponse } from 'package-majors/types';
+import type { QueryData } from 'package-majors/types';
 
 const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData[]]) => {
   let chart = createChart(element, data);
@@ -40,10 +40,7 @@ const DataChart: TOC<{
 
 export class Data extends Component<{
   Args: {
-    data: {
-      packages: string[];
-      stats: DownloadsResponse[];
-    };
+    data: QueryData;
   };
 }> {
   <template>

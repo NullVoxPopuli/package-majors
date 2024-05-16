@@ -4,24 +4,12 @@
  * This allows the component/framework code to be more isolated so that viewers have a better idea of
  * what is Ember vs what is Chart.js vs what may be "Vanilla"
  */
-import {
-  BarController,
-  BarElement,
-  CategoryScale,
-  Chart,
-  Colors,
-  Legend,
-  LinearScale,
-  Tooltip,
-} from 'chart.js';
 import { colorScheme } from 'ember-primitives/color-scheme';
 import { versionComparator } from 'package-majors/utils';
 
+import { Chart, colors } from '../setup-chart';
+
 import type { FormattedData } from './util';
-
-Chart.register(Colors, BarController, BarElement, CategoryScale, LinearScale, Legend, Tooltip);
-
-const colors = ['#8844cc', '#44cc88', '#cc8844', '#cc4488', '#88cc44', '#4488cc'];
 
 function sortLabels(data: FormattedData[]): string[] {
   let versions = new Set<string>();

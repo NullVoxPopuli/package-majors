@@ -1,41 +1,16 @@
 import Route from '@ember/routing/route';
+import { service } from '@ember/service';
 
-import type RouterService from '@ember/routing/router-service';
+import { hasHistory } from 'package-majors/utils';
 
-type Transition = ReturnType<RouterService['transitionTo']>;
+import { getPackagesData, getQP, type Transition } from './-request';
 
-function urlFor(packageName: string) {
-  return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
-}
-
-const CACHE = new Map();
-
-async function getStats(packageName: string) {
-  if (CACHE.has(packageName)) {
-    return CACHE.get(packageName);
-  }
-
-  let result = await fetch(urlFor(packageName)).then((response) => response.json());
-
-  CACHE.set(packageName, result);
-
-  return Object.freeze(result);
-}
-
-function getQP(transition: Transition): string {
-  let qps = transition.to?.queryParams;
-
-  if (!qps) return '';
-  if (!('packages' in qps)) return '';
-
-  let packages = qps['packages'];
-
-  if (typeof packages !== 'string') return '';
-
-  return packages || '';
-}
+import type Settings from 'package-majors/services/settings';
+import type { QueryData } from 'package-majors/types';
 
 export default class Query extends Route {
+  @service declare settings: Settings;
+
   queryParams = {
     packages: {
       refreshModel: true,
@@ -51,22 +26,21 @@ export default class Query extends Route {
     },
   };
 
-  async model(_: unknown, transition: Transition) {
+  async model(_: unknown, transition: Transition): Promise<QueryData> {
     let rawPackages = getQP(transition);
     let packages = rawPackages
       .split(',')
       .map((str) => str.trim())
       .filter(Boolean);
 
-    let stats = await Promise.all(
-      packages.map((packageName) => {
-        return getStats(packageName);
-      })
-    );
+    let { stats, histories } = await getPackagesData(packages);
+
+    this.settings.hasHistory = hasHistory(histories);
 
     return {
       packages,
       stats,
+      histories,
     };
   }
 }

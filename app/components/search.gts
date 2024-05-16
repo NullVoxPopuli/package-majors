@@ -9,6 +9,7 @@ import { ShowMinors } from './show-minors';
 import { ShowOld } from './show-old';
 
 import type RouterService from '@ember/routing/router-service';
+import type Settings from 'package-majors/services/settings';
 import type { DownloadsResponse } from 'package-majors/types';
 
 /**
@@ -37,35 +38,42 @@ export class Search extends Component<{
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
       <NameInput @value={{this.last.packages}} />
 
-      <ShowMinors checked={{this.last.minors}} />
-      <ShowOld checked={{this.last.old}} />
+      {{#if this.isNotViewingHistory}}
+        <div style="display: grid; gap: 0.5rem;">
+          <ShowMinors checked={{this.last.minors}} />
+          <ShowOld checked={{this.last.old}} />
+        </div>
+      {{/if}}
     </Form>
   </template>
 
+  @service declare settings: Settings;
   @service declare router: RouterService;
 
+  get isNotViewingHistory() {
+    return !this.router.currentRouteName?.includes('history');
+  }
+
+  // For the initial form values
   get last() {
-    let qps = this.router.currentRoute?.queryParams;
-    let minors = qps?.['minors'];
-    let packages = qps?.['packages'];
-    let old = qps?.['old'];
+    let { minors, packages, old } = this.settings;
 
     return {
-      packages: packages ? `${packages}` : '',
-      minors: minors ? `${minors}` : undefined,
-      old: old ? `${old}` : undefined,
+      packages,
+      minors,
+      old,
     };
   }
 
+  // keys don't match the form names 1:1
+  // so that searching and debugging are a smidge easier.
   updateSearch = (data: SearchFormData) => {
     let { packageName: packages, showMinors: minors, showOld: old } = data;
 
-    this.router.transitionTo('query', {
-      queryParams: {
-        packages,
-        minors,
-        old,
-      },
+    this.settings.updateQPs({
+      packages,
+      minors,
+      old,
     });
   };
 }

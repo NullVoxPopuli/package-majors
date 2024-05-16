@@ -56,6 +56,7 @@ export async function updateManifest(packageName: string) {
 async function getSnapshotPaths(packageName: string) {
   let paths = [];
 
+  // eslint-disable-next-line n/no-unsupported-features/node-builtins
   for await (let entry of fs.glob("**/*.json", { cwd: `./public/history/${packageName}/` })) {
     paths.push(entry);
   }

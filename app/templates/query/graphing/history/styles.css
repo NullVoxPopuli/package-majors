@@ -1,0 +1,60 @@
+#history-chart-tooltip {
+  background: rgb(0 0 0 / 70%);
+  border-radius: 0.25rem;
+  color: white;
+  transition: all 0.1s ease;
+  padding: 0.5rem;
+  pointer-events: none;
+
+  header {
+    background: none;
+    height: unset;
+    padding: 0;
+  }
+
+  display: grid;
+  gap: 0.5rem;
+
+  table {
+    pointer-events: none;
+    width: max-content;
+    margin: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    tr {
+      background-color: inherit;
+      td {
+        padding: 0.25rem 0.5rem;
+
+        &:first-child {
+          background: var(--dataset-color);
+        }
+      }
+
+      span {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+      }
+    }
+  }
+
+  .active {
+    font-weight: bold;
+    font-style: italic;
+
+    td {
+      border-top: 1px solid var(--dataset-color);
+      border-bottom: 3px solid var(--dataset-color);
+      border-radius: 0.5rem;
+
+      &:first-child {
+        border-radius: 0;
+      }
+      &:last-child {
+        border-right: 1px solid var(--dataset-color);
+      }
+    }
+  }
+}

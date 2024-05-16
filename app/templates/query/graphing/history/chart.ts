@@ -72,8 +72,6 @@ function datasetsFor(data: ReshapedHistoricalData) {
   return result;
 }
 
-// Use this:
-// https://chartjs-plugin-datalabels.netlify.app/samples/scriptable/interactions.html
 export function createChart(
   element: HTMLCanvasElement,
   data: ReshapedHistoricalData,

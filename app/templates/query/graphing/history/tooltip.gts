@@ -1,10 +1,12 @@
 import './styles.css';
 
+import { assert } from '@ember/debug';
 import { on } from '@ember/modifier';
 import { htmlSafe as trusted } from '@ember/template';
 
-import { autoPlacement, autoUpdate, computePosition } from '@floating-ui/dom';
+import { arrow, autoPlacement, autoUpdate, computePosition, offset, shift } from '@floating-ui/dom';
 import { modifier } from 'ember-modifier';
+import { Popover } from 'ember-primitives/components/popover';
 
 import type { IDC } from './util';
 import type { TOC } from '@ember/component/template-only';
@@ -13,13 +15,18 @@ function colorAt(context: IDC, index: number) {
   return context.tooltip.labelColors[index].backgroundColor;
 }
 
-const updatePosition = modifier((element: HTMLElement, [context]) => {
+function updatePosition(context: IDC, setHook: (element: IDC) => void) {
   if (!context) return;
 
   const { tooltip } = context;
 
-  const virtual = {
-    getBoundingClientRect() {
+  const arrowElement = document.querySelector('canvas')?.parentElement;
+
+  assert('[BUG]: Lost the arrow element', arrowElement);
+
+  let virtual = document.createElement('div');
+
+  virtual.getBoundingClientRect = () => {
       let x = tooltip.caretX;
       let y = tooltip.caretY;
 
@@ -32,35 +39,44 @@ const updatePosition = modifier((element: HTMLElement, [context]) => {
         right: x + 4,
         width: 4,
         height: 4,
-      };
-    },
-    contextElement: document.querySelector('canvas').parentElement,
-  };
+      } as const;
+    };
 
-  element.style.opacity = 1;
+  setHook(virtual);
 
-  const cleanup = autoUpdate(virtual, element, () => {
-    computePosition(virtual, element, {
-      strategy: 'fixed',
-      middleware: [autoPlacement()],
-    }).then(({ x, y }) => {
-      element.style.top = `${y}px`;
-      element.style.left = `${x}px`;
-    });
-  });
-
-  return () => {
-    cleanup();
-    element.style.opacity = 0;
-  };
-});
+}
 
 function hide() {
-  document.querySelector('#history-chart-tooltip').style.opacity = 0;
+  let el = document.querySelector('#history-chart-tooltip') as HTMLElement;
+
+  if (!el): return;
+
+    el.style.opacity = 0;
+}
+
+function queryCanvas() {
+  const contextElement = document.querySelector('canvas');
+
+  assert('[BUG]: Lost the context element', contextElement);
+
+  return contextElement;
 }
 
 function styleForColor(context: IDC, i: number) {
   return trusted(`background: ${colorAt(context, i)};`);
+}
+
+function shiftOptions() {
+  return {
+    elementContext: queryCanvas(),
+  }
+}
+
+function offsetOptions() {
+  return {
+    mainAxis: 8,
+    elementContext: queryCanvas(),
+  }
 }
 
 export const Tooltip: TOC<{
@@ -68,36 +84,42 @@ export const Tooltip: TOC<{
     context: IDC;
   };
 }> = <template>
-  <div id="history-chart-tooltip" {{updatePosition @context}}>
-    <button type="button" class="close" aria-label="Close" {{on "click" hide}}>×</button>
-    <header>
-      {{#each @context.tooltip.title as |title|}}
-        {{title}}
-      {{/each}}
-    </header>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each @context.tooltip.dataPoints as |dataPoint i|}}
-          <tr class="{{if dataPoint.element.active 'active'}}">
-            <td><span 
-              style={{styleForColor @context i}}
-              ></span></td>
-            <td>{{dataPoint.dataset.label}}</td>
-            <td>{{dataPoint.formattedValue}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+  <Popover @offsetOptions={{(offsetOptions)}} @shiftOptions={{(shiftOptions)}} as |p|>
+    {{ (updatePosition @context p.setHook) }}
+    <p.Content>
+      <div class="arrow" {{p.arrow}}></div>
+      <div id="history-chart-tooltip">
+        <button type="button" class="close" aria-label="Close" {{on "click" hide}}>×</button>
+        <header>
+          {{#each @context.tooltip.title as |title|}}
+            {{title}}
+          {{/each}}
+        </header>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each @context.tooltip.dataPoints as |dataPoint i|}}
+              <tr class="{{if dataPoint.element.active 'active'}}">
+                <td><span
+                  style={{styleForColor @context i}}
+                  ></span></td>
+                <td>{{dataPoint.dataset.label}}</td>
+                <td>{{dataPoint.formattedValue}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
 
-    <footer>
-      {{#each @context.tooltip.footer as |foot|}}
-        {{foot}}
-      {{/each}}
-    </footer>
-  </div>
+        <footer>
+          {{#each @context.tooltip.footer as |foot|}}
+            {{foot}}
+          {{/each}}
+        </footer>
+      </div>
+    </p.Content>
+  </Popover>
 </template>;

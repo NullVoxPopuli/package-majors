@@ -201,6 +201,9 @@ devDependencies:
   loader.js:
     specifier: ^4.7.0
     version: 4.7.0
+  node-confirm:
+    specifier: ^1.0.1
+    version: 1.0.1
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
@@ -222,6 +225,9 @@ devDependencies:
   webpack:
     specifier: ^5.91.0
     version: 5.91.0
+  yesno:
+    specifier: ^0.4.0
+    version: 0.4.0
 
 packages:
 
@@ -9328,6 +9334,12 @@ packages:
       tslib: 2.6.2
     dev: true
 
+  /node-confirm@1.0.1:
+    resolution: {integrity: sha512-Ptbaa4NA//YRb4BP+P3hUHiCUe3uUlD3ISK2OnzvHaArxoTBCl2Yz4wVbttrQhM8WEjQ8Bkyvof/1RamIf5BSw==}
+    dependencies:
+      yesno: 0.4.0
+    dev: true
+
   /node-int64@0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
     dev: true
@@ -12089,6 +12101,10 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
+    dev: true
+
+  /yesno@0.4.0:
+    resolution: {integrity: sha512-tdBxmHvbXPBKYIg81bMCB7bVeDmHkRzk5rVJyYYXurwKkHq/MCd8rz4HSJUP7hW0H2NlXiq8IFiWvYKEHhlotA==}
     dev: true
 
   /yocto-queue@0.1.0:

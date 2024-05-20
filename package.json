@@ -78,6 +78,7 @@
     "esyes": "^1.0.3",
     "fs-extra": "^11.2.0",
     "loader.js": "^4.7.0",
+    "node-confirm": "^1.0.1",
     "prettier": "^3.2.5",
     "prettier-plugin-ember-template-tag": "^2.0.2",
     "qunit": "^2.20.1",
@@ -85,7 +86,8 @@
     "tracked-built-ins": "^3.1.1",
     "typescript": "^5.4.5",
     "validate-npm-package-name": "^5.0.1",
-    "webpack": "^5.91.0"
+    "webpack": "^5.91.0",
+    "yesno": "^0.4.0"
   },
   "packageManager": "pnpm@8.9.0",
   "pnpm": {

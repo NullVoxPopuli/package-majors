@@ -5,7 +5,7 @@ import { ensureDir, pathExists } from "fs-extra/esm";
 
 import type { DownloadResponse } from "../app/types.ts";
 
-const IGNORED_TAG_PREFIXES = (['alpha', 'dev', 'beta', 'next', 'rc', 'unstable']);
+export const IGNORED_TAG_PREFIXES = (['alpha', 'dev', 'beta', 'next', 'rc', 'unstable']);
 
 
 let now = new Date();
@@ -21,7 +21,6 @@ export function urlFor(packageName: string) {
  * (every commit, for example)
  */
 export async function scrubIgnoredTags(snapshot: DownloadResponse) {
-
   for (let version of Object.keys(snapshot.downloads)) {
     let isIgnored = IGNORED_TAG_PREFIXES.some((tag) => version.includes(`-${tag}.`));
 

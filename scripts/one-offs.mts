@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console, n/no-unsupported-features/node-builtins */
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -57,16 +58,33 @@ export async function removePrereleases() {
 
   const { scrubIgnoredTags } = await import("./utils.mjs");
 
+  async function tryIt(
+    fn: () => void | Promise<void>, onFail: (error: any) => void ){
+    try {
+      await fn();
+    } catch (e) {
+      onFail(e);
+    }
+  }
+
   for (let entry of toUpdate) {
+    console.log('Updating', entry);
+
     let content = await fs.readFile(entry, "utf8");
     let file = content.toString();
     let json = JSON.parse(file);
 
-    scrubIgnoredTags(json);
+    tryIt(async () => {
+      scrubIgnoredTags(json.response)
 
-    let data = JSON.stringify(json);
+      let data = JSON.stringify(json);
 
-    await fs.writeFile(entry, data);
+      await fs.writeFile(entry, data);
+    }, e => {
+      console.log({ json, entry })
+      throw e;
+    });
+
   }
 }
 

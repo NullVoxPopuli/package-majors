@@ -4,6 +4,15 @@ import path from "node:path";
 
 import { confirm } from "node-confirm";
 
+async function updateManifests() {
+  let { PACKAGES } = await import("./packages.mjs");
+  let { updateManifest } = await import("./utils.mjs");
+
+  for (let packageName of PACKAGES) {
+    await updateManifest(packageName);
+  }
+}
+
 /**
  * Week 19 was mislabeled and is actually week 20
  * and week 20 is the same data as week 19
@@ -26,6 +35,8 @@ async function removeWeek19() {
   for (let entry of toRemove) {
     await fs.rm(entry);
   }
+
+  await updateManifests();
 }
 
 await removeWeek19();

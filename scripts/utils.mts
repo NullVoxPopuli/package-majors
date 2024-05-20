@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { ensureDir, pathExists } from "fs-extra/esm";
+import semver from 'semver';
 
 import type { DownloadResponse } from "../app/types.ts";
 
@@ -13,9 +14,27 @@ export function urlFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
 }
 
+/**
+ * Some libraries create a *ton* of in-progress versions.
+ * (every commit, for example)
+ */
+export async function scrubIgnoredTags(snapshot: DownloadResponse) {
+  for (let version of Object.keys(snapshot.downloads)) {
+    let isPrerelease = semver.prerelease(version);
+
+    if (isPrerelease) {
+      delete snapshot.downloads[version];
+    }
+  }
+
+  return snapshot;
+}
+
 export async function getStats(packageName: string): Promise<DownloadResponse> {
   // eslint-disable-next-line n/no-unsupported-features/node-builtins
   let result = await fetch(urlFor(packageName)).then((response) => response.json());
+
+  result = scrubIgnoredTags(result);
 
   return Object.freeze(result);
 }

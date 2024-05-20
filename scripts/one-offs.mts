@@ -48,7 +48,7 @@ export async function removeWeek19() {
 export async function removePrereleases() {
   let toUpdate = [];
 
-  for await (let entry of fs.glob('public/history/**/*.json')) {
+  for await (let entry of fs.glob("public/history/**/*.json")) {
     if (entry.endsWith("manifest.json")) continue;
     toUpdate.push(entry);
   }
@@ -58,8 +58,7 @@ export async function removePrereleases() {
 
   const { scrubIgnoredTags } = await import("./utils.mjs");
 
-  async function tryIt(
-    fn: () => void | Promise<void>, onFail: (error: any) => void ){
+  async function tryIt(fn: () => void | Promise<void>, onFail: (error: any) => void) {
     try {
       await fn();
     } catch (e) {
@@ -68,23 +67,25 @@ export async function removePrereleases() {
   }
 
   for (let entry of toUpdate) {
-    console.log('Updating', entry);
+    console.log("Updating", entry);
 
     let content = await fs.readFile(entry, "utf8");
     let file = content.toString();
     let json = JSON.parse(file);
 
-    tryIt(async () => {
-      scrubIgnoredTags(json.response)
+    tryIt(
+      async () => {
+        scrubIgnoredTags(json.response);
 
-      let data = JSON.stringify(json);
+        let data = JSON.stringify(json);
 
-      await fs.writeFile(entry, data);
-    }, e => {
-      console.log({ json, entry })
-      throw e;
-    });
-
+        await fs.writeFile(entry, data);
+      },
+      (e) => {
+        console.log({ json, entry });
+        throw e;
+      },
+    );
   }
 }
 

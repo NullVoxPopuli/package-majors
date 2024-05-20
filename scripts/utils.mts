@@ -5,8 +5,7 @@ import { ensureDir, pathExists } from "fs-extra/esm";
 
 import type { DownloadResponse } from "../app/types.ts";
 
-export const IGNORED_TAG_PREFIXES = (['alpha', 'dev', 'beta', 'next', 'rc', 'unstable']);
-
+export const IGNORED_TAG_PREFIXES = ["alpha", "dev", "beta", "next", "rc", "unstable"];
 
 let now = new Date();
 let year = now.getUTCFullYear();

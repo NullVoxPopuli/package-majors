@@ -2,20 +2,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { ensureDir, pathExists } from "fs-extra/esm";
+import semver from 'semver';
 
 import type { DownloadResponse } from "../app/types.ts";
-
-export const IGNORED_TAG_PREFIXES = [
-  "alpha",
-  "dev",
-  "beta",
-  "next",
-  "rc",
-  "unstable",
-  "canary",
-  "experimental",
-  "insiders",
-];
 
 let now = new Date();
 let year = now.getUTCFullYear();
@@ -31,11 +20,9 @@ export function urlFor(packageName: string) {
  */
 export async function scrubIgnoredTags(snapshot: DownloadResponse) {
   for (let version of Object.keys(snapshot.downloads)) {
-    let isIgnored = IGNORED_TAG_PREFIXES.some(
-      (tag) => version.includes(`-${tag}.`) || version.includes(`-${tag}-`),
-    );
+    let isPrerelease = semver.prerelease(version);
 
-    if (isIgnored) {
+    if (isPrerelease) {
       delete snapshot.downloads[version];
     }
   }

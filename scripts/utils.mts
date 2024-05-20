@@ -5,6 +5,9 @@ import { ensureDir, pathExists } from "fs-extra/esm";
 
 import type { DownloadResponse } from "../app/types.ts";
 
+const IGNORED_TAG_PREFIXES = (['alpha', 'dev', 'beta', 'next', 'rc', 'unstable']);
+
+
 let now = new Date();
 let year = now.getUTCFullYear();
 let week = getWeek(now);
@@ -13,9 +16,28 @@ export function urlFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
 }
 
+/**
+ * Some libraries create a *ton* of in-progress versions.
+ * (every commit, for example)
+ */
+export async function scrubIgnoredTags(snapshot: DownloadResponse) {
+
+  for (let version of Object.keys(snapshot.downloads)) {
+    let isIgnored = IGNORED_TAG_PREFIXES.some((tag) => version.includes(`-${tag}.`));
+
+    if (isIgnored) {
+      delete snapshot.downloads[version];
+    }
+  }
+
+  return snapshot;
+}
+
 export async function getStats(packageName: string): Promise<DownloadResponse> {
   // eslint-disable-next-line n/no-unsupported-features/node-builtins
   let result = await fetch(urlFor(packageName)).then((response) => response.json());
+
+  result = scrubIgnoredTags(result);
 
   return Object.freeze(result);
 }

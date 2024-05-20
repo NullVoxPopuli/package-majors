@@ -17,7 +17,7 @@ async function updateManifests() {
  * Week 19 was mislabeled and is actually week 20
  * and week 20 is the same data as week 19
  */
-async function removeWeek19() {
+export async function removeWeek19() {
   let history = "public/history";
 
   let toRemove = [];
@@ -39,4 +39,36 @@ async function removeWeek19() {
   await updateManifests();
 }
 
-await removeWeek19();
+/**
+ * Some packages spam npm with pre-releases every commit,
+ * for the sake of keeping git storage low, we remove this information
+ * because it's not actually used in any of the calculations.
+ */
+export async function removePrereleases() {
+  let toUpdate = [];
+
+  for await (let entry of fs.glob('public/history/**/*.json')) {
+    if (entry.endsWith("manifest.json")) continue;
+    toUpdate.push(entry);
+  }
+
+  console.log("Will update", toUpdate);
+  await confirm();
+
+  const { scrubIgnoredTags } = await import("./utils.mjs");
+
+  for (let entry of toUpdate) {
+    let content = await fs.readFile(entry, "utf8");
+    let file = content.toString();
+    let json = JSON.parse(file);
+
+    scrubIgnoredTags(json);
+
+    let data = JSON.stringify(json);
+
+    await fs.writeFile(entry, data);
+  }
+}
+
+//await removeWeek19();
+await removePrereleases();

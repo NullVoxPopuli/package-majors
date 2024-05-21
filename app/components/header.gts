@@ -8,6 +8,7 @@ import { Arrow } from './icons/fa/external-link';
 export const Header = <template>
   <header>
     <div class="left">
+      <a href="/" aria-label="Home" title="Home">🏠</a>
       <ExternalLink class="github" href="https://github.com/NullVoxPopuli/package-majors">
         <img alt="" src="/images/github-logo.png" />
         GitHub

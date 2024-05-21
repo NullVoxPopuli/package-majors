@@ -9,6 +9,8 @@ const ExamplePR = <template>
   </ExternalLink>
 </template>;
 
+const sort = (x: string[]) => [...x].sort();
+
 export default Route<{
   Args: {
     model: string[]
@@ -17,20 +19,22 @@ export default Route<{
   <template>
     {{pageTitle "Currently tracked packages"}}
 
-    <p>
+    <p style="max-width: 400px; margin: 0 auto;">
       History for each packages is currently tracked manually in a cronjob.
 
-      If you'd like to see a package's history tracked, please open a PR similar to <ExamplePR />.
+      If you'd like to see a package's history tracked, please open a PR similar to <ExamplePR />
     </p>
 
-    <h2>Currently tracked packages</h2>
+    <div class="margin: 0 auto; text-align: center">
+      <h2>Currently tracked packages</h2>
 
-    <ul>
-    {{#each @model as |packageName|}}
-      <li>
-        <a href="/q/h?packages={{packageName}}">{{packageName}}</a>
-      </li>
-    {{/each}}
-    </ul>
+      <ul>
+        {{#each (sort @model) as |packageName|}}
+          <li>
+            <a href="/q/h?packages={{packageName}}">{{packageName}}</a>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
   </template>
 );

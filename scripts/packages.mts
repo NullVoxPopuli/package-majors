@@ -35,9 +35,13 @@ ember-cli-mirage
 ###############
 eslint
 execa
+npm
+pnpm
 rollup
 typescript
 vite
+@yarnpkg/core
+yarn
 webpack
 
 ###############

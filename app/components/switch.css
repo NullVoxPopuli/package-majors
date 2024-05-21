@@ -21,7 +21,7 @@
 .fun-switch input[type="checkbox"] {
   height: 0;
   width: 0;
-  visibility: hidden;
+  opacity: 0;
   position: absolute;
 }
 

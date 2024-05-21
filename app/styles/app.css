@@ -60,7 +60,7 @@ body {
   body {
     --page-bg: var(--ember-black);
     --page-font: var(--ember-white);
-    --link-font: var(--horizon-amethyst);
+    --link-font: var(--horizon-lavender);
     --github-bg: var(--ember-faint-gray);
     --github-border: var(--ember-light-blue);
     --github-font: white;
@@ -82,7 +82,7 @@ body {
 .theme-dark {
   --page-bg: var(--ember-black);
   --page-font: var(--ember-white);
-  --link-font: var(--horizon-amethyst);
+  --link-font: var(--horizon-lavender);
   --github-bg: var(--ember-faint-gray);
   --github-border: var(--ember-light-blue);
   --github-font: white;

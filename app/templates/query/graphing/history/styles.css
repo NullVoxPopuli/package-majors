@@ -7,6 +7,10 @@
   pointer-events: none;
   z-index: 1000;
 
+  &[data-hidden] {
+    opacity: 0;
+  }
+
   header {
     background: none;
     height: unset;

@@ -49,6 +49,8 @@ function styleForColor(context: IDC, i: number) {
   return trusted(`--dataset-color: ${colorAt(context, i)};`);
 }
 
+const isZero = (x: IDC) => x?.tooltip?.opacity === 0;
+
 export const Tooltip: TOC<{
   Args: {
     context: IDC;
@@ -56,7 +58,7 @@ export const Tooltip: TOC<{
 }> = <template>
   <Popover @offsetOptions={{8}} as |p|>
     {{updatePosition @context p.setHook}}
-    <p.Content id="history-chart-tooltip">
+    <p.Content id="history-chart-tooltip" data-hidden={{isZero @context}}>
       <div class="arrow" {{p.arrow}}></div>
       <header>
         {{#each @context.tooltip.title as |title|}}

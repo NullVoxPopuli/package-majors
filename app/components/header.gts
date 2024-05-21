@@ -21,5 +21,3 @@ export const Header = <template>
     </div>
   </header>
 </template>;
-
-

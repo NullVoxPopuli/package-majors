@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { ensureDir, pathExists } from "fs-extra/esm";
 
-import { PACKAGES } from './packages.mts';
+import { PACKAGES } from "./packages.mts";
 
 import type { DownloadResponse } from "../app/types.ts";
 

@@ -16,7 +16,7 @@ export default Route<{
     <Data @data={{@model}} />
 
     {{#if (hasHistory @model.histories)}}
-      <LinkTo @route="query.history">View History</LinkTo>
+      <LinkTo @route="query.history" class="history-toggle">View History</LinkTo>
     {{/if}}
   </template>
 );

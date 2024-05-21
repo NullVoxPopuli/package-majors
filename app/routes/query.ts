@@ -1,8 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
-import { hasHistory } from 'package-majors/utils';
-
 import { getPackagesData, getQP, type Transition } from './-request';
 
 import type Settings from 'package-majors/services/settings';
@@ -34,8 +32,6 @@ export default class Query extends Route {
       .filter(Boolean);
 
     let { stats, histories } = await getPackagesData(packages);
-
-    this.settings.hasHistory = hasHistory(histories);
 
     return {
       packages,

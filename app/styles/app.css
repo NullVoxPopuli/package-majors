@@ -120,9 +120,10 @@ main {
   display: grid;
   justify-content: center;
   grid-auto-columns: 1fr;
-  gap: 4rem;
+  gap: 2rem;
   max-height: calc(100dvh - 52px);
   grid-template-rows: min-content 1fr;
+  overflow: auto;
 }
 
 form {
@@ -177,4 +178,9 @@ li span {
   position: absolute !important;
   width: 1px !important;
   white-space: nowrap !important; /* 3 */
+}
+
+.history-toggle {
+  position: absolute;
+  bottom: 1rem;
 }

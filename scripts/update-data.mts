@@ -5,6 +5,7 @@ import {
   ensureManifest,
   storeSnapshot,
   tryGet,
+  updateList,
   updateManifest,
 } from "./utils.mts";
 
@@ -37,5 +38,7 @@ for (let packageName of PACKAGES) {
     await updateManifest(packageName);
   });
 }
+
+await updateList();
 
 checkErrors();

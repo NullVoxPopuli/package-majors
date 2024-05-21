@@ -17,6 +17,6 @@ export default Route<{
 
     <Data @data={{@model}} />
 
-    <LinkTo @route="query">Back</LinkTo>
+    <LinkTo @route="query" class="history-toggle">Back</LinkTo>
   </template>
 );

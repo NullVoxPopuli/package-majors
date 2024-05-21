@@ -3,11 +3,14 @@ import path from "node:path";
 
 import { ensureDir, pathExists } from "fs-extra/esm";
 
+import { PACKAGES } from "./packages.mts";
+
 import type { DownloadResponse } from "../app/types.ts";
 
 let now = new Date();
 let year = now.getUTCFullYear();
 let week = getWeek(now);
+let listPath = "./public/packages-with-history.json";
 
 export function urlFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
@@ -38,6 +41,10 @@ export async function storeSnapshot(packageName: string) {
 
 function snapshotPathFor(packageName: string) {
   return `./public/history/${packageName}/${year}/${week}.json`;
+}
+
+export async function updateList() {
+  await fs.writeFile(listPath, JSON.stringify(PACKAGES));
 }
 
 export async function updateManifest(packageName: string) {

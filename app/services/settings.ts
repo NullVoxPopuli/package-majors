@@ -1,4 +1,3 @@
-import { tracked } from '@glimmer/tracking';
 import Service, { service } from '@ember/service';
 
 import type RouterService from '@ember/routing/router-service';
@@ -11,8 +10,6 @@ const stringOr = <T, O>(x: T, y: O | undefined = undefined) => (x ? String(x) : 
 
 export default class Settings extends Service {
   @service declare router: RouterService;
-
-  @tracked hasHistory = true;
 
   get queryParams(): QPs {
     return (this.router.currentRoute?.queryParams ?? {}) as QPs;
@@ -28,10 +25,6 @@ export default class Settings extends Service {
 
   get old() {
     return stringOr(this.queryParams['old']) === 'on';
-  }
-
-  get weeklyHistory() {
-    return this.queryParams['weeklyHistory'] === 'on';
   }
 
   updateQPs(qps: QPs) {

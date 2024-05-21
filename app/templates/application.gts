@@ -4,8 +4,6 @@ import { PortalTargets } from 'ember-primitives/components/portal-targets';
 import Route from 'ember-route-template';
 
 import { Header } from '../components/header';
-import { IntroText } from '../components/intro-text';
-import { Search } from '../components/search';
 
 function syncColorScheme() {
   if (colorScheme.current === 'dark') {
@@ -26,11 +24,9 @@ export default Route(
       <Header />
 
       <main>
-        <Search />
 
         {{outlet}}
 
-        <IntroText />
       </main>
     </div>
     <PortalTargets />

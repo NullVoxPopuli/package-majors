@@ -10,6 +10,19 @@ header {
     color: white;
   }
 
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    a {
+      color: var(--github-font);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   .preem__site-theme-toggle {
     label {
       height: 30px;

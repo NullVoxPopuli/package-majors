@@ -14,6 +14,7 @@ export const PACKAGES = `
 ember-source
 ember-data
 ember-cli
+ember-cli-babel
 @ember/test-helpers
 @ember/test-waiters
 

@@ -2,6 +2,7 @@
 /blueprints/*/files/
 app/templates/*.gts
 public/history/
+public/
 
 # compiled output
 /dist/

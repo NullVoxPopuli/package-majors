@@ -1,6 +1,7 @@
 # unconventional js
 /blueprints/*/files/
 public/history
+public/
 
 # compiled output
 /dist/

@@ -20,5 +20,6 @@ jobs:
     steps:
       - uses: wyvox/action@v1
       - run: pnpm esyes ./scripts/update-data.mts
-      - run: git diff
+      - run: git diff --shortstat
+        name: "[Debug] Did changes occur?"
 

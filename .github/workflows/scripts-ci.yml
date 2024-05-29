@@ -1,0 +1,25 @@
+name: "Scripts' CI"
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request: {}
+
+concurrency:
+  group: scripts-ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  does_it_run:
+    name: "Does it Run?"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: wyvox/action@v1
+      - run: pnpm esyes ./scripts/update-data.mts
+      - run: git diff --shortstat
+        name: "[Debug] Did changes occur?"
+

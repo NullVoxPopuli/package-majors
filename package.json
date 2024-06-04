@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build:production": "ember build --environment=production",
+    "build:production": "vite build",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
     "lint:hbs": "ember-template-lint .",
@@ -21,9 +21,9 @@
     "lint:prettier": "prettier . --check",
     "lint:prettier:fix": "prettier . --write",
     "lint:types": "glint",
-    "start": "ember serve",
+    "start": "vite",
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
-    "test:ember": "ember test"
+    "test:ember": "vite build --mode test && ember test --path dist"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",

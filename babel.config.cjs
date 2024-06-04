@@ -12,4 +12,16 @@ if (process.env.EMBROIDER_PREBUILD || process.env.EMBROIDER_TEST_SETUP_FORCE ===
   config = require('./node_modules/.embroider/_babel_config_');
 }
 
+config.plugins = [
+  [
+    'module:decorator-transforms',
+    {
+      runtime: {
+        import: 'decorator-transforms/runtime',
+      },
+    },
+  ],
+  ...config.plugins,
+];
+
 module.exports = config;

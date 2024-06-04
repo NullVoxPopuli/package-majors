@@ -15,6 +15,13 @@ import { babel } from "@rollup/plugin-babel";
 const root = "node_modules/.embroider/rewritten-app";
 
 export default defineConfig(({ mode }) => {
+  let isProduction = mode === "production";
+  console.log(`
+    mode: ${mode}
+    isProduction: ${isProduction}
+    NODE_ENV: ${process.env.NODE_ENV}
+    FORCE_BUILD_TESTS: ${process.env.FORCE_BUILD_TESTS}
+  `);
   return {
     root,
     // esbuild in vite does not support decorators
@@ -48,6 +55,35 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
+      target: "esnext",
+      minify: isProduction ? "terser" : false,
+      terserOptions: {
+        module: true,
+        toplevel: false,
+        ecma: 2022,
+        output: {
+          comments: false,
+        },
+        compress: {
+          ecma: 2022,
+          module: true,
+          passes: 6,
+          sequences: 30,
+          arguments: false,
+          keep_fargs: false,
+          toplevel: false,
+          unsafe: true,
+          hoist_funs: true,
+          conditionals: true,
+          drop_debugger: true,
+          evaluate: true,
+          reduce_vars: true,
+          side_effects: true,
+          dead_code: true,
+          defaults: true,
+          unused: true,
+        },
+      },
       outDir: resolve(process.cwd(), "dist"),
       rollupOptions: {
         input: {

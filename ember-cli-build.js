@@ -2,6 +2,8 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+const { maybeEmbroider } = require('@embroider/test-setup');
+
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
     // Add options here
@@ -26,9 +28,7 @@ module.exports = function (defaults) {
     },
   });
 
-  const { Webpack } = require('@embroider/webpack');
-
-  return require('@embroider/compat').compatBuild(app, Webpack, {
+  return maybeEmbroider(app, {
     extraPublicTrees: [],
     staticAddonTrees: true,
     staticAddonTestSupportTrees: true,

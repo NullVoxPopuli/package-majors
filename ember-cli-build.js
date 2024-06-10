@@ -2,6 +2,8 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+const { maybeEmbroider } = require('@embroider/test-setup');
+
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
     // Add options here
@@ -9,26 +11,9 @@ module.exports = function (defaults) {
       enableTypeScriptTransform: true,
       disableDecoratorTransforms: true,
     },
-    babel: {
-      plugins: [
-        // add the new transform.
-        [
-          // eslint-disable-next-line n/no-missing-require
-          require.resolve('decorator-transforms'),
-          {
-            runtime: {
-              // eslint-disable-next-line n/no-missing-require
-              import: require.resolve('decorator-transforms/runtime'),
-            },
-          },
-        ],
-      ],
-    },
   });
 
-  const { Webpack } = require('@embroider/webpack');
-
-  return require('@embroider/compat').compatBuild(app, Webpack, {
+  return maybeEmbroider(app, {
     extraPublicTrees: [],
     staticAddonTrees: true,
     staticAddonTestSupportTrees: true,

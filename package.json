@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build:production": "ember build --environment=production",
+    "build:production": "vite build",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
     "lint:hbs": "ember-template-lint .",
@@ -21,9 +21,9 @@
     "lint:prettier": "prettier . --check",
     "lint:prettier:fix": "prettier . --write",
     "lint:types": "glint",
-    "start": "ember serve",
+    "start": "vite",
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
-    "test:ember": "ember test"
+    "test:ember": "vite build --mode test && ember test --path dist"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",
@@ -32,9 +32,11 @@
     "@ember/optional-features": "^2.1.0",
     "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^3.3.0",
-    "@embroider/compat": "3.5.0",
-    "@embroider/core": "3.4.9",
-    "@embroider/webpack": "4.0.0",
+    "@embroider/compat": "3.5.2-unstable.05796e6",
+    "@embroider/config-meta-loader": "0.0.1-unstable.05796e6",
+    "@embroider/core": "3.4.11-unstable.05796e6",
+    "@embroider/test-setup": "4.0.1-unstable.05796e6",
+    "@embroider/vite": "0.2.1-unstable.05796e6",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@glint/core": "1.4.0",
@@ -42,6 +44,7 @@
     "@glint/environment-ember-template-imports": "^1.4.0",
     "@glint/template": "^1.4.0",
     "@nullvoxpopuli/eslint-configs": "^4.0.0",
+    "@rollup/plugin-babel": "^6.0.4",
     "@tsconfig/ember": "^3.0.6",
     "@types/chart.js": "^2.9.41",
     "@types/color": "^3.0.6",
@@ -83,9 +86,11 @@
     "prettier-plugin-ember-template-tag": "^2.0.2",
     "qunit": "^2.20.1",
     "qunit-dom": "^3.1.2",
+    "terser": "^5.31.0",
     "tracked-built-ins": "^3.1.1",
     "typescript": "^5.4.5",
     "validate-npm-package-name": "^5.0.1",
+    "vite": "^5.2.12",
     "webpack": "^5.91.0",
     "yesno": "^0.4.0"
   },
@@ -108,7 +113,7 @@
     "edition": "octane"
   },
   "dependencies": {
-    "@embroider/macros": "^1.16.1",
+    "@embroider/macros": "^1.16.2-unstable.05796e6",
     "@universal-ember/preem": "^0.1.7",
     "chart.js": "^4.4.3",
     "color": "^4.2.3",

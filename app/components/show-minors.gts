@@ -1,15 +1,15 @@
-import { Switch } from './switch';
+import { StyledSwitch } from './switch';
 
 import type { TOC } from '@ember/component/template-only';
 
 export const ShowMinors: TOC<{
   Element: HTMLInputElement;
 }> = <template>
-  <Switch ...attributes name="showMinors">
+  <StyledSwitch ...attributes name="showMinors">
     <:before>Majors</:before>
     <:after>Minors</:after>
     <:label>
       Toggle showing minors or majors
     </:label>
-  </Switch>
+  </StyledSwitch>
 </template>;

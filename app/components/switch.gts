@@ -42,3 +42,5 @@ export const Switch: TOC<{
     {{/if}}
   </StylelessSwitch>
 </template>;
+
+export const StyledSwitch = Switch;

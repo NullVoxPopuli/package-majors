@@ -22,7 +22,7 @@
     "lint:prettier:fix": "prettier . --write",
     "lint:types": "glint",
     "start": "vite",
-    "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
+    "test": "pnpm test:ember",
     "test:ember": "vite build --mode test && ember test --path dist"
   },
   "devDependencies": {

@@ -36,6 +36,7 @@ ember-cli-mirage
 ###############
 eslint
 execa
+msw
 npm
 pnpm
 rollup

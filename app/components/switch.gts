@@ -3,7 +3,7 @@ import './switch.css';
 import { assert } from '@ember/debug';
 import { on } from '@ember/modifier';
 
-import { Switch as StylelessSwitch } from 'ember-primitives/components/switch';
+import { Switch as StylelessSwitch } from 'ember-primitives';
 
 import type { TOC } from '@ember/component/template-only';
 
@@ -42,5 +42,3 @@ export const Switch: TOC<{
     {{/if}}
   </StylelessSwitch>
 </template>;
-
-export const StyledSwitch = Switch;

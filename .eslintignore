@@ -5,6 +5,7 @@ public/
 
 # compiled output
 /dist/
+/tmp/
 
 # misc
 /coverage/

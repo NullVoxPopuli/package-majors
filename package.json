@@ -95,7 +95,10 @@
       "@glint/environment-ember-loose": "1.4.0",
       "@glint/environment-ember-template-imports": "^1.4.0",
       "@glint/template": "^1.4.0",
-      "ember-primitives": "^0.17.0"
+      "ember-primitives": "0.17.0"
+    },
+    "patchedDependencies": {
+      "@embroider/vite@0.2.1-unstable.1486226": "patches/@embroider__vite@0.2.1-unstable.1486226.patch"
     }
   },
   "engines": {
@@ -111,7 +114,7 @@
     "color": "^4.2.3",
     "decorator-transforms": "^2.0.0",
     "ember-modifier": "^4.1.0",
-    "ember-primitives": "^0.20.0",
+    "ember-primitives": "0.17.0",
     "ember-resources": "^7.0.1",
     "ember-route-template": "^1.0.3",
     "reactiveweb": "^1.2.3",

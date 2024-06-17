@@ -1,0 +1,116 @@
+diff --git a/src/template-tag.js b/src/template-tag.js
+index f7e274453d2cec5d1dd92b64515fbd68bf09021f..a4a2ee15ed829adbe5cbaf67a74fe5772076dfd0 100644
+--- a/src/template-tag.js
++++ b/src/template-tag.js
+@@ -3,53 +3,65 @@ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.templateTag = void 0;
+ const pluginutils_1 = require("@rollup/pluginutils");
+ const content_tag_1 = require("content-tag");
+-const gjsFilter = (0, pluginutils_1.createFilter)('**/*.{gjs,gts}?(\\?)*');
++const gjsFilter = (0, pluginutils_1.createFilter)("**/*.{gjs,gts}?(\\?)*");
+ function templateTag({ inline_source_map } = { inline_source_map: false }) {
+-    let preprocessor = new content_tag_1.Preprocessor();
+-    function candidates(id) {
+-        return [id + '.gjs', id + '.gts'];
+-    }
+-    return {
+-        name: 'embroider-template-tag',
+-        enforce: 'pre',
+-        async resolveId(id, importer, options) {
+-            var _a, _b;
+-            if ((_b = (_a = options.custom) === null || _a === void 0 ? void 0 : _a.embroider) === null || _b === void 0 ? void 0 : _b.isExtensionSearch) {
+-                return null;
+-            }
+-            let resolution = await this.resolve(id, importer, {
+-                skipSelf: true,
+-            });
+-            if (resolution) {
+-                return resolution;
+-            }
+-            for (let candidate of candidates(id)) {
+-                resolution = await this.resolve(candidate, importer, {
+-                    skipSelf: true,
+-                    custom: {
+-                        embroider: {
+-                            isExtensionSearch: true,
+-                            enableCustomResolver: false,
+-                        },
+-                    },
+-                });
+-                if (resolution) {
+-                    return {
+-                        id: resolution.id,
+-                    };
+-                }
+-            }
+-        },
+-        transform(code, id) {
+-            if (!gjsFilter(id)) {
+-                return null;
+-            }
+-            return preprocessor.process(code, {
+-                filename: id,
+-                inline_source_map: inline_source_map,
+-            });
+-        },
+-    };
++  let preprocessor = new content_tag_1.Preprocessor();
++  function candidates(id) {
++    return [id + ".gjs", id + ".gts"];
++  }
++  return {
++    name: "embroider-template-tag",
++    enforce: "pre",
++    async resolveId(id, importer, options) {
++      var _a, _b;
++      if (
++        (_b =
++          (_a = options.custom) === null || _a === void 0
++            ? void 0
++            : _a.embroider) === null || _b === void 0
++          ? void 0
++          : _b.isExtensionSearch
++      ) {
++        return null;
++      }
++      if (id.endsWith(".gjs") || id.endsWith(".gts")) {
++        let resolution = await this.resolve(id, importer, {
++          skipSelf: true,
++        });
++        if (resolution) {
++          return resolution;
++        }
++      }
++      for (let candidate of candidates(id)) {
++        try {
++          resolution = await this.resolve(candidate, importer, {
++            skipSelf: true,
++            custom: {
++              embroider: {
++                isExtensionSearch: true,
++                enableCustomResolver: false,
++              },
++            },
++          });
++          if (resolution) {
++            return {
++              id: resolution.id,
++            };
++          }
++        } catch (e) {}
++      }
++    },
++    transform(code, id) {
++      if (!gjsFilter(id)) {
++        return null;
++      }
++      return preprocessor.process(code, {
++        filename: id,
++        inline_source_map: inline_source_map,
++      });
++    },
++  };
+ }
+ exports.templateTag = templateTag;
+ //# sourceMappingURL=template-tag.js.map
++

@@ -11,7 +11,12 @@ overrides:
   '@glint/environment-ember-loose': 1.4.0
   '@glint/environment-ember-template-imports': ^1.4.0
   '@glint/template': ^1.4.0
-  ember-primitives: ^0.17.0
+  ember-primitives: 0.17.0
+
+patchedDependencies:
+  '@embroider/vite@0.2.1-unstable.1486226':
+    hash: qdp4lz4o3ltydsrryyegefnjva
+    path: patches/@embroider__vite@0.2.1-unstable.1486226.patch
 
 dependencies:
   '@embroider/macros':
@@ -33,8 +38,8 @@ dependencies:
     specifier: ^4.1.0
     version: 4.1.0(ember-source@5.8.0)
   ember-primitives:
-    specifier: ^0.20.0
-    version: 0.20.0(@babel/core@7.24.7)(@ember/test-helpers@3.3.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/environment-ember-loose@1.4.0)(@glint/template@1.4.0)(ember-modifier@4.1.0)(ember-resources@7.0.1)(ember-source@5.8.0)
+    specifier: 0.17.0
+    version: 0.17.0(@babel/core@7.24.7)(@ember/test-helpers@3.3.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/environment-ember-loose@1.4.0)(@glint/template@1.4.0)(ember-modifier@4.1.0)(ember-resources@7.0.1)(ember-source@5.8.0)
   ember-resources:
     specifier: ^7.0.1
     version: 7.0.1(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.4.0)(ember-source@5.8.0)
@@ -84,7 +89,7 @@ devDependencies:
     version: 4.0.1-unstable.1486226(@embroider/compat@3.5.3-unstable.1486226)(@embroider/core@3.4.12-unstable.1486226)
   '@embroider/vite':
     specifier: 0.2.1-unstable.1486226
-    version: 0.2.1-unstable.1486226(@embroider/core@3.4.12-unstable.1486226)(@glint/template@1.4.0)(vite@5.3.1)
+    version: 0.2.1-unstable.1486226(patch_hash=qdp4lz4o3ltydsrryyegefnjva)(@embroider/core@3.4.12-unstable.1486226)(@glint/template@1.4.0)(vite@5.3.1)
   '@glimmer/component':
     specifier: ^1.1.2
     version: 1.1.2(@babel/core@7.24.7)
@@ -1895,7 +1900,7 @@ packages:
       '@glint/template':
         optional: true
     dependencies:
-      '@embroider/macros': 1.16.1(@glint/template@1.4.0)
+      '@embroider/macros': 1.16.3(@glint/template@1.4.0)
       '@glint/environment-ember-loose': 1.4.0(@glimmer/component@1.1.2)(@glint/template@1.4.0)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.1.0)
       '@glint/template': 1.4.0
       broccoli-funnel: 3.0.8
@@ -1905,7 +1910,7 @@ packages:
       - supports-color
     dev: false
 
-  /@embroider/vite@0.2.1-unstable.1486226(@embroider/core@3.4.12-unstable.1486226)(@glint/template@1.4.0)(vite@5.3.1):
+  /@embroider/vite@0.2.1-unstable.1486226(patch_hash=qdp4lz4o3ltydsrryyegefnjva)(@embroider/core@3.4.12-unstable.1486226)(@glint/template@1.4.0)(vite@5.3.1):
     resolution: {integrity: sha512-BdDCVbmcwJ60XQTIwgMYPWR9rsFg9JgnSQ52NCzyC+2zTFfdc2DYToeY5LssEasBbLv09l5DuZFuVrSRJmFD/w==}
     peerDependencies:
       '@embroider/core': 3.4.12-unstable.1486226
@@ -1933,6 +1938,7 @@ packages:
       - supports-color
       - utf-8-validate
     dev: true
+    patched: true
 
   /@esbuild/aix-ppc64@0.21.5:
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -6270,48 +6276,6 @@ packages:
       - supports-color
     dev: false
 
-  /ember-primitives@0.20.0(@babel/core@7.24.7)(@ember/test-helpers@3.3.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/environment-ember-loose@1.4.0)(@glint/template@1.4.0)(ember-modifier@4.1.0)(ember-resources@7.0.1)(ember-source@5.8.0):
-    resolution: {integrity: sha512-G/12w7A9nXfWdjvAdh+kq09PlA8uWGFcnpHMMnXllBMZWHAUFyVgu0xL/t0o3GAuURE0MV4pUEZTN0EGl8fglQ==}
-    peerDependencies:
-      '@ember/test-helpers': ^3.2.0
-      '@ember/test-waiters': ^3.0.2
-      '@glimmer/component': ^1.1.2
-      '@glimmer/tracking': ^1.1.2
-      '@glint/template': ^1.4.0
-      ember-modifier: '>= 4.1.0'
-      ember-resources: '>= 6.1.0'
-      ember-source: ^5.8.0
-    peerDependenciesMeta:
-      '@ember/test-helpers':
-        optional: true
-      '@glint/template':
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.24.7
-      '@ember/test-helpers': 3.3.0(@glint/template@1.4.0)(ember-source@5.8.0)(webpack@5.92.0)
-      '@ember/test-waiters': 3.1.0
-      '@embroider/addon-shim': 1.8.9
-      '@embroider/macros': 1.16.1(@glint/template@1.4.0)
-      '@floating-ui/dom': 1.6.5
-      '@glimmer/component': 1.1.2(@babel/core@7.24.7)
-      '@glimmer/tracking': 1.1.2
-      '@glint/template': 1.4.0
-      decorator-transforms: 2.0.0(@babel/core@7.24.7)
-      ember-element-helper: 0.8.6(@glint/environment-ember-loose@1.4.0)(@glint/template@1.4.0)(ember-source@5.8.0)
-      ember-modifier: 4.1.0(ember-source@5.8.0)
-      ember-resources: 7.0.1(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.4.0)(ember-source@5.8.0)
-      ember-source: 5.8.0(@babel/core@7.24.7)(@glimmer/component@1.1.2)(@glint/template@1.4.0)(rsvp@4.8.5)(webpack@5.92.0)
-      form-data-utils: 0.4.1
-      reactiveweb: 1.3.0(@babel/core@7.24.7)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/template@1.4.0)(ember-source@5.8.0)
-      tabster: 7.3.0
-      tracked-built-ins: 3.3.0
-      tracked-toolbox: 2.0.0(@babel/core@7.24.7)(ember-source@5.8.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@glint/environment-ember-loose'
-      - supports-color
-    dev: false
-
   /ember-qunit@8.1.0(@ember/test-helpers@3.3.0)(@glint/template@1.4.0)(ember-source@5.8.0)(qunit@2.21.0):
     resolution: {integrity: sha512-55/xqvVQwhiNcnh/tCzWyvlYzrYqwDY0/cIPyDQbAxGKtkUt9jCfRUGllfyOofC6LX0fL/0fIi+5e9sg1m6vXw==}
     peerDependencies:
@@ -7689,10 +7653,6 @@ packages:
     resolution: {integrity: sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==}
     engines: {node: '>=0.10.0'}
     dev: true
-
-  /form-data-utils@0.4.1:
-    resolution: {integrity: sha512-B//piRNefbfSfbI6sTPKoJ6/QLvmiMjZW6dzyVgoSCMTR6x8xyDmKemZ/NaeYvL2nqziGTfc7CzfoU07QfI+WA==}
-    dev: false
 
   /form-data@3.0.1:
     resolution: {integrity: sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==}

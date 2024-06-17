@@ -73,6 +73,7 @@
     "eslint-plugin-qunit": "^8.1.1",
     "esyes": "^1.0.3",
     "fs-extra": "^11.2.0",
+    "loader.js": "^4.7.0",
     "node-confirm": "^1.0.1",
     "prettier": "^3.2.5",
     "prettier-plugin-ember-template-tag": "^2.0.2",

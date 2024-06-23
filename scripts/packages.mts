@@ -45,6 +45,11 @@ vite
 @yarnpkg/core
 yarn
 webpack
+jasmine
+jasmine-core
+mocha
+qunit
+qunitjs
 
 ###############
 # React

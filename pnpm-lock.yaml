@@ -15,8 +15,8 @@ overrides:
 
 dependencies:
   '@embroider/macros':
-    specifier: 1.16.4-unstable.1486226
-    version: 1.16.4-unstable.1486226(@glint/template@1.4.0)
+    specifier: 1.16.5
+    version: 1.16.5(@glint/template@1.4.0)
   '@universal-ember/preem':
     specifier: ^0.1.7
     version: 0.1.7(@babel/core@7.24.8)(@ember/test-helpers@3.3.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/environment-ember-loose@1.4.0)(@glint/template@1.4.0)(ember-modifier@4.2.0)(ember-resources@7.0.2)(ember-source@5.8.0)
@@ -1764,6 +1764,7 @@ packages:
       semver: 7.6.2
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@embroider/macros@1.16.5(@glint/template@1.4.0):
     resolution: {integrity: sha512-Oz8bUZvZzOV1Gk3qSgIzZJJzs6acclSTcEFyB+KdKbKqjTC3uebn53aU2gAlLU7/YdTRZrg2gNbQuwAp+tGkGg==}
@@ -1860,6 +1861,7 @@ packages:
       typescript-memoize: 1.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@embroider/test-setup@4.0.1-unstable.1486226(@embroider/compat@3.5.3-unstable.1486226)(@embroider/core@3.4.12-unstable.1486226):
     resolution: {integrity: sha512-V4ga3l1mVxz1hlMqzoFnXGrc+gpVE7ewEq2mkVn30o2ijODGaYRbmOBjUIeFS0OC06duXaGK1+TMPuU0fcf+Zw==}
@@ -1898,7 +1900,7 @@ packages:
       '@glint/template':
         optional: true
     dependencies:
-      '@embroider/macros': 1.16.1(@glint/template@1.4.0)
+      '@embroider/macros': 1.16.5(@glint/template@1.4.0)
       '@glint/environment-ember-loose': 1.4.0(@glimmer/component@1.1.2)(@glint/template@1.4.0)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0)
       '@glint/template': 1.4.0
       broccoli-funnel: 3.0.8

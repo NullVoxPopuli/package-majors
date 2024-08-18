@@ -87,7 +87,7 @@
     "webpack": "^5.91.0",
     "yesno": "^0.4.0"
   },
-  "packageManager": "pnpm@8.9.0",
+  "packageManager": "pnpm@8.15.9",
   "pnpm": {
     "overrides": {
       "@glimmer/component": "^1.1.2",
@@ -121,6 +121,6 @@
   },
   "volta": {
     "node": "22.1.0",
-    "pnpm": "8.10.5"
+    "pnpm": "8.15.9"
   }
 }

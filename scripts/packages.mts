@@ -42,6 +42,7 @@ pnpm
 rollup
 typescript
 vite
+vitest
 @yarnpkg/core
 yarn
 webpack

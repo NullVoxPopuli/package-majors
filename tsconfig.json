@@ -4,6 +4,8 @@
     "environment": ["ember-loose", "ember-template-imports"]
   },
   "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
     // The combination of `baseUrl` with `paths` allows Ember's classic package
     // layout, which is not resolveable with the Node resolution algorithm, to
     // work with TypeScript.

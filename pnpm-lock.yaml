@@ -22,7 +22,7 @@ dependencies:
     version: 0.1.7(@babel/core@7.24.8)(@ember/test-helpers@3.3.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2)(@glimmer/tracking@1.1.2)(@glint/environment-ember-loose@1.4.1-unstable.0fbe14f)(@glint/template@1.4.1-unstable.0fbe14f)(ember-modifier@4.2.0)(ember-resources@7.0.2)(ember-source@5.8.0)
   chart.js:
     specifier: ^4.4.3
-    version: 4.4.6
+    version: 4.4.7
   color:
     specifier: ^4.2.3
     version: 4.2.3
@@ -4893,8 +4893,8 @@ packages:
       inherits: 2.0.4
     dev: true
 
-  /chart.js@4.4.6:
-    resolution: {integrity: sha512-8Y406zevUPbbIBA/HRk33khEmQPk5+cxeflWE/2rx1NJsjVWMPw/9mSP9rxHP5eqi6LNoPBVMfZHxbwLSgldYA==}
+  /chart.js@4.4.7:
+    resolution: {integrity: sha512-pwkcKfdzTMAU/+jNosKhNL2bHtJc/sSmYgVbuGTEDhzkrhmyihmP7vUc/5ZK9WopidMDHNe3Wm7jOd/WhuHWuw==}
     engines: {pnpm: '>=8'}
     dependencies:
       '@kurkle/color': 0.3.4

@@ -9,7 +9,7 @@ overrides:
   '@glimmer/tracking': ^1.1.2
   '@glint/core': 1.4.1-unstable.0fbe14f
   '@glint/environment-ember-loose': 1.4.1-unstable.0fbe14f
-  '@glint/environment-ember-template-imports': 1.4.1-unstable.0fbe14f
+  '@glint/environment-ember-template-imports': 1.5.0
   '@glint/template': 1.4.1-unstable.0fbe14f
   ember-primitives: ^0.20.0
 
@@ -98,8 +98,8 @@ devDependencies:
     specifier: 1.4.1-unstable.0fbe14f
     version: 1.4.1-unstable.0fbe14f(@glimmer/component@1.1.2)(@glint/template@1.4.1-unstable.0fbe14f)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0)
   '@glint/environment-ember-template-imports':
-    specifier: 1.4.1-unstable.0fbe14f
-    version: 1.4.1-unstable.0fbe14f(@glint/environment-ember-loose@1.4.1-unstable.0fbe14f)(@glint/template@1.4.1-unstable.0fbe14f)
+    specifier: 1.5.0
+    version: 1.5.0(@glint/environment-ember-loose@1.4.1-unstable.0fbe14f)(@glint/template@1.4.1-unstable.0fbe14f)
   '@glint/template':
     specifier: 1.4.1-unstable.0fbe14f
     version: 1.4.1-unstable.0fbe14f
@@ -2729,8 +2729,8 @@ packages:
       ember-cli-htmlbars: 6.3.0
       ember-modifier: 4.2.0(@babel/core@7.24.8)(ember-source@5.8.0)
 
-  /@glint/environment-ember-template-imports@1.4.1-unstable.0fbe14f(@glint/environment-ember-loose@1.4.1-unstable.0fbe14f)(@glint/template@1.4.1-unstable.0fbe14f):
-    resolution: {integrity: sha512-7VGJLZ7nuHH4UXPSLoMkm5FhKBl3Vu7X7xpWgnLhmEuucH2F3xw++vGH/2Y5TQibXJK+cyva9+PGjP3Ogsvuug==}
+  /@glint/environment-ember-template-imports@1.5.0(@glint/environment-ember-loose@1.4.1-unstable.0fbe14f)(@glint/template@1.4.1-unstable.0fbe14f):
+    resolution: {integrity: sha512-SS+KNffLuNYcsT7iEmCr2jp2538E7KTMEAWY+KWNvUJ0ZMd6oe6xbIIF50+9BgCgGHWwj7oL/NdgCVkS3OqRdw==}
     peerDependencies:
       '@glint/environment-ember-loose': 1.4.1-unstable.0fbe14f
       '@glint/template': 1.4.1-unstable.0fbe14f

@@ -106,7 +106,7 @@
     "edition": "octane"
   },
   "dependencies": {
-    "@embroider/macros": "1.16.4-unstable.1486226",
+    "@embroider/macros": "1.16.10",
     "@universal-ember/preem": "^0.1.7",
     "chart.js": "^4.4.3",
     "color": "^4.2.3",

@@ -95,7 +95,7 @@
       "@glint/core": "1.4.1-unstable.0fbe14f",
       "@glint/environment-ember-loose": "1.4.1-unstable.0fbe14f",
       "@glint/environment-ember-template-imports": "1.4.1-unstable.0fbe14f",
-      "@glint/template": "1.4.1-unstable.0fbe14f",
+      "@glint/template": "1.5.0",
       "ember-primitives": "^0.20.0"
     }
   },

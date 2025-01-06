@@ -4,6 +4,7 @@
     "environment": ["ember-loose", "ember-template-imports"]
   },
   "compilerOptions": {
+    // Apps don't need to publish declarations
     "declaration": false,
     "declarationMap": false,
     // The combination of `baseUrl` with `paths` allows Ember's classic package
@@ -11,8 +12,6 @@
     // work with TypeScript.
     "baseUrl": ".",
     "allowJs": true,
-    // Apps don't need to publish declarations
-    "declaration": false,
     "paths": {
       "package-majors/tests/*": ["tests/*"],
       "package-majors/*": ["app/*"],

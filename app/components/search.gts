@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 
-import { Form } from 'ember-primitives';
+import { Form } from 'ember-primitives/components/form';
 
 import { NameInput } from './name-input';
 import { ShowMinors } from './show-minors';

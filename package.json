@@ -88,6 +88,12 @@
     "yesno": "^0.4.0"
   },
   "packageManager": "pnpm@9.15.3",
+  "pnpm": {
+    "overrides": {
+      "@glimmer/component": "^2.0.0",
+    "@embroider/macros": "unstable"
+    }
+  },
   "engines": {
     "node": ">= 20.x"
   },
@@ -104,7 +110,7 @@
   },
   "dependencies": {
     "@embroider/macros": "unstable",
-    "@universal-ember/preem": "^0.1.7",
+    "@universal-ember/preem": "^0.2.0",
     "chart.js": "^4.4.3",
     "color": "^4.2.3",
     "decorator-transforms": "^2.3.0",

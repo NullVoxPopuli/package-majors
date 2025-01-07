@@ -1,7 +1,7 @@
 import './header.css';
 
 import { ThemeToggle } from '@universal-ember/preem';
-import { ExternalLink } from 'ember-primitives';
+import { ExternalLink } from 'ember-primitives/components/external-link';
 
 import { Arrow } from './icons/fa/external-link';
 

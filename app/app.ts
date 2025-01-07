@@ -3,12 +3,31 @@ import { isTesting, macroCondition } from '@embroider/macros';
 
 import { sync } from 'ember-primitives/color-scheme';
 import Resolver from 'ember-resolver';
-import config from 'package-majors/config/environment';
+
+import config from './config/environment';
+import Router from './router';
+
+function formatAsResolverEntries(imports: Record<string, unknown>) {
+  return Object.fromEntries(
+    Object.entries(imports).map(([k, v]) => [
+      k.replace(/\.g?(j|t)s$/, '').replace(/^\.\//, 'package-majors/'),
+      v,
+    ])
+  );
+}
+
+const resolverRegistry = {
+  ...formatAsResolverEntries(import.meta.glob('./templates/**/*.{gjs,gts,js,ts}', { eager: true })),
+  ...formatAsResolverEntries(import.meta.glob('./services/**/*.{js,ts}', { eager: true })),
+  ...formatAsResolverEntries(import.meta.glob('./routes/**/*.{js,ts}', { eager: true })),
+  'package-majors/router': Router,
+};
 
 export default class App extends Application {
   modulePrefix = config.modulePrefix;
   podModulePrefix = config.podModulePrefix;
-  Resolver = Resolver;
+  // Resolver will be going away eventually
+  Resolver = Resolver.withModules(resolverRegistry);
 }
 
 if (macroCondition(isTesting())) {

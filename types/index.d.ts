@@ -1,1 +1,1 @@
-import 'ember-source/types';
+/// <reference types="@embroider/core/virtual" />

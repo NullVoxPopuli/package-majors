@@ -57,7 +57,7 @@ export const Tooltip: TOC<{
   };
 }> = <template>
   <Popover @offsetOptions={{8}} as |p|>
-    {{updatePosition @context p.setHook}}
+    {{updatePosition @context p.setReference}}
     <p.Content id="history-chart-tooltip" data-hidden={{isZero @context}}>
       <div class="arrow" {{p.arrow}}></div>
       <header>

@@ -21,6 +21,24 @@ function sortLabels(data: ReshapedHistoricalData) {
   return [...labels].sort();
 }
 
+/**
+ * Most data entries contain YYYY, week #
+ * But the last entry should be YYYY-MM-DD (today)
+ */
+function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
+  return data.sort((a, b) => {
+    // comma or hyphen?
+    if (!a.week.includes('week') || !b.week.includes('week')) {
+      if (a.week.includes('week')) return -1;
+      if (b.week.includes('week')) return 1;
+
+      return 0;
+    }
+
+    return a.week.localeCompare(b.week);
+  });
+}
+
 const increments = [0.1, 0.2, 0.3, 0.4, 0.5];
 
 function datasetsFor(data: ReshapedHistoricalData) {
@@ -60,14 +78,15 @@ function datasetsFor(data: ReshapedHistoricalData) {
       let color = colorFor(packageName, version);
 
       result.push({
-        label: `${packageName} @ ${version}.x`,
         backgroundColor: color,
         pointHoverBorderWidth: 5,
         hoverBorderWidth: 7,
         borderColor: color,
-        data: Object.entries(byTime).map(([week, count]) => {
-          return { week, count };
-        }),
+        data: sortByWeek(
+          Object.entries(byTime).map(([week, count]) => {
+            return { week, count };
+          })
+        ),
       });
     }
   }

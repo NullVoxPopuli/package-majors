@@ -115,9 +115,5 @@
     "reactiveweb": "^1.2.3",
     "semver": "^7.6.3",
     "tracked-built-ins": "^3.4.0"
-  },
-  "volta": {
-    "node": "22.12.0",
-    "pnpm": "8.15.9"
   }
 }

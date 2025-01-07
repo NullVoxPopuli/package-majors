@@ -87,23 +87,20 @@
     "webpack": "^5.97.1",
     "yesno": "^0.4.0"
   },
-  "packageManager": "pnpm@8.15.9",
-  "pnpm": {
-    "overrides": {
-      "@glimmer/component": "^1.1.2",
-      "@glimmer/tracking": "^1.1.2",
-      "@glint/core": "1.4.1-unstable.0fbe14f",
-      "@glint/environment-ember-loose": "1.4.1-unstable.0fbe14f",
-      "@glint/environment-ember-template-imports": "1.4.1-unstable.0fbe14f",
-      "@glint/template": "1.4.1-unstable.0fbe14f",
-      "ember-primitives": "^0.20.0"
-    }
-  },
+  "packageManager": "pnpm@9.15.3",
   "engines": {
     "node": ">= 20.x"
   },
   "ember": {
     "edition": "octane"
+  },
+  "ember-addon": {
+    "type": "app",
+    "version": 2
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./app/*"
   },
   "dependencies": {
     "@embroider/macros": "unstable",

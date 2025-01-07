@@ -1,9 +1,11 @@
 {
-  "extends": "@tsconfig/ember/tsconfig.json",
+  "extends": "@tsconfig/ember",
   "glint": {
     "environment": ["ember-loose", "ember-template-imports"]
   },
   "compilerOptions": {
+    "target": "esnext",
+
     // Apps don't need to publish declarations
     "declaration": false,
     "declarationMap": false,
@@ -16,7 +18,11 @@
       "package-majors/tests/*": ["tests/*"],
       "package-majors/*": ["app/*"],
       "*": ["types/*"]
-    }
+    },
+"types": [
+      "ember-source/types",
+      "vite/client"
+    ]
   },
   "include": ["app/**/*", "tests/**/*", "types/**/*"]
 }

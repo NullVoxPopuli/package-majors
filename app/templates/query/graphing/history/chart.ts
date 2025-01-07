@@ -77,10 +77,7 @@ function datasetsFor(data: ReshapedHistoricalData) {
     for (let [version, byTime] of Object.entries(byVersion)) {
       let color = colorFor(packageName, version);
 
-      console.log(byVersion, byTime);
-
       result.push({
-        label: `${packageName} @ ${version}.x`,
         backgroundColor: color,
         pointHoverBorderWidth: 5,
         hoverBorderWidth: 7,
@@ -93,8 +90,6 @@ function datasetsFor(data: ReshapedHistoricalData) {
       });
     }
   }
-
-  console.log(result);
 
   return result;
 }

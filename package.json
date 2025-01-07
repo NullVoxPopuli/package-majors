@@ -91,7 +91,7 @@
   "pnpm": {
     "overrides": {
       "@glimmer/component": "^2.0.0",
-    "@embroider/macros": "unstable"
+      "@embroider/macros": "unstable"
     }
   },
   "engines": {

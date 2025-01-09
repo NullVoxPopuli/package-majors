@@ -54,7 +54,7 @@ export class Data extends Component<{
   get groupBy(): 'minors' | 'majors' {
     let qps = this.router.currentRoute?.queryParams;
 
-    if (qps?.['minors']) {
+    if (qps?.['minors'] === 'true' || qps?.['minors'] === 'on') {
       return 'minors';
     }
 
@@ -64,7 +64,7 @@ export class Data extends Component<{
   get showOld(): boolean {
     let qps = this.router.currentRoute?.queryParams;
 
-    return qps?.['old'] === 'on';
+    return qps?.['old'] === 'on' || qps?.['old'] === 'true';
   }
 
   get formattedData() {

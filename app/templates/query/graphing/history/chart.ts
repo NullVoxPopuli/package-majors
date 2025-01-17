@@ -7,6 +7,9 @@ import type { IDC, ReshapedHistoricalData } from './util';
 
 const formatter = new Intl.NumberFormat('en-US');
 
+/**
+ * Labels for the X-axis (time)
+ */
 function sortLabels(data: ReshapedHistoricalData) {
   let labels = new Set();
 
@@ -49,6 +52,7 @@ function datasetsFor(data: ReshapedHistoricalData) {
   function colorFor(packageName: string, version: string) {
     if (numPackages === 1) {
       let versions = Object.keys(data[packageName] || {});
+
       let i = versions.indexOf(version);
       let chosen = colors[i % colors.length];
 
@@ -78,6 +82,7 @@ function datasetsFor(data: ReshapedHistoricalData) {
       let color = colorFor(packageName, version);
 
       result.push({
+        label: `v${version}`,
         backgroundColor: color,
         pointHoverBorderWidth: 5,
         hoverBorderWidth: 7,

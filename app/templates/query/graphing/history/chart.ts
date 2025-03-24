@@ -28,7 +28,7 @@ function sortLabels(data: ReshapedHistoricalData) {
  * Most data entries contain YYYY, week #
  * But the last entry should be YYYY-MM-DD (today)
  */
-function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
+export function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
   return data.sort((a, b) => {
     // comma or hyphen?
     if (!a.week.includes('week') || !b.week.includes('week')) {
@@ -38,7 +38,16 @@ function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
       return 0;
     }
 
-    return a.week.localeCompare(b.week);
+    let aParts = a.week.split(', week ');
+    let bParts = b.week.split(', week ');
+
+    let year = parseInt(aParts[0], 10) - parseInt(bParts[0], 10);
+
+    if (year === 0) {
+      return parseInt(aParts[1], 10) - parseInt(bParts[1], 10);
+    }
+
+    return year;
   });
 }
 

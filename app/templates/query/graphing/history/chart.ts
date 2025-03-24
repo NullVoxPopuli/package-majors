@@ -41,6 +41,22 @@ export function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
     let aParts = a.week.split(', week ');
     let bParts = b.week.split(', week ');
 
+    if (!aParts?.[0]) {
+      return 1;
+    }
+
+    if (!bParts?.[0]) {
+      return -1;
+    }
+
+    if (!aParts?.[1]) {
+      return 1;
+    }
+
+    if (!bParts?.[1]) {
+      return -1;
+    }
+
     let year = parseInt(aParts[0], 10) - parseInt(bParts[0], 10);
 
     if (year === 0) {

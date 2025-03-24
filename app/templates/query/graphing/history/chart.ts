@@ -135,8 +135,6 @@ export function createChart(
   let labels = sortLabels(data);
   let datasets = datasetsFor(data);
 
-  console.log({ labels, datasets });
-
   return new Chart(element, {
     type: 'line',
     data: {

@@ -11,7 +11,7 @@ const formatter = new Intl.NumberFormat('en-US');
  * Labels for the X-axis (time)
  */
 function sortLabels(data: ReshapedHistoricalData) {
-  let labels = new Set();
+  let labels = new Set<string>();
 
   for (let byVersion of Object.values(data)) {
     for (let timeSeries of Object.values(byVersion)) {
@@ -21,14 +21,14 @@ function sortLabels(data: ReshapedHistoricalData) {
     }
   }
 
-  return [...labels].sort();
+  return sortByWeek([...labels].map((x) => ({ week: x }))).map((x) => x.week);
 }
 
 /**
  * Most data entries contain YYYY, week #
  * But the last entry should be YYYY-MM-DD (today)
  */
-function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
+export function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
   return data.sort((a, b) => {
     // comma or hyphen?
     if (!a.week.includes('week') || !b.week.includes('week')) {
@@ -38,7 +38,32 @@ function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
       return 0;
     }
 
-    return a.week.localeCompare(b.week);
+    let aParts = a.week.split(', week ');
+    let bParts = b.week.split(', week ');
+
+    if (!aParts?.[0]) {
+      return 1;
+    }
+
+    if (!bParts?.[0]) {
+      return -1;
+    }
+
+    if (!aParts?.[1]) {
+      return 1;
+    }
+
+    if (!bParts?.[1]) {
+      return -1;
+    }
+
+    let year = parseInt(aParts[0], 10) - parseInt(bParts[0], 10);
+
+    if (year === 0) {
+      return parseInt(aParts[1], 10) - parseInt(bParts[1], 10);
+    }
+
+    return year;
   });
 }
 
@@ -107,11 +132,14 @@ export function createChart(
   let textColor = colorScheme.current === 'dark' ? 'white' : 'black';
   let gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
 
+  let labels = sortLabels(data);
+  let datasets = datasetsFor(data);
+
   return new Chart(element, {
     type: 'line',
     data: {
-      labels: sortLabels(data),
-      datasets: datasetsFor(data),
+      labels,
+      datasets,
     },
     options: {
       clip: 8,

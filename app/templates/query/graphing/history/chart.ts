@@ -11,7 +11,7 @@ const formatter = new Intl.NumberFormat('en-US');
  * Labels for the X-axis (time)
  */
 function sortLabels(data: ReshapedHistoricalData) {
-  let labels = new Set();
+  let labels = new Set<string>();
 
   for (let byVersion of Object.values(data)) {
     for (let timeSeries of Object.values(byVersion)) {
@@ -21,7 +21,7 @@ function sortLabels(data: ReshapedHistoricalData) {
     }
   }
 
-  return [...labels].sort();
+  return sortByWeek([...labels].map((x) => ({ week: x }))).map((x) => x.week);
 }
 
 /**
@@ -132,11 +132,16 @@ export function createChart(
   let textColor = colorScheme.current === 'dark' ? 'white' : 'black';
   let gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
 
+  let labels = sortLabels(data);
+  let datasets = datasetsFor(data);
+
+  console.log({ labels, datasets });
+
   return new Chart(element, {
     type: 'line',
     data: {
-      labels: sortLabels(data),
-      datasets: datasetsFor(data),
+      labels,
+      datasets,
     },
     options: {
       clip: 8,

@@ -139,10 +139,32 @@ form {
 }
 
 main > div,
-main > p,
+main > p {
+  display: grid;
+  justify-content: center;
+}
+
 main > form {
   display: grid;
   justify-content: center;
+
+  .toggles {
+    position: fixed;
+    right: 2rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  main > form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .toggles {
+      position: static !important;
+      right: unset;
+    }
+  }
 }
 
 a {

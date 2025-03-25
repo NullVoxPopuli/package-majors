@@ -39,7 +39,7 @@ export class Search extends Component<{
       <NameInput @value={{this.last.packages}} />
 
       {{#if this.isNotViewingHistory}}
-        <div style="display: grid; gap: 0.5rem;">
+        <div class="toggles" style="display: grid; gap: 0.5rem;">
           <ShowMinors checked={{this.last.minors}} />
           <ShowOld checked={{this.last.old}} />
         </div>

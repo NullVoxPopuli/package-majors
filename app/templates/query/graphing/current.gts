@@ -29,13 +29,7 @@ const DataChart: TOC<{
     data: FormattedData[];
   };
 }> = <template>
-  <div
-    style="
-      display: grid;
-      min-width: 100%;
-      justify-content: center;
-    "
-  ><canvas {{renderChart @data}}></canvas></div>
+  <canvas {{renderChart @data}}></canvas>
 </template>;
 
 export class Data extends Component<{
@@ -45,7 +39,17 @@ export class Data extends Component<{
 }> {
   <template>
     {{#if @data.stats}}
-      <DataChart @data={{this.formattedData}} />
+      <div
+        style="
+          display: grid;
+          min-width: 100%;
+          grid-template-rows: min-content 1fr;
+          max-height: 100dvh;
+        "
+      >
+        <h3 style="margin-top: 0; position: absolute;">In the last week...</h3>
+        <DataChart @data={{this.formattedData}} />
+      </div>
     {{/if}}
   </template>
 

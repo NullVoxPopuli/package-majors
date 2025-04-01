@@ -51,6 +51,7 @@ jasmine-core
 mocha
 qunit
 qunitjs
+wrangler
 
 ###############
 # React

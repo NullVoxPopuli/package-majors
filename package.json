@@ -45,7 +45,7 @@
     "@glint/template": "1.5.0",
     "@nullvoxpopuli/eslint-configs": "^4.3.0",
     "@rollup/plugin-babel": "^6.0.4",
-    "@tsconfig/ember": "^3.0.6",
+    "@ember/app-tsconfig": "^1.0.0",
     "@types/chart.js": "^2.9.41",
     "@types/color": "^3.0.6",
     "@types/qunit": "^2.19.10",

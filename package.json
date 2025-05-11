@@ -120,6 +120,6 @@
     "ember-route-template": "^1.0.3",
     "reactiveweb": "^1.2.3",
     "semver": "^7.6.3",
-    "tracked-built-ins": "^3.4.0"
+    "tracked-built-ins": "^4.0.0"
   }
 }

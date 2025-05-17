@@ -56,7 +56,7 @@ export class Search extends Component<{
 
   // For the initial form values
   get last() {
-    let { minors, packages, old } = this.settings;
+    const { minors, packages, old } = this.settings;
 
     return {
       packages,
@@ -68,7 +68,7 @@ export class Search extends Component<{
   // keys don't match the form names 1:1
   // so that searching and debugging are a smidge easier.
   updateSearch = (data: SearchFormData) => {
-    let { packageName: packages, showMinors: minors, showOld: old } = data;
+    const { packageName: packages, showMinors: minors, showOld: old } = data;
 
     this.settings.updateQPs({
       packages,

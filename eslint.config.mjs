@@ -1,12 +1,12 @@
+import { globalIgnores } from "eslint/config";
+
 import { configs } from "@nullvoxpopuli/eslint-configs";
 
-const config = configs.ember();
+const config = configs.ember(import.meta.dirname);
 
 export default [
   ...config,
-  {
-    ignore: ["public"],
-  },
+  globalIgnores(["public"]),
   {
     files: ["*.{cjs,js}"],
     rules: {

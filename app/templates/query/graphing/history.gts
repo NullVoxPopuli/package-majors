@@ -12,8 +12,8 @@ import type { IDC, ReshapedHistoricalData } from './history/util';
 import type { TOC } from '@ember/component/template-only';
 import type { DownloadsResponse, HistoryData } from 'package-majors/types';
 
-let now = new Date();
-let currentTime = now.toISOString().slice(0, 10);
+const now = new Date();
+const currentTime = now.toISOString().slice(0, 10);
 
 /**
  * Reshapes the data fetched from the network
@@ -36,34 +36,33 @@ let currentTime = now.toISOString().slice(0, 10);
  * So maybe versions are each a range of the same color?
  */
 function reshape(data: HistoryData): ReshapedHistoricalData {
-  let { current, history } = data;
+  const { current, history } = data;
 
-  let result: ReshapedHistoricalData = {};
+  const result: ReshapedHistoricalData = {};
 
   function addToResult(packageName: string, time: string, response: DownloadsResponse) {
-    let formatted = format([response], 'majors', false);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    let grouped = formatted[0]!.downloads;
+    const formatted = format([response], 'majors', false);
+
+    const grouped = formatted[0]!.downloads;
 
     result[packageName] ||= {};
 
-    for (let { version, downloadCount } of grouped) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      result[packageName]![version] ||= {};
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      result[packageName]![version]![time] = downloadCount;
+    for (const { version, downloadCount } of grouped) {
+      result[packageName][version] ||= {};
+
+      result[packageName][version][time] = downloadCount;
     }
   }
 
-  for (let [packageName, snapshots] of Object.entries(history)) {
-    for (let snapshot of snapshots) {
-      let time = `${snapshot.year}, week ${snapshot.week}`;
+  for (const [packageName, snapshots] of Object.entries(history)) {
+    for (const snapshot of snapshots) {
+      const time = `${snapshot.year}, week ${snapshot.week}`;
 
       addToResult(packageName, time, snapshot.response);
     }
   }
 
-  for (let [packageName, response] of Object.entries(current)) {
+  for (const [packageName, response] of Object.entries(current)) {
     addToResult(packageName, currentTime, response);
   }
 
@@ -75,8 +74,8 @@ const renderChart = modifier(
     element: HTMLCanvasElement,
     [data, updateTooltip]: [ReshapedHistoricalData, (context: IDC) => void]
   ) => {
-    let chart = createChart(element, data, updateTooltip);
-    let update = () => chart.update();
+    const chart = createChart(element, data, updateTooltip);
+    const update = () => chart.update();
 
     colorScheme.on.update(update);
 

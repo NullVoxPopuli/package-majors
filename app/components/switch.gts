@@ -8,7 +8,7 @@ import { Switch as StylelessSwitch } from 'ember-primitives/components/switch';
 import type { TOC } from '@ember/component/template-only';
 
 function submit(event: Event) {
-  let input = event.target;
+  const input = event.target;
 
   assert(`[BUG], Unexpected dom change`, input instanceof HTMLInputElement);
 

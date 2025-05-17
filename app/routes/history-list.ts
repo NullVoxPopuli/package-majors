@@ -8,8 +8,8 @@ export default class Query extends Route {
       return data;
     }
 
-    let response = await fetch('/packages-with-history.json');
-    let json = await response.json();
+    const response = await fetch('/packages-with-history.json');
+    const json = await response.json();
 
     data = json;
 

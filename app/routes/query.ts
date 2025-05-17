@@ -25,13 +25,13 @@ export default class Query extends Route {
   };
 
   async model(_: unknown, transition: Transition): Promise<QueryData> {
-    let rawPackages = getQP(transition);
-    let packages = rawPackages
+    const rawPackages = getQP(transition);
+    const packages = rawPackages
       .split(',')
       .map((str) => str.trim())
       .filter(Boolean);
 
-    let { stats, histories } = await getPackagesData(packages);
+    const { stats, histories } = await getPackagesData(packages);
 
     return {
       packages,

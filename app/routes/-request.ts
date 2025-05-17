@@ -2,6 +2,7 @@ import { assert } from '@ember/debug';
 
 import type RouterService from '@ember/routing/router-service';
 import type { Histories, PackageManifest } from 'package-majors/types';
+
 export type Transition = ReturnType<RouterService['transitionTo']>;
 
 const CACHE = new Map();
@@ -12,8 +13,8 @@ export const cached = {
       return CACHE.get(url);
     }
 
-    let response = await fetch(url);
-    let result = await response.json();
+    const response = await fetch(url);
+    const result = await response.json();
 
     CACHE.set(url, result);
 
@@ -30,7 +31,7 @@ function historyManifestURLFor(packageName: string) {
 }
 
 async function getStats(packages: string[]) {
-  let stats = await Promise.all(
+  const stats = await Promise.all(
     packages.map((packageName) => {
       return cached.get(statsURLFor(packageName));
     })
@@ -40,22 +41,22 @@ async function getStats(packages: string[]) {
 }
 
 async function getHistories(packages: string[]): Promise<Histories> {
-  let ordered = await Promise.allSettled<PackageManifest>(
+  const ordered = await Promise.allSettled<PackageManifest>(
     packages.map((packageName) => {
       return cached.get(historyManifestURLFor(packageName));
     })
   );
 
-  let result: Histories = {};
+  const result: Histories = {};
 
   for (let i = 0; i < packages.length; i++) {
-    let name = packages[i];
-    let promiseState = ordered[i];
+    const name = packages[i];
+    const promiseState = ordered[i];
 
     assert(`[BUG]: packages and promise states got out of sync`, name);
     assert(`[BUG]: packages and promise states got out of sync`, promiseState);
 
-    let history = promiseState?.status === 'fulfilled' ? promiseState.value : null;
+    const history = promiseState?.status === 'fulfilled' ? promiseState.value : null;
 
     result[name] = history;
   }
@@ -64,18 +65,18 @@ async function getHistories(packages: string[]): Promise<Histories> {
 }
 
 export async function getPackagesData(packages: string[]) {
-  let [stats, histories] = await Promise.all([getStats(packages), getHistories(packages)]);
+  const [stats, histories] = await Promise.all([getStats(packages), getHistories(packages)]);
 
   return { stats, histories };
 }
 
 export function getQP(transition: Transition): string {
-  let qps = transition.to?.queryParams;
+  const qps = transition.to?.queryParams;
 
   if (!qps) return '';
   if (!('packages' in qps)) return '';
 
-  let packages = qps['packages'];
+  const packages = qps['packages'];
 
   if (typeof packages !== 'string') return '';
 

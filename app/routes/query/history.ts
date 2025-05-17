@@ -16,8 +16,8 @@ export default class History extends Route {
   };
 
   async model(): Promise<HistoryData> {
-    let queryData = this.modelFor('query') as QueryData;
-    let history = await getHistory(queryData);
+    const queryData = this.modelFor('query') as QueryData;
+    const history = await getHistory(queryData);
 
     return {
       current: byPackage(queryData.stats),
@@ -27,10 +27,10 @@ export default class History extends Route {
 }
 
 function byPackage(stats: QueryData['stats']) {
-  let result: Record<string, QueryData['stats'][number]> = {};
+  const result: Record<string, QueryData['stats'][number]> = {};
 
-  for (let stat of stats) {
-    let { package: packageName } = stat;
+  for (const stat of stats) {
+    const { package: packageName } = stat;
 
     result[packageName] = stat;
   }
@@ -39,20 +39,20 @@ function byPackage(stats: QueryData['stats']) {
 }
 
 async function getHistory(queryData: QueryData) {
-  let results: HistoryData['history'] = {};
+  const results: HistoryData['history'] = {};
 
-  let promises = Object.entries(queryData.histories).map(async ([packageName, manifest]) => {
+  const promises = Object.entries(queryData.histories).map(async ([packageName, manifest]) => {
     if (!manifest) {
       results[packageName] = [];
 
       return;
     }
 
-    let promises = manifest.snapshots.map((url) => {
+    const promises = manifest.snapshots.map((url) => {
       return cached.get(url);
     });
 
-    let snapshots = await Promise.all(promises);
+    const snapshots = await Promise.all(promises);
 
     results[packageName] = snapshots;
   });

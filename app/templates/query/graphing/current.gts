@@ -13,8 +13,8 @@ import type RouterService from '@ember/routing/router-service';
 import type { QueryData } from 'package-majors/types';
 
 const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData[]]) => {
-  let chart = createChart(element, data);
-  let update = () => chart.update();
+  const chart = createChart(element, data);
+  const update = () => chart.update();
 
   colorScheme.on.update(update);
 
@@ -56,7 +56,7 @@ export class Data extends Component<{
   @service declare router: RouterService;
 
   get groupBy(): 'minors' | 'majors' {
-    let qps = this.router.currentRoute?.queryParams;
+    const qps = this.router.currentRoute?.queryParams;
 
     if (qps?.['minors'] === 'true' || qps?.['minors'] === 'on') {
       return 'minors';
@@ -66,7 +66,7 @@ export class Data extends Component<{
   }
 
   get showOld(): boolean {
-    let qps = this.router.currentRoute?.queryParams;
+    const qps = this.router.currentRoute?.queryParams;
 
     return qps?.['old'] === 'on' || qps?.['old'] === 'true';
   }

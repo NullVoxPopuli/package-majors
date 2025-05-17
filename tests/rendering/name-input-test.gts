@@ -19,7 +19,7 @@ module('Rendering | <NameInput>', function (hooks) {
   });
 
   test('with an initial value', async function (assert) {
-    let value = 'initial value';
+    const value = 'initial value';
 
     await render(<template><NameInput @value={{value}} /></template>);
 

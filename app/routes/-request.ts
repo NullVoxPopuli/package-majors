@@ -5,7 +5,7 @@ import type { Histories, PackageManifest } from 'package-majors/types';
 
 export type Transition = ReturnType<RouterService['transitionTo']>;
 
-const CACHE = new Map();
+const CACHE = new Map<string, unknown>();
 
 export const cached = {
   get: async (url: string) => {

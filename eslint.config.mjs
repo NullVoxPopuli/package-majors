@@ -8,6 +8,15 @@ export default [
   ...config,
   globalIgnores(["public"]),
   {
+    files: ["**/*.{ts,gts}"],
+    rules: {
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-return": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+    },
+  },
+  {
     files: ["*.{cjs,js}"],
     rules: {
       "n/no-unsupported-syntax": "off",

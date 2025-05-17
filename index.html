@@ -13,16 +13,9 @@
     <meta property="og:image" content="https://majors.nullvoxpopuli.com/og-preview.png" />
     <meta name="twitter:image" content="https://majors.nullvoxpopuli.com/og-preview.png" />
 
-    {{content-for "head"}}
-
-    <link integrity="" rel="stylesheet" href="/@embroider/virtual/vendor.css" />
-    <link integrity="" rel="stylesheet" href="/assets/package-majors.css" />
-
-    {{content-for "head-footer"}}
+    <link integrity="" rel="stylesheet" href="./app/styles/app.css" />
   </head>
   <body>
-    {{content-for "body"}}
-
     <script src="/@embroider/virtual/vendor.js"></script>
     <script type="module">
       import Application from "./app/app";
@@ -30,7 +23,5 @@
 
       Application.create(environment.APP);
     </script>
-
-    {{content-for "body-footer"}}
   </body>
 </html>

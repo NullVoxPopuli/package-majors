@@ -5,6 +5,7 @@
   },
   "compilerOptions": {
     "target": "esnext",
+    "skipLibCheck": true,
     // The combination of `baseUrl` with `paths` allows Ember's classic package
     // layout, which is not resolveable with the Node resolution algorithm, to
     // work with TypeScript.
@@ -16,5 +17,6 @@
       "*": ["types/*"]
     },
     "types": ["ember-source/types", "vite/client", "@embroider/core/virtual"]
-  }
+  },
+  "include": ["app/**/*", "tests/**/*", "types/**/*", "scripts/**/*"]
 }

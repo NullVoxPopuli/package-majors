@@ -1,3 +1,4 @@
+// @ts-expect-error
 import validate from "validate-npm-package-name";
 
 export const PACKAGES = `
@@ -86,7 +87,7 @@ nuxt
   .map((x) => x.trim())
   .filter(isPackage);
 
-function isPackage(line) {
+function isPackage(line: string) {
   if (!line) return false;
   if (line.startsWith("#")) return false;
 

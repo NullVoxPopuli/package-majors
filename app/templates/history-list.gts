@@ -1,21 +1,17 @@
 import { pageTitle } from 'ember-page-title';
 import { ExternalLink } from 'ember-primitives/components/external-link';
-import Route from 'ember-route-template';
+
+import type { TOC } from '@ember/component/template-only';
 
 const ExamplePR = <template>
   <ExternalLink href="https://github.com/NullVoxPopuli/package-majors/pull/24">
- 
+
   this example PR.
   </ExternalLink>
 </template>;
 
 const sort = (x: string[]) => [...x].sort();
 
-export default Route<{
-  Args: {
-    model: string[]
-  }
-}>(
   <template>
     {{pageTitle "Currently tracked packages"}}
 
@@ -36,5 +32,8 @@ export default Route<{
         {{/each}}
       </ul>
     </div>
-  </template>
-);
+  </template> satisfies TOC<{
+  Args: {
+    model: string[]
+  }
+}>;

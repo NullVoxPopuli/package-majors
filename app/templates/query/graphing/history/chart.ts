@@ -11,11 +11,11 @@ const formatter = new Intl.NumberFormat('en-US');
  * Labels for the X-axis (time)
  */
 function sortLabels(data: ReshapedHistoricalData) {
-  let labels = new Set<string>();
+  const labels = new Set<string>();
 
-  for (let byVersion of Object.values(data)) {
-    for (let timeSeries of Object.values(byVersion)) {
-      let keys = Object.keys(timeSeries);
+  for (const byVersion of Object.values(data)) {
+    for (const timeSeries of Object.values(byVersion)) {
+      const keys = Object.keys(timeSeries);
 
       keys.forEach((key) => labels.add(key));
     }
@@ -38,8 +38,8 @@ export function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
       return 0;
     }
 
-    let aParts = a.week.split(', week ');
-    let bParts = b.week.split(', week ');
+    const aParts = a.week.split(', week ');
+    const bParts = b.week.split(', week ');
 
     if (!aParts?.[0]) {
       return 1;
@@ -57,7 +57,7 @@ export function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
       return -1;
     }
 
-    let year = parseInt(aParts[0], 10) - parseInt(bParts[0], 10);
+    const year = parseInt(aParts[0], 10) - parseInt(bParts[0], 10);
 
     if (year === 0) {
       return parseInt(aParts[1], 10) - parseInt(bParts[1], 10);
@@ -70,31 +70,31 @@ export function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
 const increments = [0.1, 0.2, 0.3, 0.4, 0.5];
 
 function datasetsFor(data: ReshapedHistoricalData) {
-  let result = [];
-  let packageNames = Object.keys(data);
-  let numPackages = packageNames.length;
+  const result = [];
+  const packageNames = Object.keys(data);
+  const numPackages = packageNames.length;
 
   function colorFor(packageName: string, version: string) {
     if (numPackages === 1) {
-      let versions = Object.keys(data[packageName] || {});
+      const versions = Object.keys(data[packageName] || {});
 
-      let i = versions.indexOf(version);
-      let chosen = colors[i % colors.length];
+      const i = versions.indexOf(version);
+      const chosen = colors[i % colors.length];
 
       return new Color(chosen).rgb().string();
     }
 
-    let i = packageNames.indexOf(packageName);
-    let baseColor = colors[i % colors.length];
+    const i = packageNames.indexOf(packageName);
+    const baseColor = colors[i % colors.length];
 
     let color = new Color(baseColor);
 
-    let rand1 = Math.random() * increments.length;
-    let rand2 = Math.random() * increments.length;
+    const rand1 = Math.random() * increments.length;
+    const rand2 = Math.random() * increments.length;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    let inc1 = increments[Math.floor(rand1) % increments.length]!;
+    const inc1 = increments[Math.floor(rand1) % increments.length]!;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    let inc2 = increments[Math.floor(rand2) % increments.length]!;
+    const inc2 = increments[Math.floor(rand2) % increments.length]!;
 
     color = rand1 < 2.5 ? color.saturate(inc1) : color.desaturate(inc1);
     color = rand2 < 2.5 ? color.lighten(inc2) : color.darken(inc2);
@@ -102,9 +102,9 @@ function datasetsFor(data: ReshapedHistoricalData) {
     return color.rgb().string();
   }
 
-  for (let [packageName, byVersion] of Object.entries(data)) {
-    for (let [version, byTime] of Object.entries(byVersion)) {
-      let color = colorFor(packageName, version);
+  for (const [packageName, byVersion] of Object.entries(data)) {
+    for (const [version, byTime] of Object.entries(byVersion)) {
+      const color = colorFor(packageName, version);
 
       result.push({
         label: `v${version}`,
@@ -129,11 +129,11 @@ export function createChart(
   data: ReshapedHistoricalData,
   updateTooltip: (context: IDC) => void
 ) {
-  let textColor = colorScheme.current === 'dark' ? 'white' : 'black';
-  let gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
+  const textColor = colorScheme.current === 'dark' ? 'white' : 'black';
+  const gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
 
-  let labels = sortLabels(data);
-  let datasets = datasetsFor(data);
+  const labels = sortLabels(data);
+  const datasets = datasetsFor(data);
 
   return new Chart(element, {
     type: 'line',

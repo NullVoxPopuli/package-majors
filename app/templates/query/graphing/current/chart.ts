@@ -12,10 +12,10 @@ import { Chart, colors } from '../setup-chart';
 import type { FormattedData } from './util';
 
 function sortLabels(data: FormattedData[]): string[] {
-  let versions = new Set<string>();
+  const versions = new Set<string>();
 
-  for (let datum of data) {
-    for (let downloadStat of datum.downloads) {
+  for (const datum of data) {
+    for (const downloadStat of datum.downloads) {
       versions.add(downloadStat.version);
     }
   }
@@ -25,8 +25,8 @@ function sortLabels(data: FormattedData[]): string[] {
 
 export function createChart(element: HTMLCanvasElement, data: FormattedData[]) {
   // Chart.JS + Chrome does not support `currentColor` for label/tick colors.
-  let textColor = colorScheme.current === 'dark' ? 'white' : 'black';
-  let gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
+  const textColor = colorScheme.current === 'dark' ? 'white' : 'black';
+  const gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
 
   return new Chart(element, {
     type: 'bar',

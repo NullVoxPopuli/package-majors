@@ -5,7 +5,7 @@ import { ensureDir, pathExists } from "fs-extra/esm";
 
 import { PACKAGES } from "./packages.mts";
 
-import type { DownloadResponse } from "../app/types.ts";
+import type { DownloadsResponse } from "../app/types.ts";
 
 let now = new Date();
 let year = now.getUTCFullYear();
@@ -16,7 +16,7 @@ export function urlFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
 }
 
-export async function getStats(packageName: string): Promise<DownloadResponse> {
+export async function getStats(packageName: string): Promise<DownloadsResponse> {
   // eslint-disable-next-line n/no-unsupported-features/node-builtins
   let result = await fetch(urlFor(packageName)).then((response) => response.json());
 
@@ -113,11 +113,11 @@ export function getWeek(currentDate: Date): number {
   return currentDate < nextMonday
     ? 52
     : currentDate > nextMonday
-      ? Math.ceil((currentDate - nextMonday) / (24 * 3600 * 1000) / 7)
+      ? Math.ceil((currentDate.getTime() - nextMonday.getTime()) / (24 * 3600 * 1000) / 7)
       : 1;
 }
 
-let errors = [];
+let errors: { packageName: string; error: unknown }[] = [];
 
 export async function tryGet(packageName: string, fn: () => Promise<void>) {
   try {

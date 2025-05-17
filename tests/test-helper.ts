@@ -4,12 +4,14 @@ import { setup } from 'qunit-dom';
 import { start as qunitStart } from 'ember-qunit';
 
 import Application from 'package-majors/app';
-import config from 'package-majors/config/environment';
+
+import config, { enterTestMode } from '../app/config/environment';
 
 export function start() {
+  enterTestMode();
   setApplication(Application.create(config.APP));
 
   setup(QUnit.assert);
 
-  qunitStart({ loadTests: false });
+  qunitStart();
 }

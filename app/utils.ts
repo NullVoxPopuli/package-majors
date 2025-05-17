@@ -9,8 +9,8 @@ import type { DownloadsResponse, ErrorResponse, QueryData } from './types';
 export type Grouped = ReturnType<typeof groupByMajor>;
 
 export function versionComparator(a: number | string, b: number | string) {
-  let semverA = semverCoerce(a);
-  let semverB = semverCoerce(b);
+  const semverA = semverCoerce(a);
+  const semverB = semverCoerce(b);
 
   if (semverA === null) return -1;
   if (semverB === null) return 1;
@@ -27,13 +27,13 @@ export function filterDownloads(
   minDownloads: number
 ): DownloadsResponse['downloads'] {
   // We must copy the object, becaues it's cached and long lived, se we can't mutate it.
-  let copy = { ...downloads };
+  const copy = { ...downloads };
 
-  let sortedVersions = Object.keys(downloads).sort(versionComparator);
+  const sortedVersions = Object.keys(downloads).sort(versionComparator);
 
-  for (let version of sortedVersions) {
+  for (const version of sortedVersions) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    let downloadCount = downloads[version]!;
+    const downloadCount = downloads[version]!;
 
     if (downloadCount < minDownloads) {
       delete copy[version];
@@ -48,7 +48,7 @@ export function filterDownloads(
 export function getTotalDownloads(downloads: DownloadsResponse['downloads']): number {
   let total = 0;
 
-  for (let [, downloadCount] of Object.entries(downloads)) {
+  for (const [, downloadCount] of Object.entries(downloads)) {
     total += downloadCount;
   }
 
@@ -56,16 +56,16 @@ export function getTotalDownloads(downloads: DownloadsResponse['downloads']): nu
 }
 
 export function groupByMajor(downloads: DownloadsResponse['downloads']) {
-  let groups: Record<number, number> = {};
+  const groups: Record<number, number> = {};
 
-  for (let [version, downloadCount] of Object.entries(downloads)) {
+  for (const [version, downloadCount] of Object.entries(downloads)) {
     if (!isValid(version)) {
       console.error(`${version} is invalid and will be omitted from the dataset.`);
 
       continue;
     }
 
-    let major = getMajor(version);
+    const major = getMajor(version);
 
     groups[major] ||= 0;
     groups[major] += downloadCount;
@@ -77,18 +77,18 @@ export function groupByMajor(downloads: DownloadsResponse['downloads']) {
 }
 
 export function groupByMinor(downloads: DownloadsResponse['downloads']): Grouped {
-  let groups: Record<string, number> = {};
+  const groups: Record<string, number> = {};
 
-  for (let [version, downloadCount] of Object.entries(downloads)) {
+  for (const [version, downloadCount] of Object.entries(downloads)) {
     if (!isValid(version)) {
       console.error(`${version} is invalid and will be omitted from the dataset.`);
 
       continue;
     }
 
-    let major = getMajor(version);
-    let minor = getMinor(version);
-    let majorMinor = `${major}.${minor}`;
+    const major = getMajor(version);
+    const minor = getMinor(version);
+    const majorMinor = `${major}.${minor}`;
 
     groups[majorMinor] ||= 0;
     groups[majorMinor] += downloadCount;

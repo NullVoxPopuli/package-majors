@@ -18,13 +18,13 @@ export function format(data: DownloadsResponse[], groupBy: 'minors' | 'majors', 
     let dls = datum.downloads;
 
     if (!showOld) {
-      let total = getTotalDownloads(dls);
-      let onePercent = total * 0.01;
+      const total = getTotalDownloads(dls);
+      const onePercent = total * 0.01;
 
       dls = filterDownloads(dls, onePercent);
     }
 
-    let downloads = groupBy === 'minors' ? groupByMinor(dls) : groupByMajor(dls);
+    const downloads = groupBy === 'minors' ? groupByMinor(dls) : groupByMajor(dls);
 
     return {
       name: datum.package,

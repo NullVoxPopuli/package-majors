@@ -1,7 +1,6 @@
 import { pageTitle } from 'ember-page-title';
 import { colorScheme } from 'ember-primitives/color-scheme';
 import { PortalTargets } from 'ember-primitives/components/portal-targets';
-import Route from 'ember-route-template';
 
 import { Header } from '../components/header';
 
@@ -15,7 +14,6 @@ function syncColorScheme() {
   }
 }
 
-export default Route(
   <template>
     {{pageTitle "Downloads by Major"}}
     {{ (syncColorScheme) }}
@@ -31,4 +29,3 @@ export default Route(
     </div>
     <PortalTargets />
   </template>
-);

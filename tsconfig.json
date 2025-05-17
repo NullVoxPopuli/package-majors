@@ -5,10 +5,7 @@
   },
   "compilerOptions": {
     "target": "esnext",
-
-    // Apps don't need to publish declarations
-    "declaration": false,
-    "declarationMap": false,
+    "skipLibCheck": true,
     // The combination of `baseUrl` with `paths` allows Ember's classic package
     // layout, which is not resolveable with the Node resolution algorithm, to
     // work with TypeScript.
@@ -19,7 +16,7 @@
       "package-majors/*": ["app/*"],
       "*": ["types/*"]
     },
-    "types": ["ember-source/types", "vite/client"]
+    "types": ["ember-source/types", "vite/client", "@embroider/core/virtual"]
   },
-  "include": ["app/**/*", "tests/**/*", "types/**/*"]
+  "include": ["app/**/*", "tests/**/*", "types/**/*", "scripts/**/*"]
 }

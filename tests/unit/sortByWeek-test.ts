@@ -4,7 +4,7 @@ import { sortByWeek } from 'package-majors/templates/query/graphing/history/char
 
 module('Unit | sortByWeek', () => {
   test('handles 1, 10, 2', (assert) => {
-    let result = sortByWeek([
+    const result = sortByWeek([
       { week: '2025, week 1' },
       { week: '2025, week 10' },
       { week: '2025, week 2' },
@@ -18,7 +18,7 @@ module('Unit | sortByWeek', () => {
   });
 
   test('multiple years', (assert) => {
-    let result = sortByWeek([
+    const result = sortByWeek([
       { week: '2025, week 1' },
       { week: '2025, week 10' },
       { week: '2025, week 2' },
@@ -36,7 +36,7 @@ module('Unit | sortByWeek', () => {
   });
 
   test('handles YYYY-MM-DD', (assert) => {
-    let result = sortByWeek([
+    const result = sortByWeek([
       { week: '2025, week 1' },
       { week: '2025-02-24' },
       { week: '2025, week 2' },

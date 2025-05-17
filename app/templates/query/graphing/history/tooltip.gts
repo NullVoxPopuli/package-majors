@@ -21,11 +21,11 @@ function updatePosition(context: IDC, setHook: (element: IDC) => void) {
 
   assert('[BUG]: Lost the arrow element', arrowElement);
 
-  let virtual = document.createElement('div');
+  const virtual = document.createElement('div');
 
   virtual.getBoundingClientRect = () => {
-    let x = tooltip.caretX;
-    let y = tooltip.caretY;
+    const x = tooltip.caretX;
+    const y = tooltip.caretY;
 
     return {
       x,

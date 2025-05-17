@@ -25,7 +25,6 @@ const resolverRegistry = {
 
 export default class App extends Application {
   modulePrefix = config.modulePrefix;
-  podModulePrefix = config.podModulePrefix;
   // Resolver will be going away eventually
   Resolver = Resolver.withModules(resolverRegistry);
 }

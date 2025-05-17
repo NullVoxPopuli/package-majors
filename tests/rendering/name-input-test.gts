@@ -12,14 +12,8 @@ module('Rendering | <NameInput>', function (hooks) {
     @tracked value = 'initial value';
   }
 
-  let context: TestContext;
-
-  hooks.beforeEach(function () {
-    context = new TestContext();
-  });
-
   test('with an initial value', async function (assert) {
-    let value = 'initial value';
+    const value = 'initial value';
 
     await render(<template><NameInput @value={{value}} /></template>);
 
@@ -27,6 +21,8 @@ module('Rendering | <NameInput>', function (hooks) {
   });
 
   test('with a changing value', async function (assert) {
+    const context = new TestContext();
+
     await render(<template><NameInput @value={{context.value}} /></template>);
 
     assert.dom('input').hasValue(context.value);

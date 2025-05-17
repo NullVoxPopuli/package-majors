@@ -28,7 +28,7 @@ export default class Settings extends Service {
   }
 
   updateQPs(qps: QPs) {
-    for (let [key, value] of Object.entries(qps)) {
+    for (const [key, value] of Object.entries(qps)) {
       this.#setQP({ [key]: value });
     }
   }

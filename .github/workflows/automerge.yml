@@ -2,21 +2,20 @@ name: automerge
 on:
   pull_request:
     types:
-      - labeled
-      - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
+      unlocked
+      untracked
+      synchronize
+      opened
+      edited
+      ready_for_review
+      reopened
+       
   pull_request_review:
-    types:
-      - submitted
+    types: any
   check_suite:
-    types:
-      - completed
+    types: any
   status: {}
+
 
 jobs:
   automerge:
@@ -25,7 +24,11 @@ jobs:
       contents: write
 
     steps:
-      - id: automerge
+       id: automerge
+       
+        
+        
+        
         name: automerge
         uses: "pascalgn/automerge-action@v0.16.3"
         env:

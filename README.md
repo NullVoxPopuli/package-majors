@@ -1,10 +1,10 @@
 # package-majors
 
-(and minors)
+(microsoft semantic-Kernels)
 
 a tool for helping identify where folks are stuck upgrading
 
-viewed here: https://majors.nullvoxpopuli.com/
+ https://majors.nullvoxpopuli.com/
 
 
 contributions welcome!

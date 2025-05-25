@@ -14,7 +14,7 @@ importers:
     dependencies:
       '@embroider/macros':
         specifier: unstable
-        version: 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+        version: 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@universal-ember/preem':
         specifier: ^0.2.0
         version: 0.2.0(@babel/core@7.27.1)(@ember/test-helpers@5.2.2(@babel/core@7.27.1)(@glint/template@1.5.2))(@ember/test-waiters@4.1.0(@glint/template@1.5.2))(@glimmer/component@2.0.0)(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-modifier@4.2.2(@babel/core@7.27.1))(ember-resources@7.0.4(@glimmer/component@2.0.0)(@glint/template@1.5.2))(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
@@ -98,11 +98,11 @@ importers:
         specifier: ^6.0.4
         version: 6.0.4(@babel/core@7.27.1)(rollup@4.40.2)
       '@types/chart.js':
-        specifier: ^2.9.41
-        version: 2.9.41
+        specifier: ^4.0.0
+        version: 4.0.1
       '@types/color':
-        specifier: ^3.0.6
-        version: 3.0.6
+        specifier: ^4.0.0
+        version: 4.2.0
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
@@ -827,8 +827,8 @@ packages:
     resolution: {integrity: sha512-uCUkf5CnVSyed8xdUfv3stiaXgteUjAa0/WQqO4RV6jZWniXJPdgvHKbhH5NyL5MrCyyotNfmfmXU9cdwxYJyQ==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/macros@1.17.4-unstable.a9d3f97':
-    resolution: {integrity: sha512-rRdp05PeG1AqEgi/F+GY2UIM4Kxam4Ex1TutfvKo/4eqvCpushG18f1qyBE5IMfyQ11Hl3fLiusVpRH1R6iY7w==}
+  '@embroider/macros@1.18.1-unstable.50875b2':
+    resolution: {integrity: sha512-yHXYE/Z20gmFTx8gzzC1ivRtORcatKOo9h9q4KYOw7KigLhnxnQfu/MfwYeN6RtcD8xgjfHZU5jU+ETVWSJ/1A==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@glint/template': ^1.0.0
@@ -847,8 +847,8 @@ packages:
     resolution: {integrity: sha512-5J5ipUMCAinQS38WW7wedruq5Z4VnHvNo+ZgOduw0PtI9w0CQWx7/HE+98PBDW8jclikeF+aHwF317vc1hwuzg==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/shared-internals@3.0.1-unstable.a9d3f97':
-    resolution: {integrity: sha512-fQMVWMaVhH2Gf99xjLTEthP3Mr1AZ+jc5rEI9TUAx3gZEgeAgugemaABN6uUyNIxf7R1ShBkJTN+wru3g+Ktrg==}
+  '@embroider/shared-internals@3.0.1-unstable.50875b2':
+    resolution: {integrity: sha512-S4sUVO+SiXTD9ZLc7ldD3IdBR5lIJ6KfeM1DakvELCK5r22eeZrAKVsa3obOCUHtemIIq3W2UnscrEZS67Ue8g==}
     engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/vite@1.1.3':
@@ -1503,8 +1503,9 @@ packages:
   '@types/chai@4.3.20':
     resolution: {integrity: sha512-/pC9HAB5I/xMlc5FP77qjCnI16ChlJfW0tGa0IUcFn38VJrTV6DeZ60NU5KZBtaOZqjdpwTWohz5HU1RrhiYxQ==}
 
-  '@types/chart.js@2.9.41':
-    resolution: {integrity: sha512-3dvkDvueckY83UyUXtJMalYoH6faOLkWQoaTlJgB4Djde3oORmNP0Jw85HtzTuXyliUHcdp704s0mZFQKio/KQ==}
+  '@types/chart.js@4.0.1':
+    resolution: {integrity: sha512-OwXJ6Eg14eFpCsTG6sljiGnvVpit5R9rapG7nwDnQlljsdplVIOYVuCSwy07IduCtihrOwvOnbhXKLyp3nvPcw==}
+    deprecated: This is a stub types definition. chart.js provides its own type definitions, so you do not need this installed.
 
   '@types/color-convert@2.0.4':
     resolution: {integrity: sha512-Ub1MmDdyZ7mX//g25uBAoH/mWGd9swVbt8BseymnaE18SU4po/PjmCrHxqIIRjBo3hV/vh1KGr0eMxUhp+t+dQ==}
@@ -1512,8 +1513,8 @@ packages:
   '@types/color-name@1.1.5':
     resolution: {integrity: sha512-j2K5UJqGTxeesj6oQuGpMgifpT5k9HprgQd8D1Y0lOFqKHl3PJu5GMeS4Y5EgjS55AE6OQxf8mPED9uaGbf4Cg==}
 
-  '@types/color@3.0.6':
-    resolution: {integrity: sha512-NMiNcZFRUAiUUCCf7zkAelY8eV3aKqfbzyFQlXpPIEeoNDbsEHGpb854V3gzTsGKYj830I5zPuOwU/TP5/cW6A==}
+  '@types/color@4.2.0':
+    resolution: {integrity: sha512-6+xrIRImMtGAL2X3qYkd02Mgs+gFGs+WsK0b7VVMaO4mYRISwyTjcqNrO0mNSmYEoq++rSLDB2F5HDNmqfOe+A==}
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
@@ -4484,9 +4485,6 @@ packages:
     resolution: {integrity: sha512-IXnMcJ6ZyTuhRmJSjzvHSRhlVPiN9Jwc6e59V0bEJ0ba6OBeX2L0E+mRN1QseeOF4mM+F1Rit6Nh7o+rl2Yn/A==}
     engines: {node: '>0.9'}
 
-  moment@2.30.1:
-    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
-
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
 
@@ -6876,7 +6874,7 @@ snapshots:
     dependencies:
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.10.0
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@simple-dom/interface': 1.4.0
       decorator-transforms: 2.3.0(@babel/core@7.27.1)
       dom-element-descriptors: 0.5.1
@@ -6888,7 +6886,7 @@ snapshots:
   '@ember/test-waiters@4.1.0(@glint/template@1.5.2)':
     dependencies:
       '@embroider/addon-shim': 1.10.0
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
     transitivePeerDependencies:
       - '@glint/template'
       - supports-color
@@ -6914,7 +6912,7 @@ snapshots:
       '@babel/runtime': 7.27.1
       '@babel/traverse': 7.27.1
       '@embroider/core': 4.0.3(@glint/template@1.5.2)
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@types/babel__code-frame': 7.0.6
       assert-never: 1.4.0
       babel-import-util: 3.0.1
@@ -6963,7 +6961,7 @@ snapshots:
       '@babel/core': 7.27.1
       '@babel/parser': 7.27.2
       '@babel/traverse': 7.27.1
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@embroider/reverse-exports': 0.1.2
       '@embroider/shared-internals': 3.0.0
       assert-never: 1.4.0
@@ -6994,9 +6992,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/macros@1.17.4-unstable.a9d3f97(@glint/template@1.5.2)':
+  '@embroider/macros@1.18.1-unstable.50875b2(@glint/template@1.5.2)':
     dependencies:
-      '@embroider/shared-internals': 3.0.1-unstable.a9d3f97
+      '@embroider/shared-internals': 3.0.1-unstable.50875b2
       assert-never: 1.4.0
       babel-import-util: 3.0.1
       ember-cli-babel: 7.26.11
@@ -7049,7 +7047,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/shared-internals@3.0.1-unstable.a9d3f97':
+  '@embroider/shared-internals@3.0.1-unstable.50875b2':
     dependencies:
       babel-import-util: 3.0.1
       debug: 4.4.1
@@ -7071,7 +7069,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.27.1
       '@embroider/core': 4.0.3(@glint/template@1.5.2)
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@embroider/reverse-exports': 0.1.2
       '@rollup/pluginutils': 5.1.4(rollup@4.40.2)
       assert-never: 1.4.0
@@ -7788,9 +7786,9 @@ snapshots:
 
   '@types/chai@4.3.20': {}
 
-  '@types/chart.js@2.9.41':
+  '@types/chart.js@4.0.1':
     dependencies:
-      moment: 2.30.1
+      chart.js: 4.4.9
 
   '@types/color-convert@2.0.4':
     dependencies:
@@ -7798,7 +7796,7 @@ snapshots:
 
   '@types/color-name@1.1.5': {}
 
-  '@types/color@3.0.6':
+  '@types/color@4.2.0':
     dependencies:
       '@types/color-convert': 2.0.4
 
@@ -7985,7 +7983,7 @@ snapshots:
       '@babel/runtime': 7.27.1
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.10.0
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@glimmer/component': 2.0.0
       '@glimmer/tracking': 1.1.2
       decorator-transforms: 2.3.0(@babel/core@7.27.1)
@@ -9261,7 +9259,7 @@ snapshots:
       '@babel/plugin-proposal-private-methods': 7.18.6(@babel/core@7.27.1)
       '@babel/plugin-transform-class-static-block': 7.27.1(@babel/core@7.27.1)
       '@babel/preset-env': 7.27.2(@babel/core@7.27.1)
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@embroider/shared-internals': 2.9.0
       babel-loader: 8.4.1(@babel/core@7.27.1)(webpack@5.99.8)
       babel-plugin-ember-modules-api-polyfill: 3.5.0
@@ -9525,7 +9523,7 @@ snapshots:
       '@babel/runtime': 7.27.1
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.10.0
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@floating-ui/dom': 1.7.0
       '@glimmer/component': 2.0.0
       '@glimmer/tracking': 1.1.2
@@ -9552,7 +9550,7 @@ snapshots:
       '@babel/runtime': 7.27.1
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.10.0
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@floating-ui/dom': 1.7.0
       '@glimmer/component': 2.0.0
       decorator-transforms: 2.3.0(@babel/core@7.27.1)
@@ -9577,7 +9575,7 @@ snapshots:
     dependencies:
       '@ember/test-helpers': 5.2.2(@babel/core@7.27.1)(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.10.0
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       qunit: 2.24.1
       qunit-theme-ember: 1.0.0
     transitivePeerDependencies:
@@ -9593,7 +9591,7 @@ snapshots:
   ember-resources@7.0.4(@glimmer/component@2.0.0)(@glint/template@1.5.2):
     dependencies:
       '@embroider/addon-shim': 1.10.0
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       '@glint/template': 1.5.2
     optionalDependencies:
       '@glimmer/component': 2.0.0
@@ -11517,8 +11515,6 @@ snapshots:
 
   mktemp@0.4.0: {}
 
-  moment@2.30.1: {}
-
   ms@2.0.0: {}
 
   ms@2.1.3: {}
@@ -11975,7 +11971,7 @@ snapshots:
     dependencies:
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.10.0
-      '@embroider/macros': 1.17.4-unstable.a9d3f97(@glint/template@1.5.2)
+      '@embroider/macros': 1.18.1-unstable.50875b2(@glint/template@1.5.2)
       decorator-transforms: 2.3.0(@babel/core@7.27.1)
       ember-async-data: 2.0.1(@babel/core@7.27.1)(@glint/template@1.5.2)
       ember-resources: 7.0.4(@glimmer/component@2.0.0)(@glint/template@1.5.2)

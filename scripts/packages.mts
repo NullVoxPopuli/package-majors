@@ -75,6 +75,7 @@ solid-js
 ###############
 svelte
 @sveltejs/kit
+@sveltejs/vite-plugin-svelte
 
 ###############
 # Vue

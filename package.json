@@ -73,7 +73,7 @@
     "webpack": "^5.99.8",
     "yesno": "^0.4.0"
   },
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@10.15.1",
   "pnpm": {
     "overrides": {
       "@glimmer/component": "^2.0.0",

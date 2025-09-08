@@ -53,6 +53,7 @@ mocha
 qunit
 qunitjs
 wrangler
+fast-check
 
 ###############
 # React

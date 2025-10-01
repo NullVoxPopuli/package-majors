@@ -8,13 +8,17 @@ export type Transition = ReturnType<RouterService['transitionTo']>;
 const CACHE = new Map<string, unknown>();
 
 export const cached = {
-  get: async (url: string) => {
+  get: async (url: string, sub?: boolean) => {
     if (CACHE.has(url)) {
       return CACHE.get(url);
     }
 
     const response = await fetch(url);
-    const result = await response.json();
+    let result = await response.json();
+
+    if(sub) {
+      result = result.response
+    }
 
     CACHE.set(url, result);
 
@@ -26,14 +30,22 @@ function statsURLFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
 }
 
+function historyURLFor(packageName: string, year: string, week: string) {
+  return `/history/${encodeURIComponent(packageName)}/${year}/${week}.json`;
+}
+
 function historyManifestURLFor(packageName: string) {
   return `/history/${packageName}/manifest.json`;
 }
 
-async function getStats(packages: string[]) {
+async function getStats(packages: string[], year?: string, week?: string) {
   const stats = await Promise.all(
     packages.map((packageName) => {
-      return cached.get(statsURLFor(packageName));
+      if(year && week) {
+        return cached.get(historyURLFor(packageName, year, week), true)
+      } else {
+        return cached.get(statsURLFor(packageName));
+      }
     })
   );
 
@@ -64,8 +76,8 @@ async function getHistories(packages: string[]): Promise<Histories> {
   return result;
 }
 
-export async function getPackagesData(packages: string[]) {
-  const [stats, histories] = await Promise.all([getStats(packages), getHistories(packages)]);
+export async function getPackagesData(packages: string[], year?: string, week?: string) {
+  const [stats, histories] = await Promise.all([getStats(packages, year, week), getHistories(packages)]);
 
   return { stats, histories };
 }

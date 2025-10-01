@@ -31,7 +31,11 @@ export default class Query extends Route {
       .map((str) => str.trim())
       .filter(Boolean);
 
-    const { stats, histories } = await getPackagesData(packages);
+    const qps = transition.to?.queryParams;
+    const year = qps?.['year'] as string;
+    const week = qps?.['week'] as string;
+
+    const { stats, histories } = await getPackagesData(packages, year, week);
 
     return {
       packages,

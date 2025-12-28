@@ -8,7 +8,7 @@ import { format } from './current/util';
 import { createChart } from './history/chart';
 import { Tooltip } from './history/tooltip';
 
-import type { IDC, ReshapedHistoricalData } from './history/util';
+import type { IDC, ReshapedHistoricalData, TotalsByTime } from './history/util';
 import type { TOC } from '@ember/component/template-only';
 import type { DownloadsResponse, HistoryData } from 'package-majors/types';
 
@@ -35,22 +35,26 @@ const currentTime = now.toISOString().slice(0, 10);
  * Each package should have its own color-range.
  * So maybe versions are each a range of the same color?
  */
-function reshape(data: HistoryData): ReshapedHistoricalData {
-  const { current, history } = data;
+function reshape(data: HistoryData): {
+  versions: ReshapedHistoricalData;
+  totals: TotalsByTime;
+} {
+  const { current, history, totals } = data;
 
-  const result: ReshapedHistoricalData = {};
+  const versionsResult: ReshapedHistoricalData = {};
+  const totalsResult: TotalsByTime = {};
 
   function addToResult(packageName: string, time: string, response: DownloadsResponse) {
     const formatted = format([response], 'majors', false);
 
     const grouped = formatted[0]!.downloads;
 
-    result[packageName] ||= {};
+    versionsResult[packageName] ||= {};
 
     for (const { version, downloadCount } of grouped) {
-      result[packageName][version] ||= {};
+      versionsResult[packageName][version] ||= {};
 
-      result[packageName][version][time] = downloadCount;
+      versionsResult[packageName][version][time] = downloadCount;
     }
   }
 
@@ -66,15 +70,74 @@ function reshape(data: HistoryData): ReshapedHistoricalData {
     addToResult(packageName, currentTime, response);
   }
 
-  return result;
+  // Process totals data - only for weeks that exist in version data
+  if (totals) {
+    for (const [packageName, totalData] of Object.entries(totals)) {
+      totalsResult[packageName] ||= {};
+
+      // Get all weeks that exist for this package in the version data
+      const existingWeeks = new Set<string>();
+      const packageVersions = versionsResult[packageName];
+
+      if (packageVersions) {
+        for (const versionData of Object.values(packageVersions)) {
+          for (const week of Object.keys(versionData)) {
+            existingWeeks.add(week);
+          }
+        }
+      }
+
+      // Group downloads by week to match the version data
+      if (totalData && totalData.downloads && existingWeeks.size > 0) {
+        const weeklyTotals: { [week: string]: number } = {};
+
+        for (const { day, downloads } of totalData.downloads) {
+          const date = new Date(day);
+          const year = date.getFullYear();
+          const weekNumber = getWeekNumber(date);
+          const weekKey = `${year}, week ${weekNumber}`;
+
+          weeklyTotals[weekKey] = (weeklyTotals[weekKey] || 0) + downloads;
+        }
+
+        // Only add totals for weeks that exist in the version data
+        for (const [week, total] of Object.entries(weeklyTotals)) {
+          if (existingWeeks.has(week)) {
+            totalsResult[packageName][week] = total;
+          }
+        }
+      }
+    }
+  }
+
+  return { versions: versionsResult, totals: totalsResult };
+}
+
+/**
+ * Get the ISO week number for a date
+ */
+function getWeekNumber(date: Date): number {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  const weekNo = Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+
+  return weekNo;
 }
 
 const renderChart = modifier(
   (
     element: HTMLCanvasElement,
-    [data, updateTooltip]: [ReshapedHistoricalData, (context: IDC) => void]
+    [data, totals, updateTooltip]: [
+      ReshapedHistoricalData,
+      TotalsByTime,
+      (context: IDC) => void
+    ]
   ) => {
-    const chart = createChart(element, data, updateTooltip);
+    const chart = createChart(element, data, totals, updateTooltip);
     const update = () => chart.update();
 
     colorScheme.on.update(update);
@@ -89,6 +152,7 @@ const renderChart = modifier(
 class DataChart extends Component<{
   Args: {
     data: ReshapedHistoricalData;
+    totals: TotalsByTime;
   };
 }> {
   @tracked tooltipContext: IDC;
@@ -101,7 +165,7 @@ class DataChart extends Component<{
         min-width: 100%;
         justify-content: center;
       "
-    ><canvas {{renderChart @data this.updateTooltip}}></canvas></div>
+    ><canvas {{renderChart @data @totals this.updateTooltip}}></canvas></div>
     <Tooltip @context={{this.tooltipContext}} />
   </template>
 }
@@ -110,4 +174,8 @@ export const Data: TOC<{
   Args: {
     data: HistoryData;
   };
-}> = <template><DataChart @data={{reshape @data}} /></template>;
+}> = <template>
+  {{#let (reshape @data) as |reshaped|}}
+    <DataChart @data={{reshaped.versions}} @totals={{reshaped.totals}} />
+  {{/let}}
+</template>;

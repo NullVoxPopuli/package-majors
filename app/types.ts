@@ -32,6 +32,7 @@ export interface QueryData {
 export interface HistoryData {
   current: { [packageName: string]: DownloadsResponse };
   history: { [packageName: string]: HistoryResponse[] };
+  totals?: { [packageName: string]: TotalDownloadsResponse };
 }
 
 export interface HistoryResponse {
@@ -39,4 +40,11 @@ export interface HistoryResponse {
   year: number;
   timestamp: string;
   response: DownloadsResponse;
+}
+
+export interface TotalDownloadsResponse {
+  downloads: { day: string; downloads: number }[];
+  start: string;
+  end: string;
+  package: string;
 }

@@ -11,6 +11,7 @@ import {
   PointElement,
   Tooltip,
 } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
 
 Chart.register(
   Colors,
@@ -22,7 +23,8 @@ Chart.register(
   Tooltip,
   LineController,
   LineElement,
-  PointElement
+  PointElement,
+  annotationPlugin
 );
 
 export { Chart };

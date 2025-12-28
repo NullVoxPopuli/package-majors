@@ -131,11 +131,7 @@ function getWeekNumber(date: Date): number {
 const renderChart = modifier(
   (
     element: HTMLCanvasElement,
-    [data, totals, updateTooltip]: [
-      ReshapedHistoricalData,
-      TotalsByTime,
-      (context: IDC) => void
-    ]
+    [data, totals, updateTooltip]: [ReshapedHistoricalData, TotalsByTime, (context: IDC) => void]
   ) => {
     const chart = createChart(element, data, totals, updateTooltip);
     const update = () => chart.update();

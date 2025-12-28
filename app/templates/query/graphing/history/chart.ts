@@ -5,8 +5,6 @@ import { Chart, colors } from '../setup-chart';
 
 import type { IDC, ReshapedHistoricalData, TotalsByTime } from './util';
 
-const formatter = new Intl.NumberFormat('en-US');
-
 /**
  * Labels for the X-axis (time)
  */
@@ -138,9 +136,6 @@ export function createChart(
   const labels = sortLabels(data);
   const datasets = datasetsFor(data);
 
-  // Create annotations for total downloads
-  const annotations: Record<string, any> = {};
-
   // Add a line annotation for each package's total downloads
   const packageNames = Object.keys(totals);
 
@@ -161,6 +156,7 @@ export function createChart(
       label: `${packageName} (total)`,
       backgroundColor: 'rgba(128, 128, 128, 0.2)',
       borderColor: annotationColor,
+      // @ts-expect-error this exists
       borderWidth: 2,
       borderDash: [10, 5],
       pointRadius: 0,

@@ -1,5 +1,9 @@
 {
   "recommendations": [
-    "embertooling.emberjs"
+    "embertooling.emberjs",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "typed-ember.glint2-vscode",
+    "pflannery.vscode-versionlens"
   ]
 }

@@ -1,8 +1,5 @@
 {
   "extends": "@ember/app-tsconfig",
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
-  },
   "compilerOptions": {
     "target": "esnext",
     "skipLibCheck": true,
@@ -16,7 +13,12 @@
       "package-majors/*": ["app/*"],
       "*": ["types/*"]
     },
-    "types": ["ember-source/types", "vite/client", "@embroider/core/virtual"]
+    "types": [
+      "ember-source/types",
+      "vite/client",
+      "@embroider/core/virtual",
+      "@glint/ember-tsc/types"
+    ]
   },
   "include": ["app/**/*", "tests/**/*", "types/**/*", "scripts/**/*"]
 }

@@ -47,6 +47,7 @@ function reshape(data: HistoryData): {
   function addToResult(packageName: string, time: string, response: DownloadsResponse) {
     const formatted = format([response], 'majors', false);
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const grouped = formatted[0]!.downloads;
 
     versionsResult[packageName] ||= {};

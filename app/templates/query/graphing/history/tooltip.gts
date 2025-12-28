@@ -49,6 +49,34 @@ function styleForColor(context: IDC, i: number) {
   return trusted(`--dataset-color: ${colorAt(context, i)};`);
 }
 
+function calculatePercentage(context: IDC, dataPointIndex: number): string {
+  if (!context?.tooltip?.dataPoints) return '';
+
+  const dataPoints = context.tooltip.dataPoints;
+
+  // Calculate total for all non-total datasets
+  let total = 0;
+
+  for (const dp of dataPoints) {
+    if (!dp.dataset.label?.includes('(total)')) {
+      total += dp.parsed.y || 0;
+    }
+  }
+
+  if (total === 0) return '';
+
+  const currentDataPoint = dataPoints[dataPointIndex];
+
+  if (!currentDataPoint || currentDataPoint.dataset.label?.includes('(total)')) {
+    return '';
+  }
+
+  const value = currentDataPoint.parsed.y || 0;
+  const percentage = ((value / total) * 100).toFixed(1);
+
+  return ` (${percentage}%)`;
+}
+
 const isZero = (x: IDC) => x?.tooltip?.opacity === 0;
 
 export const Tooltip: TOC<{
@@ -77,6 +105,7 @@ export const Tooltip: TOC<{
               <td><span></span></td>
               <td>{{dataPoint.dataset.label}}</td>
               <td>{{dataPoint.formattedValue}}</td>
+              <td>{{calculatePercentage @context i}}</td>
             </tr>
           {{/each}}
         </tbody>

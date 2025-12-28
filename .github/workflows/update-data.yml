@@ -20,7 +20,7 @@ jobs:
       - uses: wyvox/action@v1
       - run: pnpm esyes ./scripts/update-data.mts
 
-      - uses: peter-evans/create-pull-request@v7
+      - uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GH_CREATE_PR }}
           commit-message: "[update-data.yml]: The NPM Stats for the week"

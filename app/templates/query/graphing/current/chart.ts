@@ -59,6 +59,8 @@ export function createChart(element: HTMLCanvasElement, data: FormattedData[]) {
               return items.map((i) => `v${i.label}`);
             },
             label: (context) => {
+              if (!context.parsed.y) return void 0;
+
               const label = context.dataset.label || '';
               const value = context.parsed.y;
               const total = datasetTotals[context.datasetIndex] || 0;

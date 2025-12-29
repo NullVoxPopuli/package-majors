@@ -121,3 +121,36 @@ export function isError(data: unknown): data is ErrorResponse {
 export function hasHistory(histories: QueryData['histories']) {
   return Object.values(histories).filter(Boolean).length > 0;
 }
+
+/**
+ * Gets the default date cutoff (1 year ago from today) in YYYY-MM-DD format
+ */
+export function getDefaultDateCutoff(): string {
+  const date = new Date();
+
+  date.setFullYear(date.getFullYear() - 1);
+
+  return date.toISOString().slice(0, 10);
+}
+
+/**
+ * Normalizes a date value to YYYY-MM-DD format
+ * Accepts Date objects, ISO strings, or already formatted YYYY-MM-DD strings
+ */
+export function normalizeDateString(value: string | Date | undefined): string {
+  if (!value) return getDefaultDateCutoff();
+
+  // If it's already in YYYY-MM-DD format, return as-is
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return value;
+  }
+
+  // Parse and convert to YYYY-MM-DD
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return getDefaultDateCutoff();
+  }
+
+  return date.toISOString().slice(0, 10);
+}

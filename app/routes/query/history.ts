@@ -1,10 +1,16 @@
 import Route from '@ember/routing/route';
+import { service } from '@ember/service';
+
+import { getDefaultDateCutoff } from 'package-majors/utils';
 
 import { cached } from '../-request';
 
+import type Settings from 'package-majors/services/settings';
 import type { HistoryData, QueryData, TotalDownloadsResponse } from 'package-majors/types';
 
 export default class History extends Route {
+  @service declare settings: Settings;
+
   queryParams = {
     // not yet implemented, because we don't have enough data
     year: {
@@ -13,12 +19,16 @@ export default class History extends Route {
     week: {
       refreshModel: false,
     },
+    dateCutoff: {
+      refreshModel: true,
+    },
   };
 
   async model(): Promise<HistoryData> {
     const queryData = this.modelFor('query') as QueryData;
-    const history = await getHistory(queryData);
-    const totals = await getTotalDownloads(queryData.packages, history);
+    const dateCutoff = this.settings.dateCutoff || getDefaultDateCutoff();
+    const history = await getHistory(queryData, dateCutoff);
+    const totals = await getTotalDownloads(queryData.packages, history, dateCutoff);
 
     const result = {
       current: byPackage(queryData.stats),
@@ -42,8 +52,9 @@ function byPackage(stats: QueryData['stats']) {
   return result;
 }
 
-async function getHistory(queryData: QueryData) {
+async function getHistory(queryData: QueryData, dateCutoff: string) {
   const results: HistoryData['history'] = {};
+  const cutoffDate = new Date(dateCutoff);
 
   const promises = Object.entries(queryData.histories).map(async ([packageName, manifest]) => {
     if (!manifest) {
@@ -58,7 +69,15 @@ async function getHistory(queryData: QueryData) {
 
     const snapshots = await Promise.all(promises);
 
-    results[packageName] = snapshots;
+    const filteredSnapshots = snapshots.filter((snapshot: { timestamp?: string }) => {
+      if (!snapshot.timestamp) return true;
+
+      const snapshotDate = new Date(snapshot.timestamp);
+
+      return snapshotDate >= cutoffDate;
+    });
+
+    results[packageName] = filteredSnapshots;
   });
 
   await Promise.all(promises);
@@ -72,36 +91,15 @@ async function getHistory(queryData: QueryData) {
  */
 async function getTotalDownloads(
   packages: string[],
-  history: HistoryData['history']
+  history: HistoryData['history'],
+  dateCutoff: string
 ): Promise<{ [packageName: string]: TotalDownloadsResponse }> {
   const results: { [packageName: string]: TotalDownloadsResponse } = {};
 
-  // Calculate the date range from the historical data
-  let earliestTimestamp: string | null = null;
-
-  for (const snapshots of Object.values(history)) {
-    for (const snapshot of snapshots) {
-      if (!earliestTimestamp || snapshot.timestamp < earliestTimestamp) {
-        earliestTimestamp = snapshot.timestamp;
-      }
-    }
-  }
-
+  // Use the date cutoff as the start date
+  const startDate = dateCutoff;
   const now = new Date();
   const endDate = now.toISOString().slice(0, 10);
-
-  // If we have historical data, use the earliest timestamp as start date
-  // Otherwise fall back to 18 months ago (npm API limit is around 18 months)
-  let startDate: string;
-
-  if (earliestTimestamp) {
-    startDate = earliestTimestamp.slice(0, 10);
-  } else {
-    const fallbackDate = new Date(now);
-
-    fallbackDate.setMonth(now.getMonth() - 18);
-    startDate = fallbackDate.toISOString().slice(0, 10);
-  }
 
   const promises = packages.map(async (packageName) => {
     try {

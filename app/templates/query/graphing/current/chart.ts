@@ -28,6 +28,10 @@ export function createChart(element: HTMLCanvasElement, data: FormattedData[]) {
   const textColor = colorScheme.current === 'dark' ? 'white' : 'black';
   const gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
 
+  const datasetTotals = data.map((packageData) => {
+    return packageData.downloads.reduce((sum, download) => sum + download.downloadCount, 0);
+  });
+
   return new Chart(element, {
     type: 'bar',
     data: {
@@ -53,6 +57,14 @@ export function createChart(element: HTMLCanvasElement, data: FormattedData[]) {
           callbacks: {
             title: (items) => {
               return items.map((i) => `v${i.label}`);
+            },
+            label: (context) => {
+              const label = context.dataset.label || '';
+              const value = context.parsed.y;
+              const total = datasetTotals[context.datasetIndex] || 0;
+              const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
+
+              return `${label}: ${value.toLocaleString()} (${percentage}%)`;
             },
           },
         },

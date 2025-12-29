@@ -1,5 +1,7 @@
 import Service, { service } from '@ember/service';
 
+import { normalizeDateString } from 'package-majors/utils';
+
 import type RouterService from '@ember/routing/router-service';
 
 type QPs = Record<string, string | number | undefined>;
@@ -30,6 +32,12 @@ export default class Settings extends Service {
 
   get showTotal() {
     return stringToBoolean(stringOr(this.queryParams['showTotal']));
+  }
+
+  get dateCutoff() {
+    const value = this.queryParams['dateCutoff'];
+
+    return normalizeDateString(value as string | undefined);
   }
 
   updateQPs(qps: QPs) {

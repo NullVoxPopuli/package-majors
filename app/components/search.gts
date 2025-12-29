@@ -3,7 +3,9 @@ import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 
 import { Form } from 'ember-primitives/components/form';
+import { normalizeDateString } from 'package-majors/utils';
 
+import { DateCutoff } from './date-cutoff';
 import { NameInput } from './name-input';
 import { ShowMinors } from './show-minors';
 import { ShowOld } from './show-old';
@@ -20,14 +22,13 @@ import type { DownloadsResponse } from 'package-majors/types';
  * so the <Form> abstraction is basically just doing the
  * `FormData` conversion for us.
  */
-function handleSubmit(onChange: (data: SearchFormData) => void, data: unknown, eventType: string) {
-  if (eventType !== 'submit') return;
-
+function handleSubmit(onChange: (data: SearchFormData) => void, data: unknown) {
   onChange(data as SearchFormData);
 }
 
 interface SearchFormData {
   packageName: string;
+  dateCutoff?: string;
   showMinors?: 'on';
   showOld?: 'on';
   showTotal?: 'on' | 'off';
@@ -45,6 +46,7 @@ export class Search extends Component<{
           <ShowMinors checked={{this.last.minors}} />
           <ShowOld checked={{this.last.old}} />
         {{else}}
+          <DateCutoff @value={{this.last.dateCutoff}} />
           <ShowTotal checked={{this.last.showTotal}} />
         {{/if}}
       </div>
@@ -60,26 +62,28 @@ export class Search extends Component<{
 
   // For the initial form values
   get last() {
-    const { minors, packages, old, showTotal } = this.settings;
+    const { minors, packages, old, showTotal, dateCutoff } = this.settings;
 
     return {
       packages,
       minors,
       old,
       showTotal,
+      dateCutoff,
     };
   }
 
   // keys don't match the form names 1:1
   // so that searching and debugging are a smidge easier.
   updateSearch = (data: SearchFormData) => {
-    const { packageName: packages, showMinors: minors, showOld: old, showTotal } = data;
+    const { packageName: packages, showMinors: minors, showOld: old, showTotal, dateCutoff } = data;
 
     this.settings.updateQPs({
       packages,
       minors,
       old,
       showTotal,
+      dateCutoff: dateCutoff ? normalizeDateString(dateCutoff) : undefined,
     });
   };
 }

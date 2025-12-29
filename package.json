@@ -70,7 +70,7 @@
     "vite": "^6.3.5",
     "yesno": "^0.4.0"
   },
-  "packageManager": "pnpm@10.25.0",
+  "packageManager": "pnpm@10.26.2",
   "pnpm": {
     "overrides": {
       "@glimmer/component": "^2.0.0",

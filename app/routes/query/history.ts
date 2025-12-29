@@ -20,11 +20,13 @@ export default class History extends Route {
     const history = await getHistory(queryData);
     const totals = await getTotalDownloads(queryData.packages, history);
 
-    return {
+    const result = {
       current: byPackage(queryData.stats),
       history,
       totals,
     };
+
+    return result;
   }
 }
 

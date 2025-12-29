@@ -1,4 +1,5 @@
 import Application from '@ember/application';
+import setupInspector from '@embroider/legacy-inspector-support/ember-source-4.12';
 import { isTesting, macroCondition } from '@embroider/macros';
 
 import { sync } from 'ember-primitives/color-scheme';
@@ -27,6 +28,7 @@ export default class App extends Application {
   modulePrefix = config.modulePrefix;
   // Resolver will be going away eventually
   Resolver = Resolver.withModules(resolverRegistry);
+  inspector = setupInspector(this);
 }
 
 if (macroCondition(isTesting())) {

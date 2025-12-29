@@ -10,6 +10,7 @@ import { versionComparator } from 'package-majors/utils';
 import { Chart, colors } from '../setup-chart';
 
 import type { FormattedData } from './util';
+import type { QueryData } from '#app/types.ts';
 
 function sortLabels(data: FormattedData[]): string[] {
   const versions = new Set<string>();
@@ -23,24 +24,27 @@ function sortLabels(data: FormattedData[]): string[] {
   return [...versions].sort(versionComparator);
 }
 
-export function createChart(element: HTMLCanvasElement, data: FormattedData[]) {
+export function createChart(
+  element: HTMLCanvasElement,
+  data: FormattedData[],
+  sourceData: QueryData
+) {
   // Chart.JS + Chrome does not support `currentColor` for label/tick colors.
   const textColor = colorScheme.current === 'dark' ? 'white' : 'black';
   const gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
-
-  const datasetTotals = data.map((packageData) => {
-    return packageData.downloads.reduce((sum, download) => sum + download.downloadCount, 0);
-  });
 
   return new Chart(element, {
     type: 'bar',
     data: {
       labels: sortLabels(data),
       datasets: data.map((packageData, i) => {
+        const total = sourceData.stats.find((x) => x.package === packageData.name)?.total;
+
         return {
           label: packageData.name,
           data: packageData.downloads,
           backgroundColor: colors[i % colors.length],
+          total,
         };
       }),
     },
@@ -63,7 +67,8 @@ export function createChart(element: HTMLCanvasElement, data: FormattedData[]) {
 
               const label = context.dataset.label || '';
               const value = context.parsed.y;
-              const total = datasetTotals[context.datasetIndex] || 0;
+              // @ts-expect-error why is total missing?
+              const total = context.dataset.total || 0;
               const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
 
               return `${label}: ${value.toLocaleString()} (${percentage}%)`;

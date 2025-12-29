@@ -6,6 +6,11 @@ export interface DownloadsResponse {
   package: string;
   downloads: VersionRecord;
 }
+export interface StatsForWeek {
+  total: number;
+  downloads: VersionRecord;
+  package: string;
+}
 
 export interface ErrorResponse {
   error: string;
@@ -23,9 +28,15 @@ export interface PackageManifest {
 
 export type Histories = Record<string, PackageManifest | null>;
 
+/**
+ * Used by /q/?packages=...
+ * (the index)
+ *
+ * Represents the data for the "Current" week graph
+ */
 export interface QueryData {
   packages: string[];
-  stats: DownloadsResponse[];
+  stats: StatsForWeek[];
   histories: Histories;
 }
 

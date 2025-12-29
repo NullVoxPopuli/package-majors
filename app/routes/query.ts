@@ -4,7 +4,7 @@ import { service } from '@ember/service';
 import { getPackagesData, getQP, type Transition } from './-request';
 
 import type Settings from 'package-majors/services/settings';
-import type { QueryData } from 'package-majors/types';
+import type { DownloadsResponse, QueryData, StatsForWeek } from 'package-majors/types';
 
 export default class Query extends Route {
   @service declare settings: Settings;
@@ -34,7 +34,9 @@ export default class Query extends Route {
       .map((str) => str.trim())
       .filter(Boolean);
 
-    const { stats, histories } = await getPackagesData(packages);
+    const { stats: statsRequest, histories } = await getPackagesData(packages);
+
+    const stats = addTotals(statsRequest);
 
     return {
       packages,
@@ -42,4 +44,20 @@ export default class Query extends Route {
       histories,
     };
   }
+}
+
+function addTotals(stats: Array<DownloadsResponse>) {
+  const result: Array<StatsForWeek> = [];
+
+  for (const stat of stats) {
+    const clone: StatsForWeek = { ...stat, total: 0 };
+
+    for (const count of Object.values(clone.downloads)) {
+      clone.total = clone.total + count;
+    }
+
+    result.push(clone);
+  }
+
+  return result;
 }

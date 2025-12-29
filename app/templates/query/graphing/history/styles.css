@@ -2,7 +2,6 @@
   background: rgb(0 0 0 / 70%);
   border-radius: 0.25rem;
   color: white;
-  transition: all 0.1s ease;
   padding: 0.5rem;
   pointer-events: none;
   z-index: 1000;

@@ -184,7 +184,7 @@ export function createChart(
       responsive: true,
       interaction: {
         intersect: false,
-        mode: 'dataset',
+        mode: 'index',
       },
       elements: {
         line: {
@@ -197,9 +197,9 @@ export function createChart(
           external: updateTooltip,
           enabled: false,
           // ignored
-          mode: 'index',
-          intersect: false,
-          position: 'nearest',
+          // mode: 'nearest',
+          // intersect: true,
+          // position: 'nearest',
           padding: 8,
           bodyFont: {
             size: 16,

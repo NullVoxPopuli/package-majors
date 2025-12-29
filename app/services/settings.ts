@@ -7,6 +7,7 @@ type QPs = Record<string, string | number | undefined>;
 export const HAS_HISTORY = Symbol('HISTORY');
 
 const stringOr = <T, O>(x: T, y: O | undefined = undefined) => (x ? String(x) : y);
+const stringToBoolean = (x: unknown) => x === 'on' || x === 'true' || x === 'yes' || x === '1';
 
 export default class Settings extends Service {
   @service declare router: RouterService;
@@ -20,11 +21,15 @@ export default class Settings extends Service {
   }
 
   get minors() {
-    return stringOr(this.queryParams['minors']) === 'on';
+    return stringToBoolean(stringOr(this.queryParams['minors']));
   }
 
   get old() {
-    return stringOr(this.queryParams['old']) === 'on';
+    return stringToBoolean(stringOr(this.queryParams['old']));
+  }
+
+  get showTotal() {
+    return stringToBoolean(stringOr(this.queryParams['showTotal']));
   }
 
   updateQPs(qps: QPs) {

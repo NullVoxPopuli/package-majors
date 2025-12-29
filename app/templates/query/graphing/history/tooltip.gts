@@ -49,35 +49,56 @@ function styleForColor(context: IDC, i: number) {
   return trusted(`--dataset-color: ${colorAt(context, i)};`);
 }
 
-function calculatePercentage(context: IDC, dataPointIndex: number): string {
-  if (!context?.tooltip?.dataPoints) return '';
+const isZero = (x: IDC) => x?.tooltip?.opacity === 0;
+const isNotTotal = (x: IDC) => x.dataset.label !== 'total';
+const isTotal = (x: IDC) => x?.dataset?.label === 'total';
 
-  const dataPoints = context.tooltip.dataPoints;
+/**
+ * All the data is array-based, which is a little obnoxious for sorting and ordering
+ */
+function indexData(context: IDC) {
+  if (!context) return [];
 
-  // Calculate total for all non-total datasets
+  const result = [];
+  let dataForTotal;
   let total = 0;
 
-  for (const dp of dataPoints) {
-    if (!dp.dataset.label?.includes('(total)')) {
+  for (const dp of context.tooltip.dataPoints) {
+    if (isNotTotal(dp)) {
       total += dp.parsed.y || 0;
     }
   }
 
-  if (total === 0) return '';
+  for (let i = 0; i < context.tooltip.dataPoints.length; i++) {
+    const dataPoint = context.tooltip.dataPoints[i];
 
-  const currentDataPoint = dataPoints[dataPointIndex];
+    const style = styleForColor(context, i);
+    const isActive = dataPoint.element.active;
+    const hasPercentage = isNotTotal(dataPoint);
+    const value = dataPoint.parsed.y || 0;
+    const percentage = ((value / total) * 100).toFixed(1);
 
-  if (!currentDataPoint || currentDataPoint.dataset.label?.includes('(total)')) {
-    return '';
+    const data = {
+      style,
+      isActive,
+      hasPercentage,
+      label: dataPoint.dataset.label,
+      formattedValue: dataPoint.formattedValue,
+      percentage: hasPercentage ? ` (${percentage}%)` : 0,
+    };
+
+    if (isTotal(dataPoint)) {
+      dataForTotal = data;
+      continue;
+    }
+
+    result.push(data);
   }
 
-  const value = currentDataPoint.parsed.y || 0;
-  const percentage = ((value / total) * 100).toFixed(1);
+  result.push(dataForTotal);
 
-  return ` (${percentage}%)`;
+  return result;
 }
-
-const isZero = (x: IDC) => x?.tooltip?.opacity === 0;
 
 export const Tooltip: TOC<{
   Args: {
@@ -100,12 +121,16 @@ export const Tooltip: TOC<{
           </tr>
         </thead>
         <tbody>
-          {{#each @context.tooltip.dataPoints as |dataPoint i|}}
-            <tr style={{styleForColor @context i}} class="{{if dataPoint.element.active 'active'}}">
+          {{#each (indexData @context) as |data|}}
+            <tr style={{data.style}} class="{{if data.isActive 'active'}}">
               <td><span></span></td>
-              <td>{{dataPoint.dataset.label}}</td>
-              <td>{{dataPoint.formattedValue}}</td>
-              <td>{{calculatePercentage @context i}}</td>
+              <td>{{data.label}}</td>
+              <td>{{data.formattedValue}}</td>
+              <td>
+                {{#if data.hasPercentage}}
+                  {{data.percentage}}
+                {{/if}}
+              </td>
             </tr>
           {{/each}}
         </tbody>

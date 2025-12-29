@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
 
 import { modifier } from 'ember-modifier';
 import { colorScheme } from 'ember-primitives/color-scheme';
@@ -9,7 +10,7 @@ import { createChart } from './history/chart';
 import { Tooltip } from './history/tooltip';
 
 import type { IDC, ReshapedHistoricalData, TotalsByTime } from './history/util';
-import type { TOC } from '@ember/component/template-only';
+import type Settings from 'package-majors/services/settings';
 import type { DownloadsResponse, HistoryData } from 'package-majors/types';
 
 const now = new Date();
@@ -132,9 +133,14 @@ function getWeekNumber(date: Date): number {
 const renderChart = modifier(
   (
     element: HTMLCanvasElement,
-    [data, totals, updateTooltip]: [ReshapedHistoricalData, TotalsByTime, (context: IDC) => void]
+    [data, totals, updateTooltip, showTotal]: [
+      ReshapedHistoricalData,
+      TotalsByTime,
+      (context: IDC) => void,
+      boolean,
+    ]
   ) => {
-    const chart = createChart(element, data, totals, updateTooltip);
+    const chart = createChart(element, data, totals, updateTooltip, showTotal);
     const update = () => chart.update();
 
     colorScheme.on.update(update);
@@ -150,6 +156,7 @@ class DataChart extends Component<{
   Args: {
     data: ReshapedHistoricalData;
     totals: TotalsByTime;
+    showTotal: boolean;
   };
 }> {
   @tracked tooltipContext: IDC;
@@ -162,17 +169,33 @@ class DataChart extends Component<{
         min-width: 100%;
         justify-content: center;
       "
-    ><canvas {{renderChart @data @totals this.updateTooltip}}></canvas></div>
+    ><canvas {{renderChart @data @totals this.updateTooltip @showTotal}}></canvas></div>
     <Tooltip @context={{this.tooltipContext}} />
   </template>
 }
 
-export const Data: TOC<{
+class Data extends Component<{
   Args: {
     data: HistoryData;
   };
-}> = <template>
-  {{#let (reshape @data) as |reshaped|}}
-    <DataChart @data={{reshaped.versions}} @totals={{reshaped.totals}} />
-  {{/let}}
-</template>;
+}> {
+  @service declare settings: Settings;
+
+  get showTotal() {
+    const total = this.settings.queryParams.showTotal;
+
+    return total === 'on' || total === 'true';
+  }
+
+  <template>
+    {{#let (reshape @data) as |reshaped|}}
+      <DataChart
+        @data={{reshaped.versions}}
+        @totals={{reshaped.totals}}
+        @showTotal={{this.showTotal}}
+      />
+    {{/let}}
+  </template>
+}
+
+export { Data };

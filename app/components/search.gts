@@ -7,6 +7,7 @@ import { Form } from 'ember-primitives/components/form';
 import { NameInput } from './name-input';
 import { ShowMinors } from './show-minors';
 import { ShowOld } from './show-old';
+import { ShowTotal } from './show-total';
 
 import type RouterService from '@ember/routing/router-service';
 import type Settings from 'package-majors/services/settings';
@@ -29,6 +30,7 @@ interface SearchFormData {
   packageName: string;
   showMinors?: 'on';
   showOld?: 'on';
+  showTotal?: 'on' | 'off';
 }
 
 export class Search extends Component<{
@@ -38,12 +40,14 @@ export class Search extends Component<{
     <Form @onChange={{fn handleSubmit this.updateSearch}}>
       <NameInput @value={{this.last.packages}} />
 
-      {{#if this.isNotViewingHistory}}
-        <div class="toggles" style="display: grid; gap: 0.5rem;">
+      <div class="toggles">
+        {{#if this.isNotViewingHistory}}
           <ShowMinors checked={{this.last.minors}} />
           <ShowOld checked={{this.last.old}} />
-        </div>
-      {{/if}}
+        {{else}}
+          <ShowTotal checked={{this.last.showTotal}} />
+        {{/if}}
+      </div>
     </Form>
   </template>
 
@@ -56,24 +60,26 @@ export class Search extends Component<{
 
   // For the initial form values
   get last() {
-    const { minors, packages, old } = this.settings;
+    const { minors, packages, old, showTotal } = this.settings;
 
     return {
       packages,
       minors,
       old,
+      showTotal,
     };
   }
 
   // keys don't match the form names 1:1
   // so that searching and debugging are a smidge easier.
   updateSearch = (data: SearchFormData) => {
-    const { packageName: packages, showMinors: minors, showOld: old } = data;
+    const { packageName: packages, showMinors: minors, showOld: old, showTotal } = data;
 
     this.settings.updateQPs({
       packages,
       minors,
       old,
+      showTotal,
     });
   };
 }

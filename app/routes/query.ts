@@ -22,6 +22,9 @@ export default class Query extends Route {
     old: {
       refreshModel: false,
     },
+    showTotal: {
+      refreshModel: false,
+    },
   };
 
   async model(_: unknown, transition: Transition): Promise<QueryData> {

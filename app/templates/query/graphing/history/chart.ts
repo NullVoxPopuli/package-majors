@@ -126,7 +126,8 @@ export function createChart(
   element: HTMLCanvasElement,
   data: ReshapedHistoricalData,
   totals: TotalsByTime,
-  updateTooltip: (context: IDC) => void
+  updateTooltip: (context: IDC) => void,
+  showTotal: boolean = true
 ) {
   const textColor = colorScheme.current === 'dark' ? 'white' : 'black';
   const gridColor = colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0,0,0,0.1)';
@@ -137,34 +138,36 @@ export function createChart(
   const datasets = datasetsFor(data);
 
   // Add a line annotation for each package's total downloads
-  const packageNames = Object.keys(totals);
+  if (showTotal) {
+    const packageNames = Object.keys(totals);
 
-  for (const packageName of packageNames) {
-    const packageTotals = totals[packageName];
+    for (const packageName of packageNames) {
+      const packageTotals = totals[packageName];
 
-    if (!packageTotals) continue;
+      if (!packageTotals) continue;
 
-    // Create data points for the total line
-    const totalPoints = sortByWeek(
-      Object.entries(packageTotals).map(([week, count]) => {
-        return { week, count };
-      })
-    );
+      // Create data points for the total line
+      const totalPoints = sortByWeek(
+        Object.entries(packageTotals).map(([week, count]) => {
+          return { week, count };
+        })
+      );
 
-    // Add the total as a dataset instead of annotation for better interactivity
-    datasets.push({
-      label: `${packageName} (total)`,
-      backgroundColor: 'rgba(128, 128, 128, 0.2)',
-      borderColor: annotationColor,
-      // @ts-expect-error this exists
-      borderWidth: 2,
-      borderDash: [10, 5],
-      pointRadius: 0,
-      pointHoverRadius: 4,
-      pointHoverBorderWidth: 2,
-      data: totalPoints,
-      order: -1, // Draw on top
-    });
+      // Add the total as a dataset instead of annotation for better interactivity
+      datasets.push({
+        label: `${packageName} (total)`,
+        backgroundColor: 'rgba(128, 128, 128, 0.2)',
+        borderColor: annotationColor,
+        // @ts-expect-error this exists
+        borderWidth: 2,
+        borderDash: [10, 5],
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 2,
+        data: totalPoints,
+        order: -1, // Draw on top
+      });
+    }
   }
 
   return new Chart(element, {

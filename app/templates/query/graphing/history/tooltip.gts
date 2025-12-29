@@ -49,34 +49,6 @@ function styleForColor(context: IDC, i: number) {
   return trusted(`--dataset-color: ${colorAt(context, i)};`);
 }
 
-function calculatePercentage(context: IDC, dataPointIndex: number): string {
-  if (!context?.tooltip?.dataPoints) return '';
-
-  const dataPoints = context.tooltip.dataPoints;
-
-  // Calculate total for all non-total datasets
-  let total = 0;
-
-  for (const dp of dataPoints) {
-    if (isNotTotal(dp)) {
-      total += dp.parsed.y || 0;
-    }
-  }
-
-  if (total === 0) return '';
-
-  const currentDataPoint = dataPoints[dataPointIndex];
-
-  if (!currentDataPoint || isTotal(currentDataPoint)) {
-    return '';
-  }
-
-  const value = currentDataPoint.parsed.y || 0;
-  const percentage = ((value / total) * 100).toFixed(1);
-
-  return ` (${percentage}%)`;
-}
-
 const isZero = (x: IDC) => x?.tooltip?.opacity === 0;
 const isNotTotal = (x: IDC) => x.dataset.label !== 'total';
 const isTotal = (x: IDC) => x?.dataset?.label === 'total';
@@ -88,7 +60,14 @@ function indexData(context: IDC) {
   if (!context) return [];
 
   const result = [];
-  let total;
+  let dataForTotal;
+  let total = 0;
+
+  for (const dp of context.tooltip.dataPoints) {
+    if (isNotTotal(dp)) {
+      total += dp.parsed.y || 0;
+    }
+  }
 
   for (let i = 0; i < context.tooltip.dataPoints.length; i++) {
     const dataPoint = context.tooltip.dataPoints[i];
@@ -96,6 +75,8 @@ function indexData(context: IDC) {
     const style = styleForColor(context, i);
     const isActive = dataPoint.element.active;
     const hasPercentage = isNotTotal(dataPoint);
+    const value = dataPoint.parsed.y || 0;
+    const percentage = ((value / total) * 100).toFixed(1);
 
     const data = {
       style,
@@ -103,18 +84,18 @@ function indexData(context: IDC) {
       hasPercentage,
       label: dataPoint.dataset.label,
       formattedValue: dataPoint.formattedValue,
-      percentage: hasPercentage ? calculatePercentage(context, i) : 0,
+      percentage: hasPercentage ? ` (${percentage}%)` : 0,
     };
 
     if (isTotal(dataPoint)) {
-      total = data;
+      dataForTotal = data;
       continue;
     }
 
     result.push(data);
   }
 
-  result.push(total);
+  result.push(dataForTotal);
 
   return result;
 }

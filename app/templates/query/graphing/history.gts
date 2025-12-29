@@ -181,18 +181,12 @@ class Data extends Component<{
 }> {
   @service declare settings: Settings;
 
-  get showTotal() {
-    const total = this.settings.queryParams.showTotal;
-
-    return total === 'on' || total === 'true';
-  }
-
   <template>
     {{#let (reshape @data) as |reshaped|}}
       <DataChart
         @data={{reshaped.versions}}
         @totals={{reshaped.totals}}
-        @showTotal={{this.showTotal}}
+        @showTotal={{this.settings.showTotal}}
       />
     {{/let}}
   </template>

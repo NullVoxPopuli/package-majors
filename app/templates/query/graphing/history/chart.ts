@@ -122,6 +122,8 @@ function datasetsFor(data: ReshapedHistoricalData) {
   return result;
 }
 
+const formatter = new Intl.NumberFormat('en-US');
+
 export function createChart(
   element: HTMLCanvasElement,
   data: ReshapedHistoricalData,
@@ -155,7 +157,7 @@ export function createChart(
 
       // Add the total as a dataset instead of annotation for better interactivity
       datasets.push({
-        label: `${packageName} (total)`,
+        label: `total`,
         backgroundColor: 'rgba(128, 128, 128, 0.2)',
         borderColor: annotationColor,
         // @ts-expect-error this exists
@@ -201,6 +203,21 @@ export function createChart(
           padding: 8,
           bodyFont: {
             size: 16,
+          },
+          callbacks: {
+            footer: (items) => {
+              if (showTotal) return;
+
+              let sum = 0;
+
+              items.forEach((item) => {
+                if (item.dataset.label?.includes('total')) return;
+
+                sum += item.parsed.y ?? 0;
+              });
+
+              return `Total: ${formatter.format(sum)}`;
+            },
           },
         },
         legend: {

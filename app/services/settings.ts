@@ -29,7 +29,7 @@ export default class Settings extends Service {
   }
 
   get showTotal() {
-    return stringToBoolean(stringOr(this.queryParams['old']));
+    return stringToBoolean(stringOr(this.queryParams['showTotal']));
   }
 
   updateQPs(qps: QPs) {

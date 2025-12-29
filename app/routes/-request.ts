@@ -1,7 +1,7 @@
 import { assert } from '@ember/debug';
 
 import type RouterService from '@ember/routing/router-service';
-import type { Histories, PackageManifest } from 'package-majors/types';
+import type { DownloadsResponse, Histories, PackageManifest } from 'package-majors/types';
 
 export type Transition = ReturnType<RouterService['transitionTo']>;
 
@@ -30,7 +30,7 @@ function historyManifestURLFor(packageName: string) {
   return `/history/${packageName}/manifest.json`;
 }
 
-async function getStats(packages: string[]) {
+async function getStats(packages: string[]): Promise<DownloadsResponse[]> {
   const stats = await Promise.all(
     packages.map((packageName) => {
       return cached.get(statsURLFor(packageName));
@@ -64,7 +64,10 @@ async function getHistories(packages: string[]): Promise<Histories> {
   return result;
 }
 
-export async function getPackagesData(packages: string[]) {
+export async function getPackagesData(packages: string[]): Promise<{
+  stats: DownloadsResponse[];
+  histories: Histories;
+}> {
   const [stats, histories] = await Promise.all([getStats(packages), getHistories(packages)]);
 
   return { stats, histories };

@@ -12,6 +12,9 @@ importers:
 
   .:
     dependencies:
+      '@embroider/legacy-inspector-support':
+        specifier: ^0.1.3
+        version: 0.1.3
       '@embroider/macros':
         specifier: unstable
         version: 1.18.1-unstable.f6c658d(@glint/template@1.7.3)
@@ -826,6 +829,9 @@ packages:
   '@embroider/core@4.4.2':
     resolution: {integrity: sha512-NRC6gtbtKnxqeCeIgCgrJ2Dq7WdRa09mhTvnuqw9oCfj5jkWA4cGEVJnqNzvd2bOENj9PQdTQVOwVGI/B7hhxQ==}
     engines: {node: 12.* || 14.* || >= 16}
+
+  '@embroider/legacy-inspector-support@0.1.3':
+    resolution: {integrity: sha512-0VzD1xExkT78a1CUiW8wZ5VZDL4bVyMSc3t8E/RiAW1X6TlyKIA/m6zoQgsQtQIiiTPPxH0/1Tdd0F7b5//etw==}
 
   '@embroider/macros@1.18.1-unstable.f6c658d':
     resolution: {integrity: sha512-3B0lY+Nct+TalW4XsJoWAGvlxa9LDXEz93AUwYdGnWDc4xZEQ/Y7jpn9u2lfvNulHnZj9qoF8wjUSoIy8dNvIg==}
@@ -6842,6 +6848,12 @@ snapshots:
       - canvas
       - supports-color
       - utf-8-validate
+
+  '@embroider/legacy-inspector-support@0.1.3':
+    dependencies:
+      '@embroider/addon-shim': 1.10.2
+    transitivePeerDependencies:
+      - supports-color
 
   '@embroider/macros@1.18.1-unstable.f6c658d(@glint/template@1.7.3)':
     dependencies:

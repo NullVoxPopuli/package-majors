@@ -8,29 +8,22 @@ import { createChart } from './current/chart';
 import { format } from './current/util';
 
 import type { FormattedData } from './current/util';
-import type { TOC } from '@ember/component/template-only';
-import type RouterService from '@ember/routing/router-service';
+import type Settings from '#services/settings.ts';
 import type { QueryData } from 'package-majors/types';
 
-const renderChart = modifier((element: HTMLCanvasElement, [data]: [FormattedData[]]) => {
-  const chart = createChart(element, data);
-  const update = () => chart.update();
+const renderChart = modifier(
+  (element: HTMLCanvasElement, [data, sourceData]: [FormattedData[], QueryData]) => {
+    const chart = createChart(element, data, sourceData);
+    const update = () => chart.update();
 
-  colorScheme.on.update(update);
+    colorScheme.on.update(update);
 
-  return () => {
-    colorScheme.off.update(update);
-    chart.destroy();
-  };
-});
-
-const DataChart: TOC<{
-  Args: {
-    data: FormattedData[];
-  };
-}> = <template>
-  <canvas {{renderChart @data}}></canvas>
-</template>;
+    return () => {
+      colorScheme.off.update(update);
+      chart.destroy();
+    };
+  }
+);
 
 export class Data extends Component<{
   Args: {
@@ -48,17 +41,15 @@ export class Data extends Component<{
         "
       >
         <h3 style="margin-top: 0; position: absolute;">In the last week...</h3>
-        <DataChart @data={{this.formattedData}} />
+        <canvas {{renderChart this.formattedData @data}}></canvas>
       </div>
     {{/if}}
   </template>
 
-  @service declare router: RouterService;
+  @service declare settings: Settings;
 
   get groupBy(): 'minors' | 'majors' {
-    const qps = this.router.currentRoute?.queryParams;
-
-    if (qps?.['minors'] === 'true' || qps?.['minors'] === 'on') {
+    if (this.settings.minors) {
       return 'minors';
     }
 
@@ -66,9 +57,7 @@ export class Data extends Component<{
   }
 
   get showOld(): boolean {
-    const qps = this.router.currentRoute?.queryParams;
-
-    return qps?.['old'] === 'on' || qps?.['old'] === 'true';
+    return this.settings.old;
   }
 
   get formattedData() {

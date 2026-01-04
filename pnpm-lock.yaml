@@ -37,8 +37,8 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2(@babel/core@7.28.5)
       ember-primitives:
-        specifier: ^0.32.0
-        version: 0.32.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@ember/test-waiters@4.1.1(@glint/template@1.7.3))(@glimmer/component@2.0.0)(@glint/template@1.7.3)(ember-modifier@4.2.2(@babel/core@7.28.5))(ember-resources@7.0.7(@glimmer/component@2.0.0)(@glint/template@1.7.3))(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
+        specifier: ^0.49.0
+        version: 0.49.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@ember/test-waiters@4.1.1(@glint/template@1.7.3))(@glimmer/component@2.0.0)(@glint/template@1.7.3)(ember-modifier@4.2.2(@babel/core@7.28.5))(ember-resources@7.0.7(@glimmer/component@2.0.0)(@glint/template@1.7.3))(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
       ember-resources:
         specifier: ^7.0.4
         version: 7.0.7(@glimmer/component@2.0.0)(@glint/template@1.7.3)
@@ -2956,8 +2956,8 @@ packages:
       '@glint/template':
         optional: true
 
-  ember-primitives@0.32.0:
-    resolution: {integrity: sha512-VZLUgr+9ldd6FbCMgbXcRfrca+UCL8qk72FtL+yKVDJxb+7G//XrkXxiUypMB1H8tMy60+3vh1wLo7EanVE43Q==}
+  ember-primitives@0.49.0:
+    resolution: {integrity: sha512-gM7NYklwlZBA0M0/Rti94qk9cd0rcxa1snXI+fa/a8FiN+wBrwGM09aBgpH/Mp0sMn3EqIkP7qlld+EbThAlyg==}
     peerDependencies:
       '@ember/test-helpers': '>= 3.2.0'
       '@ember/test-waiters': '>= 3.0.2'
@@ -5841,6 +5841,9 @@ packages:
   which-collection@1.0.2:
     resolution: {integrity: sha512-K4jVyjnBdgvc86Y6BkaLZEN933SwYOuBFkdmBu9ZfkcAbdVbpITnDmjvZ/aQjRXQrv5EPkTnD1s39GiiqbngCw==}
     engines: {node: '>= 0.4'}
+
+  which-heading-do-i-need@0.2.2:
+    resolution: {integrity: sha512-dZD4jWcLYexRGxUdb/pUc4PI2Ru3VCaoXeZ4mw865N8NE1H2pmRoG/sia49fBd6zxr/nvnkjvVvjVx2mPoIWKA==}
 
   which-typed-array@1.1.19:
     resolution: {integrity: sha512-rEvr90Bck4WZt9HHFC4DJMsjvu7x+r6bImz0/BrbWb7A2djJ8hnZMrWnHo9F8ssv0OMErasDhftrfROTyqSDrw==}
@@ -9182,7 +9185,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  ember-primitives@0.32.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@ember/test-waiters@4.1.1(@glint/template@1.7.3))(@glimmer/component@2.0.0)(@glint/template@1.7.3)(ember-modifier@4.2.2(@babel/core@7.28.5))(ember-resources@7.0.7(@glimmer/component@2.0.0)(@glint/template@1.7.3))(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5)):
+  ember-primitives@0.49.0(@babel/core@7.28.5)(@ember/test-helpers@5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3))(@ember/test-waiters@4.1.1(@glint/template@1.7.3))(@glimmer/component@2.0.0)(@glint/template@1.7.3)(ember-modifier@4.2.2(@babel/core@7.28.5))(ember-resources@7.0.7(@glimmer/component@2.0.0)(@glint/template@1.7.3))(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5)):
     dependencies:
       '@babel/runtime': 7.28.4
       '@ember/test-waiters': 4.1.1(@glint/template@1.7.3)
@@ -9200,6 +9203,7 @@ snapshots:
       tabster: 8.7.0
       tracked-built-ins: 4.1.0(@babel/core@7.28.5)
       tracked-toolbox: 2.0.0(@babel/core@7.28.5)(ember-source@6.4.0(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      which-heading-do-i-need: 0.2.2
     optionalDependencies:
       '@ember/test-helpers': 5.4.1(@babel/core@7.28.5)(@glint/template@1.7.3)
       '@glint/template': 1.7.3
@@ -12729,6 +12733,8 @@ snapshots:
       is-set: 2.0.3
       is-weakmap: 2.0.2
       is-weakset: 2.0.4
+
+  which-heading-do-i-need@0.2.2: {}
 
   which-typed-array@1.1.19:
     dependencies:

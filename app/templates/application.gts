@@ -21,6 +21,7 @@ function syncColorScheme() {
     <div class="layout">
       <Header />
 
+  {{colorScheme.current}}
       <main>
 
         {{outlet}}

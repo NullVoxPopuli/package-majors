@@ -104,7 +104,7 @@
     "color": "^4.2.3",
     "decorator-transforms": "^2.3.0",
     "ember-modifier": "^4.2.2",
-    "ember-primitives": "^0.32.0",
+    "ember-primitives": "^0.53.0",
     "ember-resources": "^7.0.4",
     "ember-route-template": "^1.0.3",
     "reactiveweb": "^1.4.2",

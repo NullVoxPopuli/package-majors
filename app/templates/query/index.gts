@@ -1,22 +1,20 @@
 import { LinkTo } from '@ember/routing';
 
-import Route from 'ember-route-template';
 import { hasHistory } from 'package-majors/utils';
 
 import { Data } from './graphing/current';
 
+import type { TOC } from '@ember/component/template-only';
 import type { QueryData } from 'package-majors/types';
 
-export default Route<{
+<template>
+  <Data @data={{@model}} />
+
+  {{#if (hasHistory @model.histories)}}
+    <LinkTo @route="query.history" class="history-toggle">View History</LinkTo>
+  {{/if}}
+</template> satisfies TOC<{
   Args: {
     model: QueryData;
   };
-}>(
-  <template>
-    <Data @data={{@model}} />
-
-    {{#if (hasHistory @model.histories)}}
-      <LinkTo @route="query.history" class="history-toggle">View History</LinkTo>
-    {{/if}}
-  </template>
-);
+}>;

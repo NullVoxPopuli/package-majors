@@ -104,7 +104,6 @@
     "ember-modifier": "^4.2.2",
     "ember-primitives": "^0.53.0",
     "ember-resources": "^7.0.4",
-    "ember-route-template": "^1.0.3",
     "nvp.ui": "^0.5.3",
     "reactiveweb": "^1.4.2",
     "semver": "^7.7.2"

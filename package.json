@@ -108,7 +108,6 @@
     "ember-route-template": "^1.0.3",
     "nvp.ui": "^0.5.3",
     "reactiveweb": "^1.4.2",
-    "semver": "^7.7.2",
-    "tracked-built-ins": "^4.0.0"
+    "semver": "^7.7.2"
   }
 }

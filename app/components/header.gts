@@ -1,8 +1,6 @@
 import './header.css';
 
-import { ExternalLink } from 'ember-primitives/components/external-link';
-
-import { ThemeToggle } from '@universal-ember/preem';
+import { ExternalLink, ThemeToggle } from 'nvp.ui';
 
 import { Arrow } from './icons/fa/external-link';
 

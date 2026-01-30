@@ -65,9 +65,6 @@ importers:
       '@ember/optional-features':
         specifier: ^2.3.0
         version: 2.3.0
-      '@ember/string':
-        specifier: ^4.0.1
-        version: 4.0.1
       '@ember/test-helpers':
         specifier: ^5.4.1
         version: 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
@@ -801,9 +798,6 @@ packages:
   '@ember/optional-features@2.3.0':
     resolution: {integrity: sha512-+M8CkPledQEaDbfIlwlq6Phgpm5jdT3a6WVDJk7b/zadw5xAJkuQKVK7DgR0SFgHGiWlyn6a8AU5p2mCA706RA==}
     engines: {node: 10.* || 12.* || >= 14}
-
-  '@ember/string@4.0.1':
-    resolution: {integrity: sha512-VWeng8BSWrIsdPfffOQt/bKwNKJL7+37gPFh/6iZZ9bke+S83kKqkS30poo4bTGfRcMnvAE0ie7txom+iDu81Q==}
 
   '@ember/test-helpers@5.4.1':
     resolution: {integrity: sha512-BUdT91ra+QibEWAUwtZmvTGFoDHJCxDU+fkQENA8Zs0FR3pZiICxxP/fgdlNExCjjdm1letut7ENoueBuDdixQ==}
@@ -6460,8 +6454,6 @@ snapshots:
       silent-error: 1.1.1
     transitivePeerDependencies:
       - supports-color
-
-  '@ember/string@4.0.1': {}
 
   '@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)':
     dependencies:

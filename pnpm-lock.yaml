@@ -7,7 +7,7 @@ settings:
 overrides:
   ember-primitives: ^0.53.0
   '@glimmer/component': ^2.0.0
-  '@embroider/macros': 1.19.6
+  '@embroider/macros': 1.19.7
 
 importers:
 
@@ -17,8 +17,8 @@ importers:
         specifier: ^0.1.3
         version: 0.1.3
       '@embroider/macros':
-        specifier: 1.19.6
-        version: 1.19.6(@glint/template@1.7.4)
+        specifier: 1.19.7
+        version: 1.19.7(@glint/template@1.7.4)
       chart.js:
         specifier: ^4.4.9
         version: 4.5.1
@@ -819,8 +819,8 @@ packages:
   '@embroider/legacy-inspector-support@0.1.3':
     resolution: {integrity: sha512-0VzD1xExkT78a1CUiW8wZ5VZDL4bVyMSc3t8E/RiAW1X6TlyKIA/m6zoQgsQtQIiiTPPxH0/1Tdd0F7b5//etw==}
 
-  '@embroider/macros@1.19.6':
-    resolution: {integrity: sha512-yPf8lD/gRZmcxms66CCKuZuvWMJ0g/hdCE6P8FZsyewR3So6pxgdgOFp0zk2w5d34jS1ejBtxLNREZbBTELpzw==}
+  '@embroider/macros@1.19.7':
+    resolution: {integrity: sha512-KOdoJ2QwNpWFwRP8q4CutMjs4QAgZ0rjNJAO+hYZkWFxM3DOQFyqvImNDx0m/Z/sXEnE1XwUN8NpMCNYyq801A==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@glint/template': ^1.0.0
@@ -3385,6 +3385,7 @@ packages:
 
   glob@10.5.0:
     resolution: {integrity: sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@13.0.0:
@@ -3393,15 +3394,16 @@ packages:
 
   glob@5.0.15:
     resolution: {integrity: sha512-c9IPMazfRITpmAAKi22dK1VKxGDX9ehhqfABDriL/lzO92xcUKEJPQHrVA/2YHSNFB4iFlykVmWvwo48nr3OxA==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   glob@9.3.5:
     resolution: {integrity: sha512-e1LleDykUz2Iu+MTYdkSsuWX8lvAjAcs0Xef0lNIu0S2wOAzuTxCJtcd9S3cijlwYF18EsU3rzb8jPVobxDh9Q==}
     engines: {node: '>=16 || 14 >=14.17'}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   global-modules@1.0.0:
     resolution: {integrity: sha512-sKzpEkf11GpOFuw0Zzjzmt4B4UZwjOcG757PPvrfhxcLFbq0wpsgpOqxpxtxFiCG4DtG93M6XRVbF2oGdev7bg==}
@@ -6453,7 +6455,7 @@ snapshots:
     dependencies:
       '@ember/test-waiters': 4.1.1(@glint/template@1.7.4)
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       '@simple-dom/interface': 1.4.0
       decorator-transforms: 2.3.1(@babel/core@7.28.6)
       dom-element-descriptors: 0.5.1
@@ -6465,7 +6467,7 @@ snapshots:
   '@ember/test-waiters@4.1.1(@glint/template@1.7.4)':
     dependencies:
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
     transitivePeerDependencies:
       - '@glint/template'
       - supports-color
@@ -6491,7 +6493,7 @@ snapshots:
       '@babel/runtime': 7.28.6
       '@babel/traverse': 7.28.6
       '@embroider/core': 4.4.2(@glint/template@1.7.4)
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       '@types/babel__code-frame': 7.27.0
       assert-never: 1.4.0
       babel-import-util: 3.0.1
@@ -6537,7 +6539,7 @@ snapshots:
       '@babel/core': 7.28.6
       '@babel/parser': 7.28.6
       '@babel/traverse': 7.28.6
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       '@embroider/reverse-exports': 0.2.0
       '@embroider/shared-internals': 3.0.2
       assert-never: 1.4.0
@@ -6574,7 +6576,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/macros@1.19.6(@glint/template@1.7.4)':
+  '@embroider/macros@1.19.7(@glint/template@1.7.4)':
     dependencies:
       '@embroider/shared-internals': 3.0.2
       assert-never: 1.4.0
@@ -6616,7 +6618,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.6
       '@embroider/core': 4.4.2(@glint/template@1.7.4)
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       '@embroider/reverse-exports': 0.2.0
       '@rollup/pluginutils': 5.3.0(rollup@4.57.1)
       assert-never: 1.4.0
@@ -8697,7 +8699,7 @@ snapshots:
       '@babel/runtime': 7.28.6
       '@ember/test-waiters': 4.1.1(@glint/template@1.7.4)
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       '@floating-ui/dom': 1.7.5
       '@glimmer/component': 2.0.0
       decorator-transforms: 2.3.1(@babel/core@7.28.6)
@@ -8722,7 +8724,7 @@ snapshots:
     dependencies:
       '@ember/test-helpers': 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       qunit: 2.25.0
       qunit-theme-ember: 1.0.0
     transitivePeerDependencies:
@@ -8738,7 +8740,7 @@ snapshots:
   ember-resources@7.0.7(@glimmer/component@2.0.0)(@glint/template@1.7.4):
     dependencies:
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       '@glint/template': 1.7.4
     optionalDependencies:
       '@glimmer/component': 2.0.0
@@ -10603,7 +10605,7 @@ snapshots:
       '@ember/test-helpers': 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
       '@ember/test-waiters': 4.1.1(@glint/template@1.7.4)
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       '@glimmer/component': 2.0.0
       '@glint/template': 1.7.4
       decorator-transforms: 2.3.1(@babel/core@7.28.6)
@@ -10917,7 +10919,7 @@ snapshots:
     dependencies:
       '@ember/test-waiters': 4.1.1(@glint/template@1.7.4)
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.6(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(@glint/template@1.7.4)
       decorator-transforms: 2.3.1(@babel/core@7.28.6)
       ember-resources: 7.0.7(@glimmer/component@2.0.0)(@glint/template@1.7.4)
     transitivePeerDependencies:

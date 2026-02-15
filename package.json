@@ -68,7 +68,7 @@
     "vite": "7.3.1",
     "yesno": "^0.4.0"
   },
-  "packageManager": "pnpm@10.26.2",
+  "packageManager": "pnpm@10.29.3",
   "pnpm": {
     "overrides": {
       "ember-primitives": "^0.53.0",

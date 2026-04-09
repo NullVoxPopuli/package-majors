@@ -13,7 +13,7 @@ module.exports = {
     [
       'babel-plugin-ember-template-compilation',
       {
-          enableLegacyModules: [
+        enableLegacyModules: [
           'ember-cli-htmlbars',
           'ember-cli-htmlbars-inline-precompile',
           'htmlbars-inline-precompile',

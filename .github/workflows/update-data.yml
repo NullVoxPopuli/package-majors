@@ -39,3 +39,16 @@ jobs:
 
             - [package-name] contains URLs to the historical data
             - [package-name-week-date] the npm response for the week
+
+  notify:
+    name: "Discord Notification"
+    needs: [update-data]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          status: ${{ needs.update-data.result }}
+          title: "Update Data"
+          description: "Weekly NPM data update failed"

@@ -20,7 +20,8 @@ jobs:
       - uses: wyvox/action@v1
       - run: pnpm esyes ./scripts/update-data.mts
 
-      - uses: peter-evans/create-pull-request@v8
+      - if: always()
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GH_CREATE_PR }}
           commit-message: "[update-data.yml]: The NPM Stats for the week"
@@ -39,3 +40,16 @@ jobs:
 
             - [package-name] contains URLs to the historical data
             - [package-name-week-date] the npm response for the week
+
+  notify:
+    name: "Discord Notification"
+    needs: [update-data]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          status: ${{ needs.update-data.result }}
+          title: "Update Data"
+          description: "Weekly NPM data update failed"

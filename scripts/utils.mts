@@ -16,11 +16,39 @@ export function urlFor(packageName: string) {
   return `https://api.npmjs.org/versions/${encodeURIComponent(packageName)}/last-week`;
 }
 
-export async function getStats(packageName: string): Promise<DownloadsResponse> {
-  // eslint-disable-next-line n/no-unsupported-features/node-builtins
-  let result = await fetch(urlFor(packageName)).then((response) => response.json());
+export async function getStats(packageName: string, retries = 3): Promise<DownloadsResponse> {
+  let url = urlFor(packageName);
 
-  return Object.freeze(result);
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    // eslint-disable-next-line n/no-unsupported-features/node-builtins
+    let response = await fetch(url);
+
+    if (!response.ok) {
+      if (attempt < retries) {
+        await sleep(1000 * attempt);
+        continue;
+      }
+
+      throw new Error(
+        `Failed to fetch stats for ${packageName}: ${response.status} ${response.statusText}`,
+      );
+    }
+
+    let text = await response.text();
+
+    try {
+      return Object.freeze(JSON.parse(text));
+    } catch {
+      if (attempt < retries) {
+        await sleep(1000 * attempt);
+        continue;
+      }
+
+      throw new Error(`Invalid JSON response for ${packageName}: ${text.slice(0, 200)}`);
+    }
+  }
+
+  throw new Error(`Failed to fetch stats for ${packageName} after ${retries} attempts`);
 }
 
 export async function storeSnapshot(packageName: string) {
@@ -115,6 +143,10 @@ export function getWeek(currentDate: Date): number {
     : currentDate > nextMonday
       ? Math.ceil((currentDate.getTime() - nextMonday.getTime()) / (24 * 3600 * 1000) / 7)
       : 1;
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 let errors: { packageName: string; error: unknown }[] = [];

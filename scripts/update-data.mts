@@ -40,7 +40,7 @@ for (let packageName of PACKAGES) {
   });
 
   // Throttle to avoid 429s from the npm API
-  await sleep(500);
+  await sleep(2000);
 }
 
 await updateList();

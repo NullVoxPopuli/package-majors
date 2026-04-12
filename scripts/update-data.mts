@@ -3,6 +3,7 @@ import {
   checkErrors,
   ensureDirs,
   ensureManifest,
+  sleep,
   storeSnapshot,
   tryGet,
   updateList,
@@ -37,6 +38,9 @@ for (let packageName of PACKAGES) {
     await storeSnapshot(packageName);
     await updateManifest(packageName);
   });
+
+  // Throttle to avoid 429s from the npm API
+  await sleep(500);
 }
 
 await updateList();

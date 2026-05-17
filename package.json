@@ -72,7 +72,7 @@
   "packageManager": "pnpm@10.26.2",
   "pnpm": {
     "overrides": {
-      "ember-primitives": "^0.55.2",
+      "ember-primitives": "^0.57.0",
       "@glimmer/component": "^2.0.0",
       "babel-plugin-ember-template-compilation": "^4.0.0",
       "@embroider/macros": "^1.19.6"
@@ -104,7 +104,7 @@
     "color": "^5.0.3",
     "decorator-transforms": "^2.3.0",
     "ember-modifier": "^4.2.2",
-    "ember-primitives": "^0.53.0",
+    "ember-primitives": "^0.57.0",
     "ember-resources": "^7.0.4",
     "nvp.ui": "^0.5.3",
     "reactiveweb": "^1.4.2",

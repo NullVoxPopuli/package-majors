@@ -65,9 +65,20 @@ export function sortByWeek<Datum extends { week: string }>(data: Datum[]) {
   });
 }
 
+/**
+ * chart.js' `index` interaction mode looks points up by their position within
+ * each dataset's data array, not by their x-value. A version is only present in
+ * the data for the weeks it was above the 1% cutoff, so without padding, every
+ * dataset would have its own length and the tooltip would read the wrong week
+ * (or nothing at all) out of the shorter ones.
+ */
+export function alignToLabels(byTime: { [yearWeek: string]: number }, labels: string[]) {
+  return labels.map((week) => ({ week, count: byTime[week] ?? null }));
+}
+
 const increments = [0.1, 0.2, 0.3, 0.4, 0.5];
 
-function datasetsFor(data: ReshapedHistoricalData) {
+function datasetsFor(data: ReshapedHistoricalData, labels: string[]) {
   const result = [];
   const packageNames = Object.keys(data);
   const numPackages = packageNames.length;
@@ -110,11 +121,8 @@ function datasetsFor(data: ReshapedHistoricalData) {
         pointHoverBorderWidth: 5,
         hoverBorderWidth: 7,
         borderColor: color,
-        data: sortByWeek(
-          Object.entries(byTime).map(([week, count]) => {
-            return { week, count };
-          })
-        ),
+        spanGaps: true,
+        data: alignToLabels(byTime, labels),
       });
     }
   }
@@ -137,7 +145,7 @@ export function createChart(
     colorScheme.current === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)';
 
   const labels = sortLabels(data);
-  const datasets = datasetsFor(data);
+  const datasets = datasetsFor(data, labels);
 
   // Add a line annotation for each package's total downloads
   if (showTotal) {
@@ -147,13 +155,6 @@ export function createChart(
       const packageTotals = totals[packageName];
 
       if (!packageTotals) continue;
-
-      // Create data points for the total line
-      const totalPoints = sortByWeek(
-        Object.entries(packageTotals).map(([week, count]) => {
-          return { week, count };
-        })
-      );
 
       // Add the total as a dataset instead of annotation for better interactivity
       datasets.push({
@@ -166,7 +167,8 @@ export function createChart(
         pointRadius: 0,
         pointHoverRadius: 4,
         pointHoverBorderWidth: 2,
-        data: totalPoints,
+        spanGaps: true,
+        data: alignToLabels(packageTotals, labels),
         order: -1, // Draw on top
       });
     }

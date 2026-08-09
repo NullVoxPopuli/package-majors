@@ -2,8 +2,6 @@ import './header.css';
 
 import { ExternalLink, ThemeToggle } from 'nvp.ui';
 
-import { Arrow } from './icons/fa/external-link';
-
 export const Header = <template>
   <header>
     <div class="left">
@@ -11,7 +9,6 @@ export const Header = <template>
       <ExternalLink class="github" href="https://github.com/NullVoxPopuli/package-majors">
         <img alt="" src="/images/github-logo.png" />
         GitHub
-        <Arrow />
       </ExternalLink>
       <a href="/history-list">View history of...</a>
     </div>

@@ -46,7 +46,7 @@ importers:
         version: 0.5.3(@babel/core@7.29.7)
       reactiveweb:
         specifier: ^1.4.2
-        version: 1.9.1(@babel/core@7.29.7)(@ember/test-waiters@4.1.2)(@glimmer/component@2.1.1)(@glint/template@1.8.0)
+        version: 1.9.3(@babel/core@7.29.7)(@ember/test-waiters@4.1.2)(@glimmer/component@2.1.1)(@glint/template@1.8.0)
       semver:
         specifier: ^7.7.2
         version: 7.7.4
@@ -1749,6 +1749,7 @@ packages:
   '@xmldom/xmldom@0.9.10':
     resolution: {integrity: sha512-A9gOqLdi6cV4ibazAjcQufGj0B1y/vDqYrcuP6d/6x8P27gRS8643Dj9o1dEKtB6O7fwxb2FgBmJS2mX7gpvdw==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
@@ -4433,8 +4434,8 @@ packages:
     resolution: {integrity: sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==}
     engines: {node: '>= 0.10'}
 
-  reactiveweb@1.9.1:
-    resolution: {integrity: sha512-bd/Iyk8wm9A8qyxKVu8w4M4POWOtZErRKr6EJwnrBitceSLlY+yk1/m9AuKec/5XvcNnDi1NRdvBQDBEaVpk6A==}
+  reactiveweb@1.9.3:
+    resolution: {integrity: sha512-RG7UVwn8EcokVfHFMi4G/v8Zw/ny5Myy/gZ6ywDnChL7gH1wmNuLHxwhps/BHewYz4Rw89rEMUtY21ddipynhQ==}
     peerDependencies:
       '@ember/test-waiters': '>= 3.1.0'
 
@@ -8332,7 +8333,7 @@ snapshots:
       ember-modifier: 4.3.0(@babel/core@7.29.7)
       ember-resources: 7.0.7(@babel/core@7.29.7)(@glimmer/component@2.1.1)(@glint/template@1.8.0)
       form-data-utils: 0.6.0
-      reactiveweb: 1.9.1(@babel/core@7.29.7)(@ember/test-waiters@4.1.1(@babel/core@7.29.7)(@glint/template@1.8.0))(@glimmer/component@2.1.1)(@glint/template@1.8.0)
+      reactiveweb: 1.9.3(@babel/core@7.29.7)(@ember/test-waiters@4.1.1(@babel/core@7.29.7)(@glint/template@1.8.0))(@glimmer/component@2.1.1)(@glint/template@1.8.0)
       should-handle-link: 1.3.0
       tabster: 8.7.0
       tracked-built-ins: 4.1.2(@babel/core@7.29.7)
@@ -8357,7 +8358,7 @@ snapshots:
       ember-modifier: 4.3.0(@babel/core@7.29.7)
       ember-resources: 7.0.7(@babel/core@7.29.7)(@glimmer/component@2.1.1)(@glint/template@1.8.0)
       form-data-utils: 0.6.0
-      reactiveweb: 1.9.1(@babel/core@7.29.7)(@ember/test-waiters@4.1.2)(@glimmer/component@2.1.1)(@glint/template@1.8.0)
+      reactiveweb: 1.9.3(@babel/core@7.29.7)(@ember/test-waiters@4.1.2)(@glimmer/component@2.1.1)(@glint/template@1.8.0)
       should-handle-link: 1.3.0
       tabster: 8.7.0
       tracked-built-ins: 4.1.2(@babel/core@7.29.7)
@@ -10361,11 +10362,10 @@ snapshots:
       iconv-lite: 0.7.3
       unpipe: 1.0.0
 
-  reactiveweb@1.9.1(@babel/core@7.29.7)(@ember/test-waiters@4.1.1(@babel/core@7.29.7)(@glint/template@1.8.0))(@glimmer/component@2.1.1)(@glint/template@1.8.0):
+  reactiveweb@1.9.3(@babel/core@7.29.7)(@ember/test-waiters@4.1.1(@babel/core@7.29.7)(@glint/template@1.8.0))(@glimmer/component@2.1.1)(@glint/template@1.8.0):
     dependencies:
       '@ember/test-waiters': 4.1.1(@babel/core@7.29.7)(@glint/template@1.8.0)
-      '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.20.6(@babel/core@7.29.7)(@glint/template@1.8.0)
+      '@embroider/addon-shim': 1.10.3
       decorator-transforms: 2.3.1(@babel/core@7.29.7)
       ember-resources: 7.0.7(@babel/core@7.29.7)(@glimmer/component@2.1.1)(@glint/template@1.8.0)
     transitivePeerDependencies:
@@ -10374,11 +10374,10 @@ snapshots:
       - '@glint/template'
       - supports-color
 
-  reactiveweb@1.9.1(@babel/core@7.29.7)(@ember/test-waiters@4.1.2)(@glimmer/component@2.1.1)(@glint/template@1.8.0):
+  reactiveweb@1.9.3(@babel/core@7.29.7)(@ember/test-waiters@4.1.2)(@glimmer/component@2.1.1)(@glint/template@1.8.0):
     dependencies:
       '@ember/test-waiters': 4.1.2
-      '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.20.6(@babel/core@7.29.7)(@glint/template@1.8.0)
+      '@embroider/addon-shim': 1.10.3
       decorator-transforms: 2.3.1(@babel/core@7.29.7)
       ember-resources: 7.0.7(@babel/core@7.29.7)(@glimmer/component@2.1.1)(@glint/template@1.8.0)
     transitivePeerDependencies:

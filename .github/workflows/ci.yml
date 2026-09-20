@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: wyvox/action@v1
+      - uses: wyvox/action@v2
       - name: Lint
         run: pnpm lint
 
@@ -28,7 +28,7 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: wyvox/action@v1
+      - uses: wyvox/action@v2
         with:
           node-version: 20.19.0
       - name: Run Tests
